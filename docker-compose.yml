@@ -1,0 +1,27 @@
+version: '3'
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: ./docker/backend
+    container_name: judgelight-backend
+    restart: always
+    tty: true
+
+  c_compile:
+    build:
+      context: .
+      dockerfile: ./backend/c/Dockerfile
+    container_name: judgelight-c_build
+    depends_on:
+      - backend
+    restart: always
+    tty: true
+
+  #go_compile:
+  #  build:
+  #    context: .
+  #    dockerfile: ./backend/go/Dockerfile
+  #  container_name: go_build
+  #  restart: always
+  #  tty: true
