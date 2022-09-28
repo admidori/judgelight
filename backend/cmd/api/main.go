@@ -10,10 +10,15 @@ import (
 )
 
 func main() {
-	http.HandleFunc("/", Receive_proggram)
+	http.HandleFunc("/post", Receive_program)
 	http.ListenAndServe(":8080", nil)
 }
 
-func Receive_proggram(w http.ResponseWriter, r *http.Request) {
+func Receive_program(w http.ResponseWriter, r *http.Request) {
+	e := r.ParseForm()
+	if e != nil {
+		fmt.Println("Error")
+		return
+	}
 	fmt.Println("program=", r.FormValue("program"))
 }
