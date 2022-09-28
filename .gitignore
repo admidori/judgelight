@@ -1,0 +1,9 @@
+# Ignore go binary files
+*
+!*/
+!*.*
+!Dockerfile
+/test
+/frontend/.next
+/frontend/node_modules
+/frontend/*.log
