@@ -1,5 +1,5 @@
 const Index = () => {
-    return <div>judgelight firstpage</div>;
+    return <div>judgelight-v0</div>;
 };
 
 export default Index;
