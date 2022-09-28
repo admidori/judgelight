@@ -1,0 +1,6 @@
+# Ignore go binary files
+*
+!*/
+!*.*
+!Dockerfile
+/test
