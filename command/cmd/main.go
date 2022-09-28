@@ -3,7 +3,8 @@ package main
 import (
 	"fmt"
 	"os"
-	""
+
+	"github.com/rp-agota/judgelight/command/pkg/help"
 )
 
 func main() {
@@ -14,12 +15,9 @@ func main() {
 
 	switch os.Args[1] {
 	case "start":
-		fmt.Println("jl start")
-		pkg.Init_build()
-		pkg.Start_server()
-		
+
 	case "help":
-		
+		help.Command_help()
 	default:
 		os.Exit(1)
 	}
