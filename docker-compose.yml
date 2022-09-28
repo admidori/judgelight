@@ -1,9 +1,41 @@
 version: '3'
+
+volumes:
+  ignore:
+
+
 services:
-  backend:
+  api:
     build:
       context: .
-      dockerfile: ./docker/backend/Dockerfile
-    container_name: judgelight-backend
+      dockerfile: ./docker/api/Dockerfile
+    container_name: judgelight-api
+    volumes:
+      - ./backend:/go/src/app
     restart: always
     tty: true
+    ports:
+      - 8080:8080
+
+  nginx:
+    build:
+      context: .
+      dockerfile: ./docker/nginx/Dockerfile
+    container_name: judgelight-nginx
+    restart: always
+    tty: true
+    ports:
+      - 80:80
+
+  node:
+    build:
+      context: .
+      dockerfile: ./docker/js/Dockerfile
+    container_name: judgelight-react
+    hostname: judgelight
+    volumes:
+      - ./frontend:/usr/src/app
+      - ignore:/node_modules
+    command: yarn dev
+    ports:
+      - 3000:80
