@@ -1,8 +1,9 @@
 import React from 'react';
 import axios from 'axios';
-import Header from "../components/header/header";
-import Footer from '../components/footer/footer';
-import Menubar from '../components/menubar/menubar';
+import Header from "../components/common/header/header";
+import Footer from '../components/common/footer/footer';
+import Menubar from '../components/common/menubar/menubar';
+import Programbox from '../components/programbox/programbox';
 
 var params = new URLSearchParams();
 params.append("program", "itisdata")
@@ -19,9 +20,7 @@ class Index extends React.Component {
         return (
             <div>
             <Menubar />
-            <div id="main" style={{ height: 300, background: "#eee" }}>
-                        main
-            </div>
+            <Programbox />
             <Footer />
             </div>
         );
