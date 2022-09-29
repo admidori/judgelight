@@ -6,6 +6,7 @@ import (
 )
 
 func main() {
+	fmt.Println("Status: Ready to liten")
 	http.HandleFunc("/post", Receive_program)
 	http.ListenAndServe(":8080", nil)
 }

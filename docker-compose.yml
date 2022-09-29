@@ -15,7 +15,7 @@ services:
     restart: always
     tty: true
     ports:
-      - 8080:80
+      - 8080:8080
 
   nginx:
     build:
@@ -38,4 +38,4 @@ services:
       - ignore:/node_modules
     command: yarn dev
     ports:
-      - 3000:80
+      - 3000:3000

@@ -1,4 +1,5 @@
 import React from "react";
+import axios from 'axios';
 
 import Editor from 'react-simple-code-editor';
 import { highlight, languages } from 'prismjs/components/prism-core';
@@ -6,18 +7,35 @@ import 'prismjs/components/prism-clike';
 import 'prismjs/components/prism-javascript';
 import 'prismjs/components/prism-c'
 
-const code = 
-`#include<stdio.h>
-int main(void){
-    
-}`;
-
-function handleClick(code){
-    console.log(code)
-}
-
 export default class ProgramEditor extends React.Component{
-    state = { code }
+    constructor(props) {
+        super(props);
+        this.state = {
+            data:
+            `#include<stdio.h>
+            int main(void){
+            
+            }`,
+            isLoading: false
+        };
+        this.handleClick = this.handleClick.bind(this)
+    }
+
+    handleClick() {
+        this.setState({ isLoading: ture });
+        var params = new URLSearchParams();
+        params.append("program",{})
+        axios.post("http://backend:8080/post", params)
+        .then(function (response) {
+            console.log(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+
+        console.log(code)
+    }
+
     render(){
     return(
         <div>
@@ -32,7 +50,7 @@ export default class ProgramEditor extends React.Component{
             }}
         />
         <button onClick={
-            () => handleClick(this.state)
+            () => this.handleClick(this.state)
         }>Submit</button>
         </div>
     )
