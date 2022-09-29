@@ -1,9 +1,5 @@
 package main
 
-// HTTPサーバを構築する
-// フロントを実装する
-// APIを実装する
-
 import (
 	"fmt"
 	"net/http"
