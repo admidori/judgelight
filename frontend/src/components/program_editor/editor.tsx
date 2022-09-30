@@ -4,13 +4,15 @@ import axios from 'axios';
 import Editor from 'react-simple-code-editor';
 import { highlight, languages } from 'prismjs/components/prism-core';
 import 'prismjs/components/prism-clike';
-import 'prismjs/components/prism-javascript';
 import 'prismjs/components/prism-c'
 import 'prismjs/themes/prism.css'
 
 export default function ProgramEditor() {
     const [code, setCode] = React.useState(
-        `function add(a, b) {\n  return a + b;\n}`
+`#include <stdio.h>
+int main(void){
+
+}`
     );
 
     const handleClick = () => {
@@ -32,6 +34,7 @@ export default function ProgramEditor() {
         <Editor
         value={code}
         onValueChange={code => setCode(code)}
+        // Todo: Select language
         highlight={code => highlight(code, languages.c)}
         padding={10}
         style={{
