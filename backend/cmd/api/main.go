@@ -1,16 +1,13 @@
 package main
 
-// HTTPサーバを構築する
-// フロントを実装する
-// APIを実装する
-
 import (
 	"fmt"
 	"net/http"
 )
 
 func main() {
-	http.HandleFunc("/post", Receive_program)
+	fmt.Println("Status: Ready to liten")
+	http.HandleFunc("/", Receive_program)
 	http.ListenAndServe(":8080", nil)
 }
 

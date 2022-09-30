@@ -5,5 +5,5 @@ export default function Header() {
         <header style={{ height: 200, background: "#ddd" }}>
             header
         </header>
-    );
+    )
 }
