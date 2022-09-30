@@ -17,16 +17,6 @@ services:
     ports:
       - 8080:8080
 
-  nginx:
-    build:
-      context: .
-      dockerfile: ./docker/nginx/Dockerfile
-    container_name: judgelight-nginx
-    restart: always
-    tty: true
-    ports:
-      - 80:80
-
   node:
     build:
       context: .
@@ -37,5 +27,19 @@ services:
       - ./frontend:/usr/src/app
       - ignore:/node_modules
     command: yarn dev
+    depends_on:
+      - api
     ports:
       - 3000:3000
+
+  nginx:
+    build:
+      context: .
+      dockerfile: ./docker/nginx/Dockerfile
+    container_name: judgelight-nginx
+    restart: always
+    tty: true
+    depends_on:
+      - node
+    ports:
+      - 80:80
