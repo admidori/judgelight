@@ -8,14 +8,14 @@ import 'prismjs/components/prism-c'
 import 'prismjs/themes/prism.css'
 
 export default function ProgramEditor() {
-    const [code, setCode] = React.useState(
+const [code, setCode] = React.useState(
 `#include <stdio.h>
 int main(void){
 
 }`
     );
 
-    const handleClick = () => {
+    const  handleClick = () => {
         var params = new URLSearchParams();
         params.append('program', code);
     
