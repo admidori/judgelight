@@ -7,3 +7,4 @@
 /frontend/.next
 /frontend/node_modules
 /frontend/*.log
+*.DS_Store

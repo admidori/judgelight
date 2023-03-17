@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/rp-agota/judgelight/command/pkg/help"
+	"github.com/rp-agota/judgelight/command/pkg/start"
 )
 
 func main() {
@@ -15,7 +16,7 @@ func main() {
 
 	switch os.Args[1] {
 	case "start":
-
+		start.Command_start()
 	case "help":
 		help.Command_help()
 	default:

@@ -14,5 +14,6 @@ func Command_help() {
 	fmt.Println("The commands are:")
 	fmt.Println("start")
 	fmt.Println("help")
+	fmt.Println("test")
 	os.Exit(0)
 }
