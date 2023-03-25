@@ -1,14 +1,6 @@
-# 全体構成
-フロントエンド←DB/登録情報
-↓(HTTP/実行コード)
-Docker起動
-↓
-Docker内でテストケースを参照
-↓
-AC/WA判定
-↓(HTTP)
-フロントエンド
+# Overview
+- React (Frontend)
+- Ruby on rails (Backend)
+- Docker (Infra)
 
-# 構成要素
-・Docker
-ビルドを行い、ビルド終了後破棄を行う
+# Versions
