@@ -1,3 +1,5 @@
 import React from 'react';
-const HelloMessage = ({ name }) => <h1>Hello, {name}!</h1>;
-export default HelloMessage;
+
+function Hello(props) {
+    return <h1>Hello World!</h1>;
+}

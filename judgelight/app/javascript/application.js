@@ -16,11 +16,16 @@
 
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import HelloMessage from './components/App';
+//import Hello from './components/App';
+import ReactDOM from 'react-dom/client';
 
 const container = document.getElementById('root');
 const root = createRoot(container);
 
+function Hello(props) {
+    return <h1>Hello World!</h1>;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-    root.render(<HelloMessage name="World" />);
+    root.render(<Hello/>);
 });
