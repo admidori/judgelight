@@ -11,7 +11,7 @@ func main() {
 	http.ListenAndServe(":8080", nil)
 }
 
-func Send_program_docker()
+// func Send_program_docker()
 
 // Todo: Select language
 func Receive_program(w http.ResponseWriter, r *http.Request) {
