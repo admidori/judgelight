@@ -25,7 +25,6 @@
     "fix": "run-p fix:*",
     "fix:prettier": "prettier --write 'src/**/*.{ts,tsx}'",
     "fix:eslint": "eslint --fix 'src/**/*.{ts,tsx}'",
-    "prepare": "husky install",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },

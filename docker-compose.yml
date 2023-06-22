@@ -20,13 +20,12 @@ services:
   node:
     build:
       context: .
-      dockerfile: ./docker/js/Dockerfile
-    container_name: judgelight-react
+      dockerfile: ./docker/node/Dockerfile
+    container_name: judgelight-node
     hostname: frontend
     volumes:
       - ./frontend:/usr/src/app
       - ignore:/node_modules
-    command: yarn dev
     depends_on:
       - api
     ports:
