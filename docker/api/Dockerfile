@@ -4,10 +4,11 @@ ENV ROOT=/go/src/app
 ENV CGO_ENABLED 0
 ENV GOPATH=
 
-COPY ./backend/go.mod ./
+COPY go.mod ./go.mod
+COPY go.sum ./go.sum
 
 WORKDIR ${ROOT}
 RUN apk update && apk add git
-RUN go mod tidy
+RUN go mod download
 
-CMD [ "go" , "run" , "./cmd/api/main.go" ]
+CMD [ "go" , "run" , "./main.go" ]
