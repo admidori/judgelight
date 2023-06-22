@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"net/http"
+	
+	"github.com/rp-agota/judgelight/backend"
 )
 
 func main() {

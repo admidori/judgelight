@@ -4,7 +4,7 @@ ENV ROOT=/go/src/app
 ENV CGO_ENABLED 0
 ENV GOPATH=
 
-COPY go.mod ./
+COPY ./backend/go.mod ./
 
 WORKDIR ${ROOT}
 RUN apk update && apk add git
