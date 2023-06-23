@@ -1,7 +1,7 @@
 /*
-Copyright © 2023 NAME HERE <EMAIL ADDRESS>
-
+Copyright © 2023 Aoi Kondo <agotadmidori@gmail.com>
 */
+
 package cmd
 
 import (

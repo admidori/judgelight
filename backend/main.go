@@ -1,3 +1,7 @@
+/*
+Copyright © 2023 Aoi Kondo <agotadmidori@gmail.com>
+*/
+
 package main
 
 import "github.com/gin-gonic/gin"
