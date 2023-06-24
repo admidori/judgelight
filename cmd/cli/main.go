@@ -4,7 +4,7 @@ Copyright © 2023 Aoi Kondo <agotadmidori@gmail.com>
 
 package main
 
-import "github.com/rp-agota/judgelight/cmd"
+import cmd "github.com/rp-agota/judgelight/pkg/command"
 
 func main() {
 	cmd.Execute()
