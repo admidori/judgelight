@@ -22,14 +22,16 @@ services:
       context: .
       dockerfile: ./docker/node/Dockerfile
     container_name: judgelight-node
-    hostname: frontend
+    environment:
+      - NODE_ENV=development
     volumes:
       - ./frontend:/usr/src/app
       - ignore:/node_modules
-    depends_on:
-      - api
+    hostname: frontend
+    restart: always
     ports:
-      - 3000:3000
+      - '3000:3000'
+    tty: true
 
   nginx:
     build:
