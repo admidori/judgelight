@@ -11,7 +11,7 @@ export default function ProgramEditor() {
 const [code, setCode] = React.useState(
 `#include <stdio.h>
 int main(void){
-
+a
 }`
     );
 
@@ -19,7 +19,7 @@ int main(void){
         var params = new URLSearchParams();
         params.append('program', code);
     
-        axios.post('http://localhost:8080', params)
+        axios.post('http://localhost:8080/program/submit', params)
             .then(function() {
                 
             })
