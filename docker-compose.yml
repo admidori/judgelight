@@ -17,11 +17,11 @@ services:
     ports:
       - 8080:8080
 
-  node:
+  next:
     build:
       context: .
-      dockerfile: ./docker/node/Dockerfile
-    container_name: judgelight-node
+      dockerfile: ./docker/next/Dockerfile
+    container_name: judgelight-next
     environment:
       - NODE_ENV=development
     volumes:
@@ -33,6 +33,22 @@ services:
       - '3000:3000'
     tty: true
 
+  next-test:
+    build:
+      context: .
+      dockerfile: ./docker/next/Dockerfile.test
+    container_name: judgelight-next-test
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./frontend:/usr/src/app
+      - ignore:/node_modules
+    hostname: frontend
+    restart: always
+    ports:
+      - '3030:3000'
+    tty: true
+
   nginx:
     build:
       context: .
@@ -41,6 +57,6 @@ services:
     restart: always
     tty: true
     depends_on:
-      - node
+      - next
     ports:
       - 80:80
