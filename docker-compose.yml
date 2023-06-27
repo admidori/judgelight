@@ -60,3 +60,16 @@ services:
       - next
     ports:
       - 80:80
+
+# judge server for C language.
+  c:
+    build:
+      context: .
+      dockerfile: ./docker/c/Dockerfile
+    container_name: judgelight-language-c
+    restart: always
+    tty: true
+    depends_on:
+      - nginx
+    ports:
+      - 1000:1000
