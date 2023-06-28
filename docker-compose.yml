@@ -32,6 +32,17 @@ services:
     ports:
       - '3000:3000'
     tty: true
+    working_dir: /usr/src/app
+    entrypoint:
+      - sh
+    command:
+      - -c
+      - |
+        [ -f ~/.exec-once ] || {
+          yarn install && touch ~/.exec-once
+        }
+        yarn start
+
 
   next-test:
     build:
@@ -48,6 +59,16 @@ services:
     ports:
       - '3030:3000'
     tty: true
+    working_dir: /usr/src/app
+    entrypoint:
+      - sh
+    command:
+      - -c
+      - |
+        [ -f ~/.exec-once ] || {
+          yarn install && touch ~/.exec-once
+        }
+        yarn dev
 
   nginx:
     build:

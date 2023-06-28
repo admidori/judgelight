@@ -7,8 +7,6 @@ ENV GOPATH=
 COPY go.mod ./go.mod
 COPY go.sum ./go.sum
 
-COPY /var/run/docker.sock /var/run/docker.sock
-
 WORKDIR ${ROOT}
 RUN apk update && apk add git
 RUN go mod download
