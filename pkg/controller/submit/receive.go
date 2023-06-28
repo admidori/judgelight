@@ -5,11 +5,13 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/rp-agota/judgelight/pkg/docker"
 )
 
 type Receiveprogram struct {
-	Data string `json:"name"`
-	AuthorID string `json:"ID"`
+	Data     string `json:"data"`
+	DataID   string `json:"dataID"`
+	AuthorID string `json:"authorID"`
 }
 
 func ReceiveSubmitProgram(c *gin.Context) {
@@ -18,7 +20,9 @@ func ReceiveSubmitProgram(c *gin.Context) {
 	fmt.Print(message)
 
 	fmt.Print("Send program to C-language server")
-	
+	// Todo: select language using argument.
+	docker.BuildDockerfile()
+	docker.ContainerCreateAndStart()
 
 	c.JSON(http.StatusCreated, gin.H{
 		"status": "ok",

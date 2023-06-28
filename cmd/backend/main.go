@@ -17,7 +17,10 @@ import (
 
 func main() {
 	router := gin.Default()
-	router.POST("/program/submit", submit.ReceiveSubmitProgram)
 
+	// If submit programs, excute below.
+	router.POST("/program/submit", submit.ReceiveSubmitProgram)
+	
+	// Start listening.
 	router.Run(":8080")
 }
