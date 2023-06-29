@@ -15,7 +15,7 @@ import (
 
 var (
 	dockerfileName   string   = "c.Dockerfile"
-	imageNameAndTags []string = []string{"c-language:tag"}
+	imageNameAndTags []string = []string{"judge-server:c"}
 )
 
 func BuildDockerfile() {
@@ -47,7 +47,9 @@ func BuildDockerfile() {
 
 func getArchivedDockerfile(dockerfile string) *bytes.Reader {
 	// read the Dockerfile
-	f, err := os.Open(dockerfile)
+	// If you develop function about select language, change below.
+	filepath := "../../docker/language/" + dockerfile
+	f, err := os.Open(filepath)
 	if err != nil {
 		log.Panic(err)
 	}
