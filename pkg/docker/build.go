@@ -13,12 +13,13 @@ import (
 	"github.com/docker/docker/client"
 )
 
-var (
-	dockerfileName   string   = "c.Dockerfile"
-	imageNameAndTags []string = []string{"judge-server:c"}
-)
-
 func BuildDockerfile() {
+	language := "c"
+	imagename := "judge-server:"+language
+	var (
+		dockerfileName   string   = "Dockerfile"
+		imageNameAndTags []string = []string{imagename}
+	)
 	ctx := context.Background()
 
 	cli, err := client.NewClientWithOpts(client.FromEnv)
@@ -48,7 +49,8 @@ func BuildDockerfile() {
 func getArchivedDockerfile(dockerfile string) *bytes.Reader {
 	// read the Dockerfile
 	// If you develop function about select language, change below.
-	filepath := "../../docker/language/" + dockerfile
+	language := "c"
+	filepath := "../../docker/language/" + language + "/" + dockerfile
 	f, err := os.Open(filepath)
 	if err != nil {
 		log.Panic(err)

@@ -9,6 +9,7 @@ import (
 )
 
 func ContainerCreateAndStart() {
+	language := "c"
 	ctx := context.Background()
 
 	cli, err := client.NewClientWithOpts(client.FromEnv)
@@ -17,9 +18,10 @@ func ContainerCreateAndStart() {
 	}
 	cli.NegotiateAPIVersion(ctx)
 
+	imagefilename := "judge-server:"+language
 	resp, err := cli.ContainerCreate(ctx, &container.Config{
-		Image: "alpine",
-		Cmd:   []string{"echo", "hello world"},
+		Image: imagefilename,
+		Cmd:   []string{"sh", "setup.sh"},
 		Tty:   false,
 	}, nil, nil, nil, "")
 	if err != nil {
