@@ -2,3 +2,5 @@
 FROM alpine:3.8
 
 RUN apk add --no-cache gcc libc-dev
+COPY src/ /work/
+COPY env/ /work/src/
