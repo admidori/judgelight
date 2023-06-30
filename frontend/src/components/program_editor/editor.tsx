@@ -11,22 +11,24 @@ export default function ProgramEditor() {
 const [code, setCode] = React.useState(
 `#include <stdio.h>
 int main(void){
-a
+    
 }`
     );
 
     const  handleClick = () => {
-        var params = new URLSearchParams();
-        params.append('program', code);
-    
-        axios.post('http://localhost:8080/program/submit', params)
-            .then(function() {
-                
-            })
-            .catch(function() {
-                
-        });
-        console.log(code)
+        const sendJsonData = JSON.stringify(
+            {
+                "data": code,
+                "dataID": "1",
+                "authorID": "1",
+                "language": "c"
+            }
+        );
+
+        // Todo: Send json
+        //var params = new URLSearchParams();
+        //params.append('program', code);
+        axios.post('http://localhost:8080/program/submit',sendJsonData);
     }
 
     return (

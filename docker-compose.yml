@@ -10,7 +10,9 @@ services:
       dockerfile: ./docker/api/Dockerfile
     container_name: judgelight-api
     volumes:
-      - ./backend:/go/src/app
+      - ./cmd:/go/src/app
+      - ./pkg:/go/src/app
+      - ./docker/language:/go/src/app/docker
     hostname: backend
     restart: always
     tty: true
