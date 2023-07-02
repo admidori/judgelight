@@ -46,7 +46,9 @@ func ContainerCreateAndStart(filename string, language string) {
 	if err := cli.ContainerStart(ctx, resp.ID, types.ContainerStartOptions{}); err != nil {
 		panic(err)
 	}
-
+	//Nexttask:
+	//	Copy exec.sh to Docker container and expect return code.
+	//	When copy script , refer to web page
 	exitCodeCh, errch := cli.ContainerWait(ctx, resp.ID, container.WaitConditionNotRunning)
 	select {
 	case err := <-errch:
