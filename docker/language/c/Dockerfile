@@ -1,6 +1,13 @@
 # For C-language
-FROM alpine:3.8
+FROM ubuntu:latest
 
-RUN apk add --no-cache gcc libc-dev
-COPY src/ /work/
-COPY env/ /work/src/
+RUN apt-get update && apt-get install -y gcc
+
+RUN mkdir work
+ADD /work/exec.sh /work/
+WORKDIR /work
+RUN chmod 777 exec.sh
+
+CMD ["./exec.sh"]
+
+#CMD [ "chmod", "777", "exec.sh", "&&", "./exec.sh", "||", "RET=$?", "||", "true", "&&", "test", "RET", "-eq", "0" ]

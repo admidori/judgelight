@@ -13,9 +13,8 @@ import (
 	"github.com/docker/docker/client"
 )
 
-func BuildDockerfile() {
-	language := "c"
-	imagename := "judge-server:"+language
+func BuildDockerfile(language string) {
+	imagename := "judge-server:" + language
 	var (
 		dockerfileName   string   = "Dockerfile"
 		imageNameAndTags []string = []string{imagename}
@@ -29,9 +28,9 @@ func BuildDockerfile() {
 	cli.NegotiateAPIVersion(ctx)
 
 	buildOptions := types.ImageBuildOptions{
-		Dockerfile: dockerfileName,
-		Remove:     true,
-		Tags:       imageNameAndTags,
+		Dockerfile:     dockerfileName,
+		Remove:         true,
+		Tags:           imageNameAndTags,
 	}
 	res, err := cli.ImageBuild(
 		ctx,

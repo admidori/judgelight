@@ -3,4 +3,4 @@ node_modules/
 Dockerfile
 .dockerignore
 .gitignore
-.next
+.next/
