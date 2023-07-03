@@ -72,6 +72,7 @@ func ContainerCreateAndStart(filename string, language string) {
 		sendEndsignal()
 	}
 
+	// End Process - Remove container
 	err = cli.ContainerRemove(ctx, resp.ID, types.ContainerRemoveOptions{})
 	if err != nil {
 		panic(err)
