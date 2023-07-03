@@ -39,4 +39,5 @@ func createsubmitfile(json Receiveprogramformat) {
 	if _, err = f.Write([]byte(json.Data)); err != nil {
 		panic(err)
 	}
+	defer f.Close()
 }
