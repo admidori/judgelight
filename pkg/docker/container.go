@@ -8,7 +8,6 @@ import (
 	"github.com/docker/docker/api/types/container"
 	"github.com/docker/docker/api/types/mount"
 	"github.com/docker/docker/client"
-	"github.com/rp-agota/judgelight/pkg/controller/submit"
 )
 
 func ContainerCreateAndStart(filename string, language string) {
@@ -58,18 +57,19 @@ func ContainerCreateAndStart(filename string, language string) {
 		//WA
 		if exitCode.StatusCode == 1 {
 			fmt.Println("WA")
-			submit.SendWAsignal()
+			sendWAsignal()
 		}
 		//CE
 		if exitCode.StatusCode == 2 {
 			fmt.Println("CE")
-			submit.SendCEsignal()
+			sendCEsignal()
 		}
 		//AC
 		if exitCode.StatusCode == 0 {
 			fmt.Println("AC")
-			submit.SendACsignal()
+			sendACsignal()
 		}
+		sendEndsignal()
 	}
 
 	err = cli.ContainerRemove(ctx, resp.ID, types.ContainerRemoveOptions{})
