@@ -25,9 +25,6 @@ int main(void){
             }
         );
 
-        // Todo: Send json
-        //var params = new URLSearchParams();
-        //params.append('program', code);
         axios.post('http://localhost:8080/program/submit',sendJsonData);
     }
 
