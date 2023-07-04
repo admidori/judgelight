@@ -5,7 +5,6 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
-	"github.com/rp-agota/judgelight/pkg/docker"
 )
 
 type Receiveprogramformat struct {
@@ -18,15 +17,34 @@ type Receiveprogramformat struct {
 func ReceiveSubmitProgram(c *gin.Context) {
 	var json Receiveprogramformat
 	c.BindJSON(&json)
-	c.JSON(http.StatusOK, gin.H{"status": "OK"})
 
 	createsubmitfile(json)
-	docker.BuildDockerfile(json.Language)
-	docker.ContainerCreateAndStart(json.DataID, json.Language)
+	BuildDockerfile(json.Language)
+	statusCode := ContainerCreateAndStart(json.DataID, json.Language)
 
-	c.JSON(http.StatusCreated, gin.H{
-		"status": "ok",
-	})
+	switch statusCode {
+	// AC
+	case 0:
+		c.JSON(http.StatusOK, gin.H{
+			"DataID":   json.DataID,
+			"AuthorID": json.AuthorID,
+			"ResultStatus":   "AC",
+		})
+	// WA
+	case 1:
+		c.JSON(http.StatusOK, gin.H{
+			"DataID":   json.DataID,
+			"AuthorID": json.AuthorID,
+			"ResultStatus":   "WA",
+		})
+	// CE
+	case 2:
+		c.JSON(http.StatusOK, gin.H{
+			"DataID":   json.DataID,
+			"AuthorID": json.AuthorID,
+			"ResultStatus":   "CE",
+		})
+	}
 }
 
 func createsubmitfile(json Receiveprogramformat) {

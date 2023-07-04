@@ -1,4 +1,4 @@
-package docker
+package submit
 
 import (
 	"archive/tar"

@@ -1,4 +1,4 @@
-package docker
+package submit
 
 import (
 	"context"
@@ -10,7 +10,7 @@ import (
 	"github.com/docker/docker/client"
 )
 
-func ContainerCreateAndStart(filename string, language string) {
+func ContainerCreateAndStart(filename string, language string) int {
 	ctx := context.Background()
 
 	cli, err := client.NewClientWithOpts(client.FromEnv)
@@ -47,34 +47,32 @@ func ContainerCreateAndStart(filename string, language string) {
 		panic(err)
 	}
 
+	var exitCode container.WaitResponse
 	exitCodeCh, errch := cli.ContainerWait(ctx, resp.ID, container.WaitConditionNotRunning)
 	select {
 	case err := <-errch:
 		if err != nil {
 			panic(err)
 		}
-	case exitCode := <-exitCodeCh:
+	case exitCode = <-exitCodeCh:
+		// End Process - Remove container
+		err = cli.ContainerRemove(ctx, resp.ID, types.ContainerRemoveOptions{})
+		if err != nil {
+			panic(err)
+		}
+
 		//WA
 		if exitCode.StatusCode == 1 {
 			fmt.Println("WA")
-			sendWAsignal()
 		}
 		//CE
 		if exitCode.StatusCode == 2 {
 			fmt.Println("CE")
-			sendCEsignal()
 		}
 		//AC
 		if exitCode.StatusCode == 0 {
 			fmt.Println("AC")
-			sendACsignal()
 		}
-		sendEndsignal()
 	}
-
-	// End Process - Remove container
-	err = cli.ContainerRemove(ctx, resp.ID, types.ContainerRemoveOptions{})
-	if err != nil {
-		panic(err)
-	}
+	return (int(exitCode.StatusCode))
 }
