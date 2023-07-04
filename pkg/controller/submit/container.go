@@ -10,7 +10,7 @@ import (
 	"github.com/docker/docker/client"
 )
 
-func ContainerCreateAndStart(filename string, language string) int {
+func ContainerCreateAndStart(filename string, problemID string, language string) int {
 	ctx := context.Background()
 
 	cli, err := client.NewClientWithOpts(client.FromEnv)
@@ -22,13 +22,14 @@ func ContainerCreateAndStart(filename string, language string) int {
 	imagefilename := "judge-server:" + language
 	envvalue1 := "SUBMITFILENAME=" + filename
 	envvalue2 := "SUBMITLANGUAGE=" + language
+	envvalue3 := "PROBLEMID=" + problemID
 
 	resp, err := cli.ContainerCreate(
 		ctx,
 		&container.Config{
 			Image: imagefilename,
 			Cmd:   []string{},
-			Env:   []string{envvalue1, envvalue2},
+			Env:   []string{envvalue1, envvalue2, envvalue3},
 			Tty:   false,
 		}, &container.HostConfig{
 			Mounts: []mount.Mount{

@@ -10,6 +10,7 @@ import (
 type Receiveprogramformat struct {
 	Data     string `json:"data"`
 	DataID   string `json:"dataID"`
+	ProblemID string `json:"problemID"`
 	AuthorID string `json:"authorID"`
 	Language string `json:"language"`
 }
@@ -20,7 +21,7 @@ func ReceiveSubmitProgram(c *gin.Context) {
 
 	createsubmitfile(json)
 	BuildDockerfile(json.Language)
-	statusCode := ContainerCreateAndStart(json.DataID, json.Language)
+	statusCode := ContainerCreateAndStart(json.DataID, json.ProblemID, json.Language)
 
 	switch statusCode {
 	// AC

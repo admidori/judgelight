@@ -9,7 +9,6 @@ RET=$?
 function delete_files (){
     rm "./${SUBMITFILENAME}" \
         "${SUBMITFILENAME}.txt" \
-        "./answerset/${SUBMITFILENAME}.txt" \
         "${COMPILECODE}"
 }
 
@@ -22,7 +21,7 @@ else
     exit 2
 fi
 
-if ! diff "${SUBMITFILENAME}.txt" "./answerset/${SUBMITFILENAME}.txt"; then
+if ! diff "${SUBMITFILENAME}.txt" "./answerset/${PROBLEMID}.txt"; then
     echo "WA"
     delete_files
 
