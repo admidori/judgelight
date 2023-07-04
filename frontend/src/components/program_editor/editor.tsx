@@ -8,12 +8,13 @@ import 'prismjs/components/prism-c'
 import 'prismjs/themes/prism.css'
 
 export default function ProgramEditor() {
-const [code, setCode] = React.useState(
+    const baseURL = "http://localhost:8080/"
+    const [code, setCode] = React.useState(
 `#include <stdio.h>
 int main(void){
     
 }`
-    );
+        );
 
     const  handleClick = () => {
         const sendJsonData = JSON.stringify(
@@ -24,8 +25,14 @@ int main(void){
                 "language": "c"
             }
         );
-
-        axios.post('http://localhost:8080/program/submit',sendJsonData);
+        
+        axios.post(baseURL+'program/submit',sendJsonData)
+            .then(function(response){
+                console.log(response)
+            })
+            .catch(function(error){
+                console.log(error)
+            })
     }
 
     return (
@@ -33,7 +40,6 @@ int main(void){
         <Editor
         value={code}
         onValueChange={code => setCode(code)}
-        // Todo: Select language
         highlight={code => highlight(code, languages.c)}
         padding={10}
         style={{
