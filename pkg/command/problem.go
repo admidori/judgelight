@@ -19,7 +19,3 @@ var problemCmd = &cobra.Command{
 func init() {
 	setCmd.AddCommand(problemCmd)
 }
-
-func compile_yaml() {
-
-}
