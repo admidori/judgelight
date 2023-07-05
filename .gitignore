@@ -4,7 +4,7 @@
 !*/
 !*.*
 !Dockerfile
-/test
+/settings
 /frontend/.next
 /frontend/node_modules
 /frontend/*.log
