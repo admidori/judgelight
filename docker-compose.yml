@@ -45,32 +45,6 @@ services:
         }
         yarn start
 
-  next-test:
-    build:
-      context: .
-      dockerfile: ./docker/next/Dockerfile.test
-    container_name: judgelight-next-test
-    environment:
-      - NODE_ENV=development
-    volumes:
-      - ./frontend:/usr/src/app
-      - ignore:/node_modules
-    hostname: frontend
-    restart: always
-    ports:
-      - '3030:3000'
-    tty: true
-    working_dir: /usr/src/app
-    entrypoint:
-      - sh
-    command:
-      - -c
-      - |
-        [ -f ~/.exec-once ] || {
-          yarn install && touch ~/.exec-once
-        }
-        yarn dev
-
   nginx:
     build:
       context: .
