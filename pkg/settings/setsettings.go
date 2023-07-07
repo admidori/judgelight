@@ -1,6 +1,8 @@
 package settings
 
+var path = "../../settings/setting.yaml"
+
 func SetSettings() {
-	path := "../../settings/setting.yaml"
 	UnmarshalYAML(path)
 }
+

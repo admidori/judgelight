@@ -19,6 +19,4 @@ func UnmarshalYAML(yamlPath string) {
 	if err != nil {
 		panic(err)
 	}
-
-	fmt.Print(instanceYaml)
 }
