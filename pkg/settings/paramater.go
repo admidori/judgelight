@@ -17,8 +17,7 @@ type Admininformation struct {
 }
 
 type SettingParamater struct {
-	ContestInformation `yaml:",inline"`
-	ProblemInformation `yaml:",inline"`
-	Admininformation   `yaml:",inline"`
+	ContestInformation `yaml:"contest-information"`
+	ProblemInformation `yaml:"problem-information"`
+	Admininformation   `yaml:"admin-information"`
 }
-
