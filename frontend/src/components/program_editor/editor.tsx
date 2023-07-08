@@ -15,6 +15,7 @@ int main(void){
     
 }`
         );
+    const [resultStatus, setResultStatus] = React.useState("");
 
     const  handleClick = () => {
         const sendJsonData = JSON.stringify(
@@ -26,24 +27,12 @@ int main(void){
                 "language": "c"
             }
         );
-
+        
+        setResultStatus("Judging")
         axios.post(baseURL+'program/submit',sendJsonData)
             .then(function(response){
                 const responseJsonData = JSON.parse(JSON.stringify(response));
-                const resultStatus = responseJsonData.data.ResultStatus
-
-                if (resultStatus == "AC"){
-                    
-                }
-                else if (resultStatus == "WA"){
-                    
-                }
-                else if (resultStatus == "CE"){
-
-                }
-                else{
-                    console.log("Eroor")
-                }
+                setResultStatus(responseJsonData.data.ResultStatus)
             })
             .catch(function(error){
                 console.log(error)
@@ -63,6 +52,7 @@ int main(void){
             }}
         />
         <button onClick={handleClick}>Submit</button>
+        <p>{resultStatus}</p>
         </div>
     );
 }
