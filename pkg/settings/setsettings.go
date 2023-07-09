@@ -2,7 +2,6 @@ package settings
 
 var path = "../../settings/setting.yaml"
 
-func SetSettings() {
-	UnmarshalYAML(path)
+func SetSettingParamater(m *map[interface{}]interface{}) {
+	UnmarshalYAML(path, m)
 }
-
