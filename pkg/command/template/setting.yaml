@@ -1,17 +1,10 @@
-settings:
-- 
-  contest-information:
-    # コンテストの名前を記載
-    contest-name: ""
-    # コンテストへの参加人数を記載
-    number-of-participant:
-
-  problem-information:
-    # 問題数を記載
-    number-of-problem: 
-    # 実行時間の上限を記載
-    limit-time:
-  
-  admin-information:
-    # ホスト名を記載
-    hostname: "http://localhost"
+# コンテストの名前を記載
+contest-name: "sasa"
+# コンテストへの参加人数を記載
+number-of-participant: 4
+# 問題数を記載
+number-of-problem: 6
+# 実行時間の上限を記載
+limit-time: 6
+# ホスト名を記載
+hostname: "http://localhost"
