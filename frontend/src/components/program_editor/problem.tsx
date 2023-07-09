@@ -1,37 +1,53 @@
 import React from "react";
 import axios from "axios";
-import { error } from "console";
 
 export default function Problem(){
     const [problem, SetProblem] = React.useState("");
     const [problemNumber, SetProblemNumber] = React.useState(1)
-    
-    axios.get("http://localhost:8080/paramater", {
-        params: {
-            paramater: "number-of-problem",
-        }
-    })
-    .then(function(response){
-        const responseJsonData = JSON.parse(JSON.stringify(response));
-        SetProblemNumber(responseJsonData.data.return)
-    })
-    .catch(function(error){
-        console.log(error)
-    })
+    const [nowProblem, SetNowProblem] = React.useState(0)
 
+    const handleListClick = (num) => {
+        SetNowProblem(num)
+        axios.get("http://localhost:8080/problem",{
+            params: {
+                problemNumber: num,
+            }
+        })
+        .then(function(response){
+            const responseJsonData = JSON.parse(JSON.stringify(response));
+            SetProblem(responseJsonData.data.problem)
+        })
+        .catch(function(error){
+            console.log(error)
+        })
+    }
+    React.useEffect(() => {
+        axios.get("http://localhost:8080/paramater", {
+            params: {
+                paramater: "number-of-problem",
+            }
+        })
+        .then(function(response){
+            const responseJsonData = JSON.parse(JSON.stringify(response));
+            SetProblemNumber(responseJsonData.data.paramater)
+        })
+        .catch(function(error){
+            console.log(error)
+        })
+    }, []);
     return(
         <div>
             {
             (function () {
                 const list = [];
                 for (let i = 1; i <= Number(problemNumber); i++) {
-                list.push(<li>{i}</li>);
+                list.push(<li onClick= {() => handleListClick(i)}style={{ display: 'inline', listStyle: 'none' }}>{i} </li>);
                 }
                 return <ul>{list}</ul>;
             }())
             }
-            <p>Problem {problemNumber}</p>
-            <p></p>
+            <h2>Problem {nowProblem}</h2>
+            <p>{problem}</p>
         </div>
     );
 }
