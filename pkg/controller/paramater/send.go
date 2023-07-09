@@ -1,7 +1,6 @@
 package paramater
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -13,9 +12,9 @@ func SendParamater(c *gin.Context) {
 
 	settings.SetSettingParamater(&m)
 	param := c.Query("paramater")
+
 	senddata := m[param]
-	fmt.Println(m[param])
 	c.JSON(http.StatusOK, gin.H{
-		"return": senddata,
+		"paramater": senddata,
 	})
 }
