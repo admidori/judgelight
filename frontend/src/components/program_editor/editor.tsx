@@ -7,6 +7,8 @@ import 'prismjs/components/prism-clike';
 import 'prismjs/components/prism-c'
 import 'prismjs/themes/prism.css'
 
+import { now } from "./problem";
+
 export default function ProgramEditor() {
     const baseURL = "http://localhost:8080/"
     const [code, setCode] = React.useState(
@@ -16,13 +18,14 @@ int main(void){
 }`
         );
     const [resultStatus, setResultStatus] = React.useState("");
+    
 
     const  handleClick = () => {
         const sendJsonData = JSON.stringify(
             {
                 "data": code,
                 "dataID": "1",
-                "problemID": "1",
+                "problemID": now,
                 "authorID": "1",
                 "language": "c"
             }

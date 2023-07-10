@@ -1,6 +1,8 @@
 import React from "react";
 import axios from "axios";
 
+export var now
+
 export default function Problem(){
     const [problem, SetProblem] = React.useState("");
     const [problemNumber, SetProblemNumber] = React.useState(1)
@@ -8,6 +10,7 @@ export default function Problem(){
 
     const handleListClick = (num) => {
         SetNowProblem(num)
+        now = String(num)
         axios.get("http://localhost:8080/problem",{
             params: {
                 problemNumber: num,
@@ -21,6 +24,7 @@ export default function Problem(){
             console.log(error)
         })
     }
+
     React.useEffect(() => {
         axios.get("http://localhost:8080/paramater", {
             params: {
@@ -35,6 +39,7 @@ export default function Problem(){
             console.log(error)
         })
     }, []);
+
     return(
         <div>
             {
