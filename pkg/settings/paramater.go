@@ -16,3 +16,5 @@ type SettingParamater struct {
 
 	ProblemInfo []ProblemInfomation `yaml:"example-problem-info"`
 }
+
+var Yamlpath = "../../settings/setting.yaml"

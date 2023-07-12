@@ -9,8 +9,6 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-var path = "../../settings/setting.yaml"
-
 func parse(source string, dest interface{}) error {
 	if reflect.TypeOf(dest).Kind() != reflect.Ptr {
 		return errors.New("mapping: dest is not pointer")
@@ -20,8 +18,7 @@ func parse(source string, dest interface{}) error {
 }
 
 func UnmarshalYAML(schema SettingParamater) {
-
-	buf, err := ioutil.ReadFile(path)
+	buf, err := ioutil.ReadFile(Yamlpath)
 	if err != nil {
 		fmt.Print(err)
 	}
