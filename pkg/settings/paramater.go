@@ -2,22 +2,17 @@ package settings
 
 // Expand YAML file and defile values
 
-type ContestInformation struct {
-	ContestName         string `yaml:"contest-name"`
-	NumberOfParticipant int    `yaml:"number-of-participant"`
-}
-
-type ProblemInformation struct {
-	NumberOfProblem int `yaml:"number-of-problem"`
-	LimitTime       int `yaml:"limit-time"`
-}
-
-type Admininformation struct {
-	Hostname string `yaml:"hostname"`
+type ProblemInfomation struct {
+	Name           string `yaml:"name"`
+	ExampleCaseNum int    `yaml:"examplecase-num"`
+	TestCaseNum    int    `yaml:"testcase-num"`
 }
 
 type SettingParamater struct {
-	ContestInformation `yaml:"contest-information"`
-	ProblemInformation `yaml:"problem-information"`
-	Admininformation   `yaml:"admin-information"`
+	ContestName         string `yaml:"contest-name"`
+	NumberOfParticipant int    `yaml:"number-of-participant"`
+	NumberOfProblem     int    `yaml:"number-of-problem"`
+	LimitTime           int    `yaml:"limit-time"`
+
+	ProblemInfo []ProblemInfomation `yaml:"example-problem-info"`
 }
