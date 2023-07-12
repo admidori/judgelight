@@ -4,20 +4,22 @@ volumes:
   ignore:
   
 services:
-  api:
-    build:
-      context: .
-      dockerfile: ./docker/api/Dockerfile
-    container_name: judgelight-api
-    volumes:
-      - ./cmd:/go/src/app/cmd/
-      - ./pkg:/go/src/app/pkg/
-      - ./docker/language:/go/src/app/docker/language/
-    hostname: backend
-    restart: always
-    tty: true
-    ports:
-      - 8080:8080
+#
+#  api:
+#    build:
+#      context: .
+#      dockerfile: ./docker/api/Dockerfile
+#    container_name: judgelight-api
+#    volumes:
+#      - ./cmd:/go/src/app/cmd/
+#      - ./pkg:/go/src/app/pkg/
+#      - ./docker/language:/go/src/app/docker/language/
+#    hostname: backend
+#    restart: always
+#    tty: true
+#    ports:
+#      - 8080:8080
+#
 
   next:
     build:
@@ -56,3 +58,19 @@ services:
       - next
     ports:
       - 80:80
+
+  mysql:
+    build:
+      context: .
+      dockerfile: ./docker/mysql/Dockerfile
+    container_name: judgelight-mysql
+    restart: always
+    tty: true
+    depends_on:
+      - nginx
+    ports:
+      - 3306:3306
+    volumes:
+      - ./mysql/DB:/docker-entrypoint-initdb.d 
+    environment:
+      - MYSQL_ROOT_PASSWORD=ROOT
