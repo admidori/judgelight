@@ -43,7 +43,7 @@ services:
       - -c
       - |
         [ -f ~/.exec-once ] || {
-          yarn install && touch ~/.exec-once
+          yarn build && touch ~/.exec-once
         }
         yarn start
 
@@ -71,6 +71,7 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - ./mysql/DB:/docker-entrypoint-initdb.d 
+      - ./docker/mysql/data:/var/lib/mysql
+      - ./docker/mysql/init.d:/docker-entrypoint-initdb.d
     environment:
       - MYSQL_ROOT_PASSWORD=ROOT
