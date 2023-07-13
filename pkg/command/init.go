@@ -31,9 +31,9 @@ var initCmd = &cobra.Command{
 			fmt.Print("How many problems do you set? ->")
 			fmt.Scan(&ans)
 			problemNum, _ := strconv.Atoi(ans)
-			createDirectory(problemNum)
+			createDirectoryandFiles(problemNum)
 
-			er := exec.Command("sh","../../pkg/command/scripts/init.sh").Run()
+			er := exec.Command("sh", "../../pkg/command/scripts/init.sh").Run()
 			if er != nil {
 				panic(er)
 			}
@@ -51,7 +51,7 @@ func init() {
 	rootCmd.AddCommand(initCmd)
 }
 
-func createDirectory(num int) {
+func createDirectoryandFiles(num int) {
 	file, err := os.Lstat("../../settings/")
 	if err != nil {
 		fmt.Print(err)
@@ -64,13 +64,20 @@ func createDirectory(num int) {
 		dirName := "../../settings/case/" + strconv.Itoa(i+1) + "/examplecase"
 		err := os.MkdirAll(dirName, unixPerms)
 		if err != nil {
-			fmt.Print(err)
+			panic(err)
+		}
+		
+		dirName = "../../settings/case/" + strconv.Itoa(i+1)
+		_, err = os.Create(dirName+"/problem.txt")
+		if err != nil {
+			panic(err)
 		}
 
 		dirName = "../../settings/case/" + strconv.Itoa(i+1) + "/testcase"
 		err = os.MkdirAll(dirName, unixPerms)
 		if err != nil {
-			fmt.Print(err)
+			panic(err)
 		}
 	}
+
 }
