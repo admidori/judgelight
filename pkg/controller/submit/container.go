@@ -20,17 +20,16 @@ func ContainerCreateAndStart(filename string, problemID string, language string)
 	cli.NegotiateAPIVersion(ctx)
 
 	imagefilename := "judge-server:" + language
-	envvalue1 := "SUBMITFILENAME=" + filename
+	envvalue1 := "SUBMITFILENAME=" + filename // unique
 	envvalue2 := "SUBMITLANGUAGE=" + language
 	envvalue3 := "PROBLEMID=" + problemID
-	envvalue4 := "TESTCASE_NUM=" + testCaseNum
 
 	resp, err := cli.ContainerCreate(
 		ctx,
 		&container.Config{
 			Image: imagefilename,
 			Cmd:   []string{},
-			Env:   []string{envvalue1, envvalue2, envvalue3, envvalue4},
+			Env:   []string{envvalue1, envvalue2, envvalue3},
 			Tty:   false,
 		}, &container.HostConfig{
 			Mounts: []mount.Mount{
