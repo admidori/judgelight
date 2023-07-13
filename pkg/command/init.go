@@ -33,11 +33,6 @@ var initCmd = &cobra.Command{
 			problemNum, _ := strconv.Atoi(ans)
 			createDirectoryandFiles(problemNum)
 
-			er := exec.Command("sh", "../../pkg/command/scripts/init.sh").Run()
-			if er != nil {
-				panic(er)
-			}
-
 			fmt.Println("Complete init!")
 			os.Exit(0)
 		} else {
