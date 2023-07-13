@@ -23,7 +23,7 @@ var initCmd = &cobra.Command{
 		fmt.Print("Init problemset? [y/n] -> ")
 		fmt.Scan(&ans)
 		if ans == "y" || ans == "Y" {
-			err := exec.Command("sh", "../../pkg/command/template/init.sh").Run()
+			err := exec.Command("sh", "../../pkg/command/scripts/init.sh").Run()
 			if err != nil {
 				panic(err)
 			}
@@ -32,6 +32,11 @@ var initCmd = &cobra.Command{
 			fmt.Scan(&ans)
 			problemNum, _ := strconv.Atoi(ans)
 			createDirectory(problemNum)
+
+			er := exec.Command("sh","../../pkg/command/scripts/init.sh").Run()
+			if er != nil {
+				panic(er)
+			}
 
 			fmt.Println("Complete init!")
 			os.Exit(0)
