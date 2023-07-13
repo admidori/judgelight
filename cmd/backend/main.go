@@ -13,6 +13,7 @@ package main
 import (
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"github.com/rp-agota/judgelight/pkg/controller/database"
 	"github.com/rp-agota/judgelight/pkg/controller/paramater"
 	"github.com/rp-agota/judgelight/pkg/controller/problem"
 	"github.com/rp-agota/judgelight/pkg/controller/submit"
@@ -44,9 +45,10 @@ func main() {
 
 	// If submit programs, excute below.
 	router.POST("/program/submit", submit.ReceiveSubmitProgram)
-	router.GET("/paramater",paramater.SendParamater)
-	router.GET("/problem",problem.SendProblem)
-	
+	router.GET("/paramater", paramater.SendParamater)
+	router.GET("/problem", problem.SendProblem)
+	router.GET("/database/read", database.ReadDB)
+
 	// Start listening.
 	router.Run(":8080")
 }
