@@ -5,7 +5,7 @@ import (
 )
 
 func GetProblem(num string) string {
-	filename := "../../settings/problemset/" + num + ".txt"
+	filename := "../../settings/case/" + num + "/problem.txt"
 	file, err := ioutil.ReadFile(filename)
 	if err != nil {
 		panic(err)
