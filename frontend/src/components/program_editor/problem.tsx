@@ -28,7 +28,7 @@ export default function Problem(){
     React.useEffect(() => {
         axios.get("http://localhost:8080/paramater", {
             params: {
-                paramater: "number-of-problem",
+                paramater: "NumberOfProblem",
             }
         })
         .then(function(response){

@@ -1,7 +1,6 @@
 package paramater
 
 import (
-	"fmt"
 	"net/http"
 	"reflect"
 
@@ -27,10 +26,8 @@ func SendParamater(c *gin.Context) {
 	var schema settings.SettingParamater
 
 	settings.UnmarshalYAML(&schema)
-	fmt.Println(schema)
 	param := c.Query("paramater")
 	m := StructToMap(&schema)
-	fmt.Print(m)
 	sendData := m[param]
 	c.JSON(http.StatusOK, gin.H{
 		"paramater": sendData,
