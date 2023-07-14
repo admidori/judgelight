@@ -26,6 +26,10 @@ export default function Problem(){
     }
 
     React.useEffect(() => {
+        /*
+        const fs = require('fs')
+        const hostDomain = JSON.parse(fs.readFileSync("config.json", "UTF-8"))
+        */
         axios.get("http://localhost:8080/paramater", {
             params: {
                 paramater: "NumberOfProblem",

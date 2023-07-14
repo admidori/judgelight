@@ -9,6 +9,8 @@ import 'prismjs/themes/prism.css'
 
 import { now } from "./problem";
 
+var count = 0
+
 export default function ProgramEditor() {
     const baseURL = "http://localhost:8080/"
     const [code, setCode] = React.useState(
@@ -19,8 +21,8 @@ int main(void){
         );
     const [resultStatus, setResultStatus] = React.useState("");
     
-
     const  handleClick = () => {
+        count++
         const sendJsonData = JSON.stringify(
             {
                 "data": code,
