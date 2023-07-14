@@ -20,10 +20,6 @@ func ReceiveSubmitProgram(c *gin.Context) {
 	var json Receiveprogramformat
 	c.BindJSON(&json)
 
-	err := exec.Command("sh", "../../pkg/controller/submit/init.sh").Run()
-	if(err != nil){
-		panic(err)
-	}
 	createsubmitfile(json)
 	BuildDockerfile(json.Language)
 	statusCode := ContainerCreateAndStart(json.DataID, json.ProblemID, json.Language)
