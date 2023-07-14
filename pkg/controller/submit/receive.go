@@ -3,7 +3,6 @@ package submit
 import (
 	"net/http"
 	"os"
-	"os/exec"
 
 	"github.com/gin-gonic/gin"
 )
