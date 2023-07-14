@@ -3,6 +3,7 @@ package submit
 import (
 	"context"
 	"fmt"
+	"path/filepath"
 
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/container"
@@ -24,6 +25,12 @@ func ContainerCreateAndStart(filename string, problemID string, language string)
 	envvalue2 := "SUBMITLANGUAGE=" + language
 	envvalue3 := "PROBLEMID=" + problemID
 
+	absolutePath, err := filepath.Abs("../../docker/language/c/")
+	if err != nil {
+		panic(err)
+	}
+	sourcepath := absolutePath + "/"
+
 	resp, err := cli.ContainerCreate(
 		ctx,
 		&container.Config{
@@ -35,7 +42,7 @@ func ContainerCreateAndStart(filename string, problemID string, language string)
 			Mounts: []mount.Mount{
 				{
 					Type:   mount.TypeBind,
-					Source: "/Users/agota/judgelight/docker/language/c/",
+					Source: sourcepath,
 					Target: "/workspace",
 				},
 			},
