@@ -17,7 +17,7 @@ func parse(source string, dest interface{}) error {
 	return parseError
 }
 
-func UnmarshalYAML(schema SettingParamater) {
+func UnmarshalYAML(schema *SettingParamater) {
 	buf, err := ioutil.ReadFile(Yamlpath)
 	if err != nil {
 		fmt.Print(err)
