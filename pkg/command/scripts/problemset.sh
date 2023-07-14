@@ -1,3 +1,2 @@
 #!/bin/sh
-cd ../../settings
-cp -r ./case/ ../../docker/language/c/src
+cp -r ../../settings/case ../../docker/language/c/work/src
