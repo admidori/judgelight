@@ -5,6 +5,7 @@ import Footer from '../components/common/footer/footer';
 import Menubar from '../components/common/menubar/menubar';
 import ProgramEditor from '../components/program_editor/editor';
 import Problem from '../components/program_editor/problem';
+import Login from '../components/login/login';
 
 class Index extends React.Component {
     render() {
@@ -12,6 +13,7 @@ class Index extends React.Component {
             <div>
             <Header />
             <Menubar />
+            <Login />
             <Problem />
             <hr></hr>
             <h3>Edit Code</h3>
