@@ -8,6 +8,7 @@ import 'prismjs/components/prism-c'
 import 'prismjs/themes/prism.css'
 
 import { now } from "./problem";
+import { loginStateId } from "../login/login"
 
 var count = 0
 
@@ -26,9 +27,9 @@ int main(void){
         const sendJsonData = JSON.stringify(
             {
                 "data": code,
-                "dataID": "1",
+                "dataID": loginStateId,
                 "problemID": now,
-                "authorID": "1",
+                "authorID": loginStateId,
                 "language": "c"
             }
         );

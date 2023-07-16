@@ -1,7 +1,7 @@
 import React from "react";
 
 var flag = false
-var loginStateId = ""
+export var loginStateId = ""
 
 export default function Login(){
     const [id, setId] = React.useState(null)
