@@ -6,15 +6,19 @@ import (
 )
 
 func InitDatabase() {
-	username := "root"
-	password := "root"
+	username := "test"
+	password := "test"
 	hostname := "localhost:3306"
 
-	auth := username + ":" + password + "@(" + hostname + ")/judgelight"
+	var err error
+	auth := username + ":" + password + "@(" + hostname + ")/JUDGELIGHT"
 	db, err := sql.Open("mysql", auth)
 	if err != nil {
 		fmt.Print(err)
 	}
 
 	err = db.Ping()
+	if err != nil {
+		panic(err)
+	}
 }
