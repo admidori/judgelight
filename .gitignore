@@ -9,3 +9,4 @@
 /frontend/node_modules
 /frontend/*.log
 *.DS_Store
+/result
