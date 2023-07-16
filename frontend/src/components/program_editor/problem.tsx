@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-
+import {domain} from "../../pages/index"
 export var now
 
 export default function Problem(){
@@ -12,11 +12,13 @@ export default function Problem(){
     const [problemNumber, SetProblemNumber] = React.useState(1)
     const [nowProblem, SetNowProblem] = React.useState(0)
 
+    const baseURL = "http://"+domain+":8080/"
+
     const handleListClick = (num) => {
         SetNowProblem(num)
         now = String(num)
 
-        axios.get("http://localhost:8080/problem",{
+        axios.get(baseURL+"problem",{
             params: {
                 problemNumber: num,
             }
@@ -44,11 +46,7 @@ export default function Problem(){
     }
 
     React.useEffect(() => {
-        /*
-        const fs = require('fs')
-        const hostDomain = JSON.parse(fs.readFileSync("config.json", "UTF-8"))
-        */
-        axios.get("http://localhost:8080/paramater", {
+        axios.get(baseURL+"paramater", {
             params: {
                 paramater: "NumberOfProblem",
             }

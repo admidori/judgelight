@@ -7,6 +7,8 @@ import ProgramEditor from '../components/program_editor/editor';
 import Problem from '../components/program_editor/problem';
 import Login from '../components/login/login';
 
+export const domain = "192.168.2.2"
+
 class Index extends React.Component {
     render() {
         return (

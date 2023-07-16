@@ -10,10 +10,11 @@ import 'prismjs/themes/prism.css'
 import { now } from "./problem";
 import { loginStateId } from "../login/login"
 
+import { domain } from "../../pages/index"
 var count = 0
 
 export default function ProgramEditor() {
-    const baseURL = "http://localhost:8080/"
+    const baseURL = "http://"+domain+":8080/"
     const [code, setCode] = React.useState(
 `#include <stdio.h>
 int main(void){
