@@ -12,7 +12,6 @@ class Index extends React.Component {
         return (
             <div>
             <Header />
-            <Menubar />
             <Login />
             <Problem />
             <hr></hr>
