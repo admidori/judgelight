@@ -5,12 +5,17 @@ export var now
 
 export default function Problem(){
     const [problem, SetProblem] = React.useState("");
+    const [exampleInput, SetExampleInput] = React.useState([]);
+    const [exampleOutput, SetExampleOutput] = React.useState([]);
+    const [exampleNumber, SetExampleNumber] = React.useState(0);
+
     const [problemNumber, SetProblemNumber] = React.useState(1)
     const [nowProblem, SetNowProblem] = React.useState(0)
 
     const handleListClick = (num) => {
         SetNowProblem(num)
         now = String(num)
+
         axios.get("http://localhost:8080/problem",{
             params: {
                 problemNumber: num,
@@ -19,6 +24,17 @@ export default function Problem(){
         .then(function(response){
             const responseJsonData = JSON.parse(JSON.stringify(response));
             SetProblem(responseJsonData.data.problem)
+            SetExampleNumber(responseJsonData.data.exampleNum)
+
+            var input = Array(exampleNumber);
+            var output = Array(exampleNumber);
+            for (let i=0;i<exampleNumber;i++){
+                input[i] = responseJsonData.data.exampleInputData[i]
+                output[i] = responseJsonData.data.exampleOutputData[i]
+            }
+
+            SetExampleInput(input)
+            SetExampleOutput(output)
         })
         .catch(function(error){
             console.log(error)
@@ -57,6 +73,19 @@ export default function Problem(){
             }
             <h2>Problem {nowProblem}</h2>
             <p>{problem}</p>
+
+            {
+            (function () {
+                const list = [];
+                for (let i = 0; i < Number(exampleNumber); i++) {
+                list.push(<p>Example Input {i}</p>)
+                list.push(<p>{exampleInput[i]}</p>);
+                list.push(<p>Example Output {i}</p>)
+                list.push(<p>{exampleOutput[i]}</p>)
+                }
+                return <p>{list}</p>;
+            }())
+            }
         </div>
     );
 }
