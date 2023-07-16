@@ -1,6 +1,7 @@
 package submit
 
 import (
+	"fmt"
 	"net/http"
 	"os"
 
@@ -26,6 +27,8 @@ func ReceiveSubmitProgram(c *gin.Context) {
 	switch statusCode {
 	// AC
 	case 0:
+		writeFile(json.AuthorID, json.ProblemID)
+
 		c.JSON(http.StatusOK, gin.H{
 			"DataID":       json.DataID,
 			"AuthorID":     json.AuthorID,
@@ -59,4 +62,17 @@ func createsubmitfile(json Receiveprogramformat) {
 		panic(err)
 	}
 	defer f.Close()
+}
+
+func writeFile(authorID string, problemID string) {
+	fileName := "../../result/"+ authorID + ".csv"
+	writeData := problemID + "," + "AC"
+
+	file, err := os.OpenFile(fileName, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	if err != nil {
+		fmt.Print(err)
+	}
+	defer file.Close()
+
+	fmt.Fprintln(file, writeData)
 }
