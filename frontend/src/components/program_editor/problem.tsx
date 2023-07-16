@@ -35,6 +35,8 @@ export default function Problem(){
 
             SetExampleInput(input)
             SetExampleOutput(output)
+            console.log(exampleInput)
+            console.log(exampleOutput)
         })
         .catch(function(error){
             console.log(error)
@@ -66,7 +68,7 @@ export default function Problem(){
             (function () {
                 const list = [];
                 for (let i = 1; i <= Number(problemNumber); i++) {
-                list.push(<li onClick= {() => handleListClick(i)}style={{ display: 'inline', listStyle: 'none' }}>{i}</li>);
+                    list.push(<li onClick= {() => handleListClick(i)}style={{ display: 'inline', listStyle: 'none' }}>{i}</li>);
                 }
                 return <ul>{list}</ul>;
             }())
@@ -78,10 +80,11 @@ export default function Problem(){
             (function () {
                 const list = [];
                 for (let i = 0; i < Number(exampleNumber); i++) {
-                list.push(<p>Example Input {i}</p>)
-                list.push(<p>{exampleInput[i]}</p>);
-                list.push(<p>Example Output {i}</p>)
-                list.push(<p>{exampleOutput[i]}</p>)
+                    list.push(<hr></hr>)
+                    list.push(<p style={{fontSize: 12}}>入力例{i+1}</p>)
+                    list.push(<p style={{fontFamily: '"Fira code", "Fira Mono", monospace',fontSize: 12,}}>{exampleInput[i]}</p>);
+                    list.push(<p style={{fontSize: 12}}>出力例{i+1}</p>)
+                    list.push(<p style={{fontFamily: '"Fira code", "Fira Mono", monospace',fontSize: 12,}}>{exampleOutput[i]}</p>)
                 }
                 return <p>{list}</p>;
             }())

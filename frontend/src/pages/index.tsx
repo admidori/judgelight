@@ -13,6 +13,8 @@ class Index extends React.Component {
             <Header />
             <Menubar />
             <Problem />
+            <hr></hr>
+            <h3>Edit Code</h3>
             <ProgramEditor />
             <Footer />
             </div>
