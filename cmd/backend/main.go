@@ -20,28 +20,7 @@ import (
 
 func main() {
 	router := gin.Default()
-
-	router.Use(cors.New(cors.Config{
-		AllowOrigins: []string{
-			"http://localhost:3000",
-			"http://localhost:3030",
-		},
-		// If use HTTP method, change below.
-		AllowMethods: []string{
-			"POST",
-			"GET",
-		},
-		AllowHeaders: []string{
-			"Access-Control-Allow-Credentials",
-			"Access-Control-Allow-Headers",
-			"Content-Type",
-			"Content-Length",
-			"Accept-Encoding",
-			"Authorization",
-		},
-		AllowCredentials: false,
-	}))
-
+	router.Use(cors.Default())
 	// If submit programs, excute below.
 	router.POST("/program/submit", submit.ReceiveSubmitProgram)
 	router.GET("/paramater", paramater.SendParamater)
