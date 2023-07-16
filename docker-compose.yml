@@ -41,10 +41,13 @@ services:
       - sh
     command:
       - -c
+#      - |
+#        [ -f ~/.exec-once ] || {
+#          yarn build && touch ~/.exec-once
+#        }
+#        yarn start
       - |
-        [ -f ~/.exec-once ] || {
-          yarn build && touch ~/.exec-once
-        }
+        yarn build
         yarn start
 
   nginx:
