@@ -34,11 +34,8 @@ export default function Problem(){
                 input[i] = responseJsonData.data.exampleInputData[i]
                 output[i] = responseJsonData.data.exampleOutputData[i]
             }
-
             SetExampleInput(input)
             SetExampleOutput(output)
-            console.log(exampleInput)
-            console.log(exampleOutput)
         })
         .catch(function(error){
             console.log(error)
@@ -62,11 +59,12 @@ export default function Problem(){
 
     return(
         <div>
+            <p>PROBLEM NUMBER</p>
             {
             (function () {
                 const list = [];
                 for (let i = 1; i <= Number(problemNumber); i++) {
-                    list.push(<li onClick= {() => handleListClick(i)}style={{ display: 'inline', listStyle: 'none' }}>{i}</li>);
+                    list.push(<li onClick= {() => handleListClick(i)}style={{ display: 'inline', listStyle: 'none' }}>{i  }</li>);
                 }
                 return <ul>{list}</ul>;
             }())
