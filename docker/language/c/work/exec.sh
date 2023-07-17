@@ -21,7 +21,7 @@ function check_files (){
 
     for cnt in `seq 1 ${2}`
     do
-    	"./${SUBMITFILENAME}.out" < "./case/${PROBLEMID}/${1}/${cnt}/input.txt" > "./${SUBMITFILENAME}.txt"
+    	timeout -sKILL 3 bash -c "./${SUBMITFILENAME}.out" < "./case/${PROBLEMID}/${1}/${cnt}/input.txt" > "./${SUBMITFILENAME}.txt"
         if ! diff "./${SUBMITFILENAME}.txt" "./case/${PROBLEMID}/${1}/${cnt}/output.txt"; then
             echo "WA"
             # Return code 1 if WA
