@@ -7,7 +7,7 @@ import (
 )
 
 func GetTestcaseInput(problemNum string, num int) string {
-	dirPath := "../../settings/case/" + problemNum + "/examplecase/" + strconv.Itoa(num) + "/input.txt"
+	dirPath := "../../docker/language/c/work/src/case/" + problemNum + "/examplecase/" + strconv.Itoa(num) + "/input.txt"
 	file, err := ioutil.ReadFile(dirPath)
 	if err != nil {
 		panic(err)
@@ -17,7 +17,7 @@ func GetTestcaseInput(problemNum string, num int) string {
 }
 
 func GetTestcaseOutput(problemNum string, num int) string {
-	dirPath := "../../settings/case/" + problemNum + "/examplecase/" + strconv.Itoa(num) + "/output.txt"
+	dirPath := "../../docker/language/c/work/src/case/" + problemNum + "/examplecase/" + strconv.Itoa(num) + "/output.txt"
 	file, err := ioutil.ReadFile(dirPath)
 	if err != nil {
 		panic(err)
@@ -30,7 +30,7 @@ func CheckExampleNum(num string) int {
 	var cnt = 0
 
 	for {
-		dirPath := "../../settings/case/" + num + "/examplecase/" + strconv.Itoa(cnt+1)
+		dirPath := "../../docker/language/c/work/src/case/" + num + "/examplecase/" + strconv.Itoa(cnt+1)
 		if f, err := os.Stat(dirPath); os.IsNotExist(err) || !f.IsDir() {
 			return cnt
 		} else {

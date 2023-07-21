@@ -24,7 +24,10 @@ export default function Login(){
         (function () {
             if (flag == true) {
                 return (
+                <div>
                     <input value={id} readOnly></input>
+                    <p>registerd=> {id}</p>
+               	</div>
                 );
             }else{
                 return(

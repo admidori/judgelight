@@ -64,8 +64,7 @@ export default function Problem(){
             (function () {
                 const list = [];
                 for (let i = 1; i <= Number(problemNumber); i++) {
-                    list.push(<li onClick= {() => handleListClick(i)}style={{ display: 'inline', listStyle: 'none' }}>{i}</li>);
-                    list.push(<li>  </li>)
+                    list.push(<li onClick= {() => handleListClick(i)}style={{ display: 'inline', listStyle: 'none' }}>{i}<>  </></li>);
                 }
                 return <ul>{list}</ul>;
             }())
