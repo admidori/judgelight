@@ -7,7 +7,7 @@ import ProgramEditor from '../components/program_editor/editor';
 import Problem from '../components/program_editor/problem';
 import Login from '../components/login/login';
 
-export const domain = "10.20.5.116"
+export const domain = "172.20.1.109"
 
 class Index extends React.Component {
     render() {
