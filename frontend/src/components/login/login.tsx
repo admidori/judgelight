@@ -26,7 +26,7 @@ export default function Login(){
                 return (
                 <div>
                     <input value={id} readOnly></input>
-                    <p>registerd=> {id}</p>
+                    <p>registerd→ {id}</p>
                	</div>
                 );
             }else{
