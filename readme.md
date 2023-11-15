@@ -100,4 +100,4 @@ Webページに表示する問題の数を`/settings/settings.yaml`内で指定�
 →Dockerの処理の都合上、一人のユーザが連投するとCEを吐き出すようになっています。ジャッジ中はsubmitを連打しないようにお願いします。  
 
 # License
-MIT (c) 2023 [@rp-agota](https://github.com/rp-agota)
+MIT (c) 2023 [@admidori](https://github.com/admidori)
