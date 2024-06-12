@@ -1,14 +1,13 @@
 package problem
 
 import (
-	"io/ioutil"
 	"os"
 	"strconv"
 )
 
 func GetTestcaseInput(problemNum string, num int) string {
 	dirPath := "../../settings/case/" + problemNum + "/examplecase/" + strconv.Itoa(num) + "/input.txt"
-	file, err := ioutil.ReadFile(dirPath)
+	file, err := os.ReadFile(dirPath)
 	if err != nil {
 		panic(err)
 	}
@@ -18,7 +17,7 @@ func GetTestcaseInput(problemNum string, num int) string {
 
 func GetTestcaseOutput(problemNum string, num int) string {
 	dirPath := "../../settings/case/" + problemNum + "/examplecase/" + strconv.Itoa(num) + "/output.txt"
-	file, err := ioutil.ReadFile(dirPath)
+	file, err := os.ReadFile(dirPath)
 	if err != nil {
 		panic(err)
 	}
