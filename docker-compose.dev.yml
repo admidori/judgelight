@@ -74,8 +74,8 @@ services:
       - ./docker/mysql/init.d:/docker-entrypoint-initdb.d
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_USER: test
-      MYSQL_PASSWORD: test
+      MYSQL_USER: dev
+      MYSQL_PASSWORD: dev
     networks:
       - mysql-network
       
