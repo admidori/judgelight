@@ -44,14 +44,7 @@ services:
     command:
       - -c
       - |
-        [ -f ~/.exec-once ] || {
-          yarn install && yarn build && touch ~/.exec-once
-        }
-        yarn start
-
-#      - |
-#        yarn build
-#        yarn start
+        yarn dev
 
   nginx:
     build:
