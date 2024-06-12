@@ -11,11 +11,12 @@ Function: This is backend program for judgelight.
 package main
 
 import (
+	"github.com/admidori/judgelight/pkg/controller/database"
+	"github.com/admidori/judgelight/pkg/controller/paramater"
+	"github.com/admidori/judgelight/pkg/controller/problem"
+	"github.com/admidori/judgelight/pkg/controller/submit"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
-	"github.com/rp-agota/judgelight/pkg/controller/paramater"
-	"github.com/rp-agota/judgelight/pkg/controller/problem"
-	"github.com/rp-agota/judgelight/pkg/controller/submit"
 )
 
 func main() {
@@ -25,6 +26,9 @@ func main() {
 	router.POST("/program/submit", submit.ReceiveSubmitProgram)
 	router.GET("/paramater", paramater.SendParamater)
 	router.GET("/problem", problem.SendProblem)
+
+	// If register user, excute below.
+	router.POST("/register/problem", database.RegisterProblem)
 
 	// Start listening.
 	router.Run(":8080")

@@ -1,4 +1,4 @@
-module github.com/rp-agota/judgelight
+module github.com/admidori/judgelight
 
 go 1.20
 
