@@ -2,7 +2,7 @@
   "name": "judgelight-front",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/rp-agota/judgelight",
+  "repository": "https://github.com/admidori/judgelight",
   "author": "Aoi Kondo",
   "license": "MIT",
   "dependencies": {
