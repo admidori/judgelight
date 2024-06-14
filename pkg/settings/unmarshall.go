@@ -3,7 +3,7 @@ package settings
 import (
 	"errors"
 	"fmt"
-	"io/ioutil"
+	"os"
 	"reflect"
 
 	"gopkg.in/yaml.v3"
@@ -18,7 +18,7 @@ func parse(source string, dest interface{}) error {
 }
 
 func UnmarshalYAML(schema *SettingParamater) {
-	buf, err := ioutil.ReadFile(Yamlpath)
+	buf, err := os.ReadFile(Yamlpath)
 	if err != nil {
 		fmt.Print(err)
 	}
