@@ -12,6 +12,7 @@ import (
 
 var init_problem bool
 var init_result bool
+var init_user bool
 
 // initCmd represents the init command
 var initCmd = &cobra.Command{
@@ -27,14 +28,18 @@ var initCmd = &cobra.Command{
 	RunE: func(cmd *cobra.Command, args []string) error {
 		if init_problem {
 			database.DeleteProblem()
+			fmt.Println("Problem table initialized successfully.")
 		}
 		if init_result {
 			database.DeleteResult()
+			fmt.Println("Result table initialized successfully.")
 		}
-		if !init_problem && !init_result {
+		if init_user {
+			database.DeleteUser()
+			fmt.Println("User table initialized successfully.")
+		}else{
 			return fmt.Errorf("please select the table to initialize")
 		}
-		fmt.Println("Table initialized successfully.")
 		return nil
 	},
 }
@@ -44,4 +49,5 @@ func init() {
 
 	initCmd.Flags().BoolVarP(&init_problem, "problem", "p", false, "Initialize problem table")
 	initCmd.Flags().BoolVarP(&init_result, "result", "r", false, "Initialize result table")
+	initCmd.Flags().BoolVarP(&init_user, "user", "u", false, "Initialize user table")
 }
