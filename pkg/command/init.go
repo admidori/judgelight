@@ -16,7 +16,7 @@ var init_result bool
 // initCmd represents the init command
 var initCmd = &cobra.Command{
 	Use:   "init",
-	Short: "Initialize the database table",
+	Short: "Initialize the database table.",
 	Long: `This command is used to initialize the database table.
 	If you want to initialize the problem table, use the -p flag.
 	If you want to initialize the result table, use the -r flag.
