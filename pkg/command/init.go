@@ -27,15 +27,14 @@ var initCmd = &cobra.Command{
 	RunE: func(cmd *cobra.Command, args []string) error {
 		if init_problem {
 			database.DeleteProblem()
-			fmt.Print("Initializing problem table")
 		}
 		if init_result {
 			database.DeleteResult()
-			fmt.Println("Initializing result table")
 		}
 		if !init_problem && !init_result {
 			return fmt.Errorf("please select the table to initialize")
 		}
+		fmt.Println("Table initialized successfully")
 		return nil
 	},
 }
