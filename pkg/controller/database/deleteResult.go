@@ -1,19 +1,16 @@
 package database
 
-import "fmt"
+import "log"
 
 func DeleteResult() {
 	db := InitDatabase()
 
-	stmt, err := db.Prepare(`DELETE FROM JUDGELIGHT.RESULT`)
+	result, err := db.Exec(`DELETE FROM JUDGELIGHT.RESULT`)
 	if err != nil {
-		fmt.Print(err)
+		panic(err)
 	}
-	result, err := stmt.Exec()
-	if err != nil {
-		fmt.Print(err)
-	}
-	fmt.Print(result)
+
+	log.Print(result)
 
 	EndDatabase(db)
 }
