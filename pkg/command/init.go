@@ -16,13 +16,14 @@ var init_result bool
 // initCmd represents the init command
 var initCmd = &cobra.Command{
 	Use:   "init",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Initialize the database table",
+	Long: `This command is used to initialize the database table.
+	If you want to initialize the problem table, use the -p flag.
+	If you want to initialize the result table, use the -r flag.
+	You can use both flags at the same time.
+	For example, if you want to initialize the problem table and the result table, use the following command:
+		judgelight init -p -r
+	`,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		if init_problem {
 			database.DeleteProblem()
