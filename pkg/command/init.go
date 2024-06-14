@@ -34,7 +34,7 @@ var initCmd = &cobra.Command{
 		if !init_problem && !init_result {
 			return fmt.Errorf("please select the table to initialize")
 		}
-		fmt.Println("Table initialized successfully")
+		fmt.Println("Table initialized successfully.")
 		return nil
 	},
 }
