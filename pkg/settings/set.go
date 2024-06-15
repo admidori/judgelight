@@ -10,6 +10,9 @@ import (
 type Problem struct {
 	ProblemNum         string `yaml:"number"`
 	ProblemTitle       string `yaml:"title"`
+	ProblemScore       int    `yaml:"score"`
+	ProblemLimitTime   int    `yaml:"limit-execute-time"`
+	ProblemLimitMemory int    `yaml:"limit-execute-memory"`
 	ProblemDescription string `yaml:"description"`
 	ProblemInput       string `yaml:"input_description"`
 	ProblemOutput      string `yaml:"output_description"`
@@ -24,11 +27,9 @@ type Case struct {
 }
 
 type ContestInformation struct {
-	Title       string `yaml:"title"`
-	StartTime   string `yaml:"start-time"`
-	EndTime     string `yaml:"end-time"`
-	LimitTime   int    `yaml:"limit-execute-time"`
-	LimitMemory int    `yaml:"limit-memory"`
+	Title     string `yaml:"title"`
+	StartTime string `yaml:"start-time"`
+	EndTime   string `yaml:"end-time"`
 }
 
 type Problems struct {
