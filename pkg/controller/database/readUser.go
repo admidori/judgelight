@@ -5,8 +5,8 @@ import (
 )
 
 type User_table struct {
-	Username []string
-	Password []string
+	Student_id []string
+	Student_password []string
 }
 
 func ReadUser() []User_table {
@@ -25,7 +25,7 @@ func ReadUser() []User_table {
 		if err != nil {
 			fmt.Print(err)
 		}
-		result = append(result, User_table{Username: []string{username}, Password: []string{password}})
+		result = append(result, User_table{Student_id: []string{username}, Student_password: []string{password}})
 	}
 
 	EndDatabase(db)
