@@ -46,18 +46,18 @@ func ReadProblem() []Problem_table {
 		var initialCode string
 		var testcase []byte
 		var secretcase []byte
-		
+
 		err := rows.Scan(&id, &title, &score, &limitTime, &limitMemory, &problem_description, &input_description, &output_description, &initialCode, &testcase, &secretcase)
 		if err != nil {
-			fmt.Print(err)
+			panic(err)
 		}
 		var testcaseSlice []Case
 		var secretcaseSlice []Case
 		if err := json.Unmarshal(testcase, &testcaseSlice); err != nil {
-			fmt.Print("Error parsing testcase: ", err)
+			panic(err)
 		}
 		if err := json.Unmarshal(secretcase, &secretcaseSlice); err != nil {
-			fmt.Print("Error parsing secretcase: ", err)
+			panic(err)
 		}
 		result = append(result, Problem_table{ProblemNum: id, ProblemTitle: title, ProblemScore: score, ProblemLimitTime: limitTime, ProblemLimitMemory: limitMemory, ProblemDescription: problem_description, ProblemInput: input_description, ProblemOutput: output_description, ProblemInitialCode: initialCode, TestCase: testcaseSlice, SecretCase: secretcaseSlice})
 	}
