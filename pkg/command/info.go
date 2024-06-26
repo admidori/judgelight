@@ -1,5 +1,5 @@
 /*
-Copyright © 2024 NAME HERE <EMAIL ADDRESS>
+Copyright © 2024 Aoi Kondo <agotadmidori@gmail.com>
 */
 package cmd
 
@@ -31,17 +31,25 @@ to quickly create a Cobra application.`,
 
 			var cnt int = 1
 			for _, user := range user_result {
-				fmt.Println("[", cnt, "]\t", user.Username, "\t", user.Password)
+				fmt.Println("[", cnt, "]\t", user.Student_id, "\t", user.Student_password)
 				cnt++
 			}
 			return nil
 		}
 		if problem_flag {
 			fmt.Println("problem table")
+			problem := database.ReadProblem()
+
+			var cnt int = 1
+			for _, prob := range problem {
+				fmt.Println("[", cnt, "]\t", prob.ProblemNum, "\t", prob.ProblemTitle, "\t", prob.ProblemScore, "\t", prob.ProblemLimitTime, "\t", prob.ProblemLimitMemory, "\t", prob.ProblemDescription, "\t", prob.ProblemInput, "\t", prob.ProblemOutput, "\t", prob.ProblemInitialCode, "\t", prob.TestCase, "\t", prob.SecretCase)
+				cnt++
+			}
 			return nil
 		}
 		if submit_flag {
 			fmt.Println("submit table")
+			return nil
 		}
 
 		return fmt.Errorf("please select the flag")
