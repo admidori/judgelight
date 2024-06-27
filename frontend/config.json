@@ -1,3 +1,4 @@
 {
-    "domain":"localhost"
+    "domain":"localhost",
+    "apiPort": 8080
 }
