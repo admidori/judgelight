@@ -1,12 +1,8 @@
 import { createTheme, ThemeProvider, AppBar, Toolbar, Typography, Box } from "@material-ui/core";
 import React from "react";
 import { green } from "@material-ui/core/colors";
-import { handleTitle } from "./hooks";
-import { nowProblemNumber } from "./menu";
 
-export default function Title(){
-    const { problemTitle } = handleTitle(nowProblemNumber)
-
+export default function Title(props){
     const theme = createTheme({
         palette: {
             primary: green,
@@ -25,9 +21,9 @@ export default function Title(){
                         alignItems: 'center',
                         justifyContent: 'space-between',
                     }}>
-                        <Box border={1}>{problemTitle.problemNumber}</Box>
+                        <Box border={1}>{props.problemTitle.problemNumber}</Box>
                         <Typography variant="h6" component="div">
-                            {problemTitle.title}
+                            {props.problemTitle.title}
                         </Typography>
                     </Box>
                 </Toolbar>

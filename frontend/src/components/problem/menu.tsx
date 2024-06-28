@@ -1,17 +1,12 @@
 import React from "react";
-import { AppBar, Box, Container, Toolbar, Typography, Button , createTheme, ThemeProvider, ButtonGroup} from "@material-ui/core";
+import { AppBar, Box, Toolbar, Button , createTheme, ThemeProvider, ButtonGroup} from "@material-ui/core";
 import { green } from "@material-ui/core/colors";
-import { handleMenu } from "./hooks";
 
-export var now
-
-export default function Menu(){
-    const { problemNumber } = handleMenu()
-
-    const handleListClick = (num) => {
-        alert(num)
+export default function Menu(props){
+    const handleClick = (num) => {
+        props.handleNowProblemChange(num)
     }
-    
+
     const theme = createTheme({
         palette: {
             primary: green,
@@ -34,8 +29,8 @@ export default function Menu(){
                                 {
                                 (function () {
                                     const list = [];
-                                    for (let i = 1; i <= Number(problemNumber); i++) {
-                                        list.push(<Button  style={{ margin: '2px', color: 'white', display: 'block' , borderColor: 'white'}} onClick= {() => handleListClick(i)}>{i}</Button>);
+                                    for (let i = 1; i <= Number(props.problemTotal); i++) {
+                                        list.push(<Button  style={{ margin: '2px', color: 'white', display: 'block' , borderColor: 'white'}} onClick= {() => handleClick(i)}>{i}</Button>);
                                     }
                                     return <>{list}</>;
                                 }())
