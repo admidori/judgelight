@@ -1,4 +1,4 @@
-declare module '*/config.json' {
+declare module 'config.json' {
     interface Config {
         domain: string;
         apiPort: number;
