@@ -2,23 +2,24 @@ import React from "react";
 import axios from "axios";
 import { baseURL } from "../../pages/index";
 
-export const handleMenu = () => {
-    const [problemNumber, SetProblemNumber] = React.useState(0)
-
-    axios.get(baseURL+"/get/problem/info", {
-        params: {
-            paramater: "NumberOfProblem",
-        }
-    })
-    .then(function(response){
-        const responseJsonData = JSON.parse(JSON.stringify(response));
-        SetProblemNumber(responseJsonData.data.paramater)
-    })
-    .catch(function(error){
-        console.log(error)
-    })
-
-    return problemNumber
+export const handleGetProblemTotalNumber = () => {
+    const [problemTotalNumber, SetProblemTotalNumber] = React.useState(0)
+    React.useEffect(() => {
+        axios.get(baseURL+"/get/problem/info", {
+            params: {
+                paramater: "NumberOfProblem",
+            }
+        })
+        .then(function(response){
+            const responseJsonData = JSON.parse(JSON.stringify(response));
+            SetProblemTotalNumber(responseJsonData.data.paramater)
+        })
+        .catch(function(error){
+            console.log(error)
+        })
+    },[])
+    
+    return { problemTotalNumber }
 }
 
 export const handleTitle = (num) => {
@@ -27,47 +28,51 @@ export const handleTitle = (num) => {
         problemNumber: "",
     })
 
-    axios.get(baseURL+"/get/problem/info",{
-        params: {
-            problemNumber: num,
-            paramater: "Title",
-        }
-    }).then(function(response){
-        const responseJsonData = JSON.parse(JSON.stringify(response))
-        SetProblemTitle({
-            title: responseJsonData.data.title,
-            problemNumber: responseJsonData.data.problemNumber,
-        })
-    }).catch(function(error){
-        console.log(error)
-    })
-
-    return problemTitle
-}
-
-export const handleCase = (num, total) => {
-    const [testCase, SetTestCase] = React.useState({
-        input: [],
-        output: [],
-    })
-
-    axios.get(baseURL+"/get/problem",{
-        params: {
-            problemNumber: num,
-            paramater: "Case",
-        }
-    }).then(function(response){
-        const responseJsonData = JSON.parse(JSON.stringify(response))
-        for (let i=0;i<total;i++){
-            SetTestCase[i]({
-                    input: responseJsonData.data.exampleInputData[i],
-                    output: responseJsonData.data.exampleOutputData[i],
-                }
-            )}
+    React.useEffect(() => {
+        axios.get(baseURL+"/get/problem/info",{
+            params: {
+                problemNumber: String(num),
+                paramater: "Title",
+            }
+        }).then(function(response){
+            const responseJsonData = JSON.parse(JSON.stringify(response))
+            SetProblemTitle({
+                title: responseJsonData.data.title,
+                problemNumber: responseJsonData.data.problemNumber,
+            })
         }).catch(function(error){
             console.log(error)
         })
-    return testCase
+    },[num])
+
+    return { problemTitle }
+}
+
+export const handleCase = (num, total) => {
+    const [problemCase, SetProblemCase] = React.useState({
+        input: [],
+        output: [],
+    })
+    
+    React.useEffect(() => {
+        axios.get(baseURL+"/get/problem/info",{
+            params: {
+                problemNumber: num,
+                paramater: "Case",
+            }
+        }).then(function(response){
+            const responseJsonData = JSON.parse(JSON.stringify(response))
+            for (let i=0;i<total;i++){
+                SetProblemCase[i]({
+                        input: responseJsonData.data.exampleInputData[i],
+                        output: responseJsonData.data.exampleOutputData[i],
+                    }
+                )}
+            }).catch(function(error){
+                console.log(error)
+            })
+    },[num])
+    return { problemCase }
 }
 
 export const handleAppendix = (num) => {
@@ -77,45 +82,51 @@ export const handleAppendix = (num) => {
         limitMemory: 0,
     })
 
-    axios.get(baseURL+"/get/problem/info",{
-        params: {
-            problemNumber: num,
-            paramater: "Appendix",
-        }
-    }).then(function(response){
-        const responseJsonData = JSON.parse(JSON.stringify(response))
-        SetProblemAppendix({
-            score: responseJsonData.data.score,
-            limitTime: responseJsonData.data.limitTime,
-            limitMemory: responseJsonData.data.limitMemory,
+    React.useEffect(() => {
+        axios.get(baseURL+"/get/problem/info",{
+            params: {
+                problemNumber: num,
+                paramater: "Appendix",
+            }
+        }).then(function(response){
+            const responseJsonData = JSON.parse(JSON.stringify(response))
+            SetProblemAppendix({
+                score: responseJsonData.data.score,
+                limitTime: responseJsonData.data.limitTime,
+                limitMemory: responseJsonData.data.limitMemory,
+            })
+        }).catch(function(error){
+            console.log(error)
         })
-    }).catch(function(error){
-        console.log(error)
-    })
+    },[num])
 
-    return problemAppendix
+    return { problemAppendix }
 }
 
 export const handleDescription = (num) => {
-    const [problem, SetProblem] = React.useState({
+    const [problemDescription, SetProblemDescription] = React.useState({
         description: "",
         initialCode: "",
     })
 
-    axios.get(baseURL+"/get/problem/info",{
-        params: {
-            problemNumber: num,
-            paramater: "Description",
-        }
-    })
-    .then(function(response){
-        const responseJsonData = JSON.parse(JSON.stringify(response))
-        SetProblem({
-            description: responseJsonData.data.description,
-            initialCode: responseJsonData.data.initialCode,
+    React.useEffect(() => {
+        axios.get(baseURL+"/get/problem/info",{
+            params: {
+                problemNumber: num,
+                paramater: "Description",
+            }
         })
+        .then(function(response){
+            const responseJsonData = JSON.parse(JSON.stringify(response))
+            SetProblemDescription({
+                description: responseJsonData.data.description,
+                initialCode: responseJsonData.data.initialCode,
+            })
+        })
+        .catch(function(error){
+            console.log(error)
     })
-    .catch(function(error){
-        console.log(error)
-    })
+    },[num])
+
+    return { problemDescription }
 }
