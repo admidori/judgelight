@@ -1,25 +1,13 @@
 import React from 'react';
+import config from "../../config.json";
 
-import Header from "../components/common/header/header";
-import Footer from '../components/common/footer/footer';
-import Menubar from '../components/common/menubar/menubar';
-import ProgramEditor from '../components/program_editor/editor';
-import Problem from '../components/program_editor/problem';
-import Login from '../components/login/login';
-
-export const domain = "localhost"
+export var baseURL = config.domain + ":" + config.apiPort
 
 class Index extends React.Component {
     render() {
         return (
             <div>
-            <Header />
-            <Login />
-            <Problem />
-            <hr></hr>
-            <h3>Edit Code</h3>
-            <ProgramEditor />
-            <Footer />
+                <h1>Please wait</h1>
             </div>
         );
     }
