@@ -12,30 +12,23 @@ export default function Header() {
                         alignItems: 'center',
                         justifyContent: 'space-between',
                     }}>
-                        <Box sx={{
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                        }}>
-                            <ButtonGroup>
-                                    <Link href="/problem">
-                                    <Button
-                                        style={{ margin: '10px', color: 'white', display: 'block' , borderColor: 'white'}}
-                                    >
-                                        PROBLEMSET
-                                    </Button>
-                                    </Link>
-                                    <Link href="/result">
-                                    <Button
-                                        style={{ margin: '10px', color: 'white', display: 'block' , borderColor: 'white'}}
-                                    >
-                                        RESULT
-                                    </Button>
-                                    </Link>
-                            </ButtonGroup>
-                        </Box>
+                        <ButtonGroup>
+                            <Link href="/problem">
+                                <Button
+                                    style={{ margin: '10px', color: 'white', display: 'block' , borderColor: 'white'}}
+                                >
+                                    PROBLEMSET
+                                </Button>
+                            </Link>
+                            <Link href="/result">
+                                <Button
+                                    style={{ margin: '10px', color: 'white', display: 'block' , borderColor: 'white'}}
+                                >
+                                    RESULT
+                                </Button>
+                            </Link>
+                        </ButtonGroup>
                     </Box>
-
                 </Toolbar>
             </Container>
         </AppBar>
