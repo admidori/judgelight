@@ -6,20 +6,21 @@ import Title from "./title";
 import Appendix from "./appendix";
 import Limitation from "./limitation";
 import { handleGetProblemTotalNumber, handleGetProblemCaseTotalNumber, handleTitle, handleDescription, handleAppendix, handleLimitation, handleCase } from "./hooks";
+import { ProblemNumberContext } from "../../provider/problemNumber";
 
 export default function Problem(){
-    const [nowProblemNumber, SetNowProblem] = React.useState(1)
+    const [problemNumber, setProblemNumber] = React.useContext(ProblemNumberContext)
     const handleNowProblemChange = (number) => {
-        SetNowProblem(number)
+        setProblemNumber(number)
     }
     
     const problemTotalNumber = handleGetProblemTotalNumber()
-    const problemCaseTotalNumber = handleGetProblemCaseTotalNumber(nowProblemNumber)
-    const { problemTitle } = handleTitle(nowProblemNumber)
-    const problemDescription = handleDescription(nowProblemNumber)
-    const { problemAppendix } = handleAppendix(nowProblemNumber)
-    const { problemLimitation} = handleLimitation(nowProblemNumber)
-    const { problemCase } = handleCase(nowProblemNumber, problemTotalNumber)
+    const problemCaseTotalNumber = handleGetProblemCaseTotalNumber(problemNumber)
+    const { problemTitle } = handleTitle(problemNumber)
+    const problemDescription = handleDescription(problemNumber)
+    const { problemAppendix } = handleAppendix(problemNumber)
+    const { problemLimitation} = handleLimitation(problemNumber)
+    const { problemCase } = handleCase(problemNumber, problemTotalNumber)
 
     return (
         <div>
