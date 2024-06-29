@@ -13,6 +13,7 @@ import (
 var user_flag bool
 var problem_flag bool
 var submit_flag bool
+var contest_flag bool
 
 // infoCmd represents the info command
 var infoCmd = &cobra.Command{
@@ -42,7 +43,7 @@ to quickly create a Cobra application.`,
 
 			var cnt int = 1
 			for _, prob := range problem {
-				fmt.Println("[", cnt, "]\t", prob.ProblemNum, "\t", prob.ProblemTitle, "\t", prob.ProblemScore, "\t", prob.ProblemLimitTime, "\t", prob.ProblemLimitMemory, "\t", prob.ProblemDescription, "\t", prob.ProblemInput, "\t", prob.ProblemOutput, "\t", prob.ProblemInitialCode, "\t", prob.TestCase, "\t", prob.SecretCase)
+				fmt.Println("[", cnt, "]\t", prob.ProblemNum, "\t", prob.ProblemTitle, "\t", prob.ProblemScore, "\t", prob.ProblemLimitTime, "\t", prob.ProblemLimitMemory, "\t", prob.ProblemDescription, "\t", prob.ProblemLimitationInput, "\t", prob.ProblemLimitationOutput, "\t", prob.ProblemInitialCode, "\t", prob.TestCase, "\t", prob.SecretCase)
 				cnt++
 			}
 			return nil
@@ -51,7 +52,10 @@ to quickly create a Cobra application.`,
 			fmt.Println("submit table")
 			return nil
 		}
-
+		if contest_flag {
+			fmt.Println("contest table")
+			return nil
+		}
 		return fmt.Errorf("please select the flag")
 	},
 }
@@ -62,4 +66,5 @@ func init() {
 	infoCmd.Flags().BoolVarP(&user_flag, "user", "u", false, "Show user table")
 	infoCmd.Flags().BoolVarP(&problem_flag, "problem", "p", false, "Show problem table")
 	infoCmd.Flags().BoolVarP(&submit_flag, "submit", "s", false, "Show submit table")
+	infoCmd.Flags().BoolVarP(&contest_flag, "contest", "c", false, "Show contest table")
 }
