@@ -6,15 +6,15 @@ import (
 )
 
 type Problem_table struct {
-	ProblemNum         string
-	ProblemTitle       string
-	ProblemScore       int
-	ProblemLimitTime   int
-	ProblemLimitMemory int
-	ProblemDescription string
-	ProblemInput       string
-	ProblemOutput      string
-	ProblemInitialCode string
+	ProblemNum              string
+	ProblemTitle            string
+	ProblemScore            int
+	ProblemLimitTime        int
+	ProblemLimitMemory      int
+	ProblemDescription      string
+	ProblemLimitationInput  string
+	ProblemLimitationOutput string
+	ProblemInitialCode      string
 
 	TestCase   []Case
 	SecretCase []Case
@@ -59,7 +59,7 @@ func ReadProblem() []Problem_table {
 		if err := json.Unmarshal(secretcase, &secretcaseSlice); err != nil {
 			panic(err)
 		}
-		result = append(result, Problem_table{ProblemNum: id, ProblemTitle: title, ProblemScore: score, ProblemLimitTime: limitTime, ProblemLimitMemory: limitMemory, ProblemDescription: problem_description, ProblemInput: input_description, ProblemOutput: output_description, ProblemInitialCode: initialCode, TestCase: testcaseSlice, SecretCase: secretcaseSlice})
+		result = append(result, Problem_table{ProblemNum: id, ProblemTitle: title, ProblemScore: score, ProblemLimitTime: limitTime, ProblemLimitMemory: limitMemory, ProblemDescription: problem_description, ProblemLimitationInput: input_description, ProblemLimitationOutput: output_description, ProblemInitialCode: initialCode, TestCase: testcaseSlice, SecretCase: secretcaseSlice})
 	}
 	EndDatabase(db)
 	return result

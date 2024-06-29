@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/admidori/judgelight/pkg/settings"
+	"github.com/admidori/judgelight/pkg/controller/settings"
 )
 
 func RegisterProblem(problem settings.Problems) {
