@@ -5,7 +5,6 @@ import (
 	"bytes"
 	"context"
 	"io"
-	"io/ioutil"
 	"log"
 	"os"
 
@@ -28,9 +27,9 @@ func BuildDockerfile(language string) {
 	cli.NegotiateAPIVersion(ctx)
 
 	buildOptions := types.ImageBuildOptions{
-		Dockerfile:     dockerfileName,
-		Remove:         true,
-		Tags:           imageNameAndTags,
+		Dockerfile: dockerfileName,
+		Remove:     true,
+		Tags:       imageNameAndTags,
 	}
 	res, err := cli.ImageBuild(
 		ctx,
@@ -59,7 +58,7 @@ func getArchivedDockerfile(dockerfile string) *bytes.Reader {
 			log.Panic(err)
 		}
 	}()
-	b, err := ioutil.ReadAll(f)
+	b, err := io.ReadAll(f)
 	if err != nil {
 		log.Panic(err)
 	}
