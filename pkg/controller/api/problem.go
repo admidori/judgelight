@@ -66,6 +66,11 @@ func GetProblemInfo(c *gin.Context) {
 			"testCaseOutputData": TestCaseOutput,
 		})
 	}
+	if param == "InitialCode" {
+		c.JSON(http.StatusOK, gin.H{
+			"initialCode": problem[p].ProblemInitialCode,
+		})
+	}
 }
 
 func SendProblem(c *gin.Context) {
