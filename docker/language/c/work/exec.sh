@@ -1,64 +1,99 @@
 #!/bin/bash
-#PROBLEMID="2"
-#SUBMITFILENAME="1"
+
+#SUBMITFILENAME="ZZtwR"
 #SUBMITLANGUAGE="c"
+#PROBLEMID="1"
+#DATA=$'#include<stdio.h>\nint main(void){\n  int a,b;\n  scanf(\"%d %d\",&a,&b);\n  printf(\"%d\\n\",a+b);\n  return 0;\n}'
+#TESTCASEINPUT=( $'2 1' $'5 6' )
+#TESTCASEOUTPUT=( $'3' $'11' )
+#SECRETCASEINPUT=( $'2 2' $'0 10' $'22 2' )
+#SECRETCASEOUTPUT=( $'4' $'10' $'24')
 
-COMPILECODE="${SUBMITFILENAME}.${SUBMITLANGUAGE}"
+COMPILECODE="data.${SUBMITLANGUAGE}"
 
-function check_casefile_num (){
-    local rtn=$(ls -l "./case/${PROBLEMID}/${1}/" | grep ^d | wc -l)
-    return ${rtn}
+function create_files (){
+    mkdir -p "./${SUBMITFILENAME}/testcase/input"
+    mkdir -p "./${SUBMITFILENAME}/testcase/output"
+    mkdir -p "./${SUBMITFILENAME}/secretcase/input"
+    mkdir -p "./${SUBMITFILENAME}/secretcase/output"
+    echo "${DATA}" > "./${SUBMITFILENAME}/${COMPILECODE}"
+
+    for d in "${!TESTCASEINPUT[@]}"; do
+        echo "${TESTCASEINPUT[$d]}" > "./${SUBMITFILENAME}/testcase/input/${d}.txt"
+    done
+    for d in "${!TESTCASEOUTPUT[@]}"; do
+        echo "${TESTCASEOUTPUT[$d]}" > "./${SUBMITFILENAME}/testcase/output/${d}.txt"
+    done
+    for d in "${!SECRETCASEINPUT[@]}"; do
+        echo "${SECRETCASEINPUT[$d]}" > "./${SUBMITFILENAME}/secretcase/input/${d}.txt"
+    done
+    for d in "${!SECRETCASEOUTPUT[@]}"; do
+        echo "${SECRETCASEOUTPUT[$d]}" > "./${SUBMITFILENAME}/secretcase/output/${d}.txt"
+    done
 }
 
 function delete_files (){
-    rm  "./${SUBMITFILENAME}.out" \
-        "./${COMPILECODE}" \
-        "./${SUBMITFILENAME}.txt"
+    rm -r "./${SUBMITFILENAME}"
 }
 
-function check_files (){
-    local cnt=0
-
-    for cnt in `seq 1 ${2}`
-    do
-        "./${SUBMITFILENAME}.out" < "./case/${PROBLEMID}/${1}/${cnt}/input.txt" > "./${SUBMITFILENAME}.txt"
-        if ! diff "./${SUBMITFILENAME}.txt" "./case/${PROBLEMID}/${1}/${cnt}/output.txt"; then
-            echo "WA"
-            # Return code 1 if WA
-            return 1
-        fi
-    done
-
-    echo "AC"
-    # Return code 0 if AC
-    return 0
-}
+create_files
 
 # Compile a submit code
-cd src
-gcc -o "${SUBMITFILENAME}.out" "${COMPILECODE}" 
+gcc -o "./${SUBMITFILENAME}/execution.out" "./${SUBMITFILENAME}/${COMPILECODE}"
 RET=$?
 
 if [ $RET != 0 ]; then
     echo "CE"
     # Return code 2 if CE
-    rm "${COMPILECODE}"
+    rm -r "./${SUBMITFILENAME}"
     exit 2
 fi
 
-check_casefile_num "examplecase"
-CASEFILE_NUM_EXAMPLE=$?
-check_casefile_num "testcase"
-CASEFILE_NUM_TEST=$?
+index=0
+for cnt in "${TESTCASEINPUT[@]}"; do
+    BOOLDATA=0
+    "./${SUBMITFILENAME}/execution.out" < "./${SUBMITFILENAME}/testcase/input/${index}.txt" > "./${SUBMITFILENAME}/output.txt"
+    if ! diff "./${SUBMITFILENAME}/output.txt" "./${SUBMITFILENAME}/testcase/output/${index}.txt"; then
+        RESULT_TEST=1
+        break
+    fi
+    BOOLDATA=1
+    let index++
+done
 
-check_files "examplecase" ${CASEFILE_NUM_EXAMPLE}
-RESULT_EXAMPLE=$?
-check_files "testcase" ${CASEFILE_NUM_TEST}
-RESULT_TEST=$?
+if [ ${BOOLDATA} = 0 ]; then
+    echo "TestCase:WA"
+    RESULT_TEST=1
+fi
+if [ ${BOOLDATA} = 1 ]; then
+    echo "TestCase:AC"
+    RESULT_TEST=0
+fi
+
+index=0
+for cnt in "${SECRETCASEINPUT[@]}"; do
+    BOOLDATA=0
+    "./${SUBMITFILENAME}/execution.out" < "./${SUBMITFILENAME}/secretcase/input/${index}.txt" > "./${SUBMITFILENAME}/output.txt"
+    if ! diff "./${SUBMITFILENAME}/output.txt" "./${SUBMITFILENAME}/secretcase/output/${index}.txt"; then
+        RESULT_TEST=1
+        break
+    fi
+    BOOLDATA=1
+    let index++
+done
+
+if [ ${BOOLDATA} = 0 ]; then
+    echo "SecretCase:WA"
+    RESULT_SECRET=1
+fi
+if [ ${BOOLDATA} = 1 ]; then
+    echo "SecretCase:AC"
+    RESULT_SECRET=0
+fi
 
 delete_files
 
-if [ ${RESULT_EXAMPLE} = 0 ] && [ ${RESULT_TEST} = 0 ]; then
+if [ ${RESULT_TEST} = 0 ] && [ ${RESULT_SECRET} = 0 ]; then
     echo "Last Result -> AC"
     exit 0
 else
