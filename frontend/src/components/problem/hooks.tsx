@@ -67,7 +67,7 @@ export const handleCase = (num, total) => {
                 output: responseJsonData.data.testCaseOutputData,
             }
             SetProblemCase(tmpProblemCase)
-            }).catch(function(error){
+        }).catch(function(error){
                 console.log(error)
             })
     },[num,total])
