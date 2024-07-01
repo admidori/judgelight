@@ -1,7 +1,6 @@
 package submit
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -27,38 +26,37 @@ func ReceiveSubmitProgram(c *gin.Context) {
 	BuildDockerfile(json.Language)
 	statusCode := ContainerCreateAndStart(json)
 
-	fmt.Print(statusCode)
 	switch statusCode {
 	// AC
 	case 0:
 		c.JSON(http.StatusOK, gin.H{
-			"DataID":       json.DataID,
-			"AuthorID":     json.AuthorID,
-			"ResultStatus": "AC",
+			"DataID":           json.DataID,
+			"AuthorID":         json.AuthorID,
+			"ResultStatus":     "AC",
 			"ResultStatusCode": 0,
 		})
 	// WA
 	case 1:
 		c.JSON(http.StatusOK, gin.H{
-			"DataID":       json.DataID,
-			"AuthorID":     json.AuthorID,
-			"ResultStatus": "WA",
+			"DataID":           json.DataID,
+			"AuthorID":         json.AuthorID,
+			"ResultStatus":     "WA",
 			"ResultStatusCode": 1,
 		})
 	// CE
 	case 2:
 		c.JSON(http.StatusOK, gin.H{
-			"DataID":       json.DataID,
-			"AuthorID":     json.AuthorID,
-			"ResultStatus": "CE",
+			"DataID":           json.DataID,
+			"AuthorID":         json.AuthorID,
+			"ResultStatus":     "CE",
 			"ResultStatusCode": 2,
 		})
 	// TLE
 	case 3:
 		c.JSON(http.StatusOK, gin.H{
-			"DataID":       json.DataID,
-			"AuthorID":     json.AuthorID,
-			"ResultStatus": "TLE",
+			"DataID":           json.DataID,
+			"AuthorID":         json.AuthorID,
+			"ResultStatus":     "TLE",
 			"ResultStatusCode": 3,
 		})
 	}
