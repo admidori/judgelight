@@ -1,26 +1,33 @@
 package submit
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
 
 type Receiveprogramformat struct {
-	Data      string `json:"data"`
-	DataID    string `json:"dataID"`
-	ProblemID string `json:"problemID"`
-	AuthorID  string `json:"authorID"`
-	Language  string `json:"language"`
+	Data             string   `json:"data"`
+	DataID           string   `json:"dataID"`
+	AuthorID         string   `json:"authorID"`
+	Language         string   `json:"language"`
+	TestCaseInput    []string `json:"testCaseInput"`
+	TestCaseOutput   []string `json:"testCaseOutput"`
+	SecretCaseInput  []string `json:"secretCaseInput"`
+	SecretCaseOutput []string `json:"secretCaseOutput"`
 }
 
 func ReceiveSubmitProgram(c *gin.Context) {
 	var json Receiveprogramformat
-	c.BindJSON(&json)
-
+	err := c.BindJSON(&json)
+	if err != nil {
+		panic(err)
+	}
 	BuildDockerfile(json.Language)
-	statusCode := ContainerCreateAndStart(json.DataID, json.ProblemID, json.Language)
+	statusCode := ContainerCreateAndStart(json)
 
+	fmt.Print(statusCode)
 	switch statusCode {
 	// AC
 	case 0:
