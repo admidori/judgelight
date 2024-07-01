@@ -35,6 +35,7 @@ func ReceiveSubmitProgram(c *gin.Context) {
 			"DataID":       json.DataID,
 			"AuthorID":     json.AuthorID,
 			"ResultStatus": "AC",
+			"ResultStatusCode": 0,
 		})
 	// WA
 	case 1:
@@ -42,6 +43,7 @@ func ReceiveSubmitProgram(c *gin.Context) {
 			"DataID":       json.DataID,
 			"AuthorID":     json.AuthorID,
 			"ResultStatus": "WA",
+			"ResultStatusCode": 1,
 		})
 	// CE
 	case 2:
@@ -49,6 +51,7 @@ func ReceiveSubmitProgram(c *gin.Context) {
 			"DataID":       json.DataID,
 			"AuthorID":     json.AuthorID,
 			"ResultStatus": "CE",
+			"ResultStatusCode": 2,
 		})
 	// TLE
 	case 3:
@@ -56,6 +59,7 @@ func ReceiveSubmitProgram(c *gin.Context) {
 			"DataID":       json.DataID,
 			"AuthorID":     json.AuthorID,
 			"ResultStatus": "TLE",
+			"ResultStatusCode": 3,
 		})
 	}
 }
