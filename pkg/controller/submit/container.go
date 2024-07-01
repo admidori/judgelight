@@ -47,10 +47,9 @@ func ContainerCreateAndStart(json Receiveprogramformat) int {
 	imagefilename := "judge-server:" + json.Language
 	envvalue1 := "SUBMITFILENAME=" + json.AuthorID
 	envvalue2 := "SUBMITLANGUAGE=" + json.Language
-	envvalue3 := "PROBLEMID=" + json.DataID
-	envvalue4 := "DATA=" + json.Data
-	envvalue5 := "TESTCASEJSON=" + string(outputTestJson)
-	envvalue6 := "SECRETCASEJSON=" + string(outputSecretJson)
+	envvalue3 := "DATA=" + json.Data
+	envvalue4 := "TESTCASEJSON=" + string(outputTestJson)
+	envvalue5 := "SECRETCASEJSON=" + string(outputSecretJson)
 
 	absolutePath, err := filepath.Abs("../../docker/language/c/")
 	if err != nil {
@@ -63,7 +62,7 @@ func ContainerCreateAndStart(json Receiveprogramformat) int {
 		&container.Config{
 			Image: imagefilename,
 			Cmd:   []string{},
-			Env:   []string{envvalue1, envvalue2, envvalue3, envvalue4, envvalue5, envvalue6},
+			Env:   []string{envvalue1, envvalue2, envvalue3, envvalue4, envvalue5},
 			Tty:   false,
 		}, &container.HostConfig{
 			Mounts: []mount.Mount{
