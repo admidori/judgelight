@@ -2,7 +2,6 @@
 
 #SUBMITFILENAME="ZZtwR"
 #SUBMITLANGUAGE="c"
-#PROBLEMID="1"
 #DATA=$'#include<stdio.h>\nint main(void){\n  int a,b;\n  scanf(\"%d %d\",&a,&b);\n  printf(\"%d\\n\",a+b);\n  return 0;\n}'
 #TESTCASEJSON='[{"Input":"2 1\\n","Output":"3\\n"},{"Input":"5 6\\n","Output":"11\\n"}]'
 #SECRETCASEJSON='[{"Input":"2 2\\n","Output":"4\\n"},{"Input":"0 10\\n","Output":"10\\n"},{"Input":"22 2\\n","Output":"24\\n"}]'
