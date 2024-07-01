@@ -2,6 +2,7 @@ package submit
 
 import (
 	"context"
+	j "encoding/json"
 	"fmt"
 	"path/filepath"
 
@@ -11,7 +12,12 @@ import (
 	"github.com/docker/docker/client"
 )
 
-func ContainerCreateAndStart(filename string, problemID string, language string) int {
+type case_struct struct {
+	Input  string
+	Output string
+}
+
+func ContainerCreateAndStart(json Receiveprogramformat) int {
 	ctx := context.Background()
 
 	cli, err := client.NewClientWithOpts(client.FromEnv)
@@ -20,10 +26,31 @@ func ContainerCreateAndStart(filename string, problemID string, language string)
 	}
 	cli.NegotiateAPIVersion(ctx)
 
-	imagefilename := "judge-server:" + language
-	envvalue1 := "SUBMITFILENAME=" + filename // unique
-	envvalue2 := "SUBMITLANGUAGE=" + language
-	envvalue3 := "PROBLEMID=" + problemID
+	var testcaseJson []case_struct
+	for i := 0; i < len(json.TestCaseInput); i++ {
+		testcaseJson = append(testcaseJson, case_struct{Input: json.TestCaseInput[i], Output: json.TestCaseOutput[i]})
+	}
+	outputTestJson, err := j.Marshal(&testcaseJson)
+	if err != nil {
+		panic(err)
+	}
+
+	var secretcaseJson []case_struct
+	for i := 0; i < len(json.SecretCaseInput); i++ {
+		secretcaseJson = append(secretcaseJson, case_struct{Input: json.SecretCaseInput[i], Output: json.SecretCaseOutput[i]})
+	}
+	outputSecretJson, err := j.Marshal(&secretcaseJson)
+	if err != nil {
+		panic(err)
+	}
+
+	imagefilename := "judge-server:" + json.Language
+	envvalue1 := "SUBMITFILENAME=" + json.AuthorID
+	envvalue2 := "SUBMITLANGUAGE=" + json.Language
+	envvalue3 := "PROBLEMID=" + json.DataID
+	envvalue4 := "DATA=" + json.Data
+	envvalue5 := "TESTCASEJSON=" + string(outputTestJson)
+	envvalue6 := "SECRETCASEJSON=" + string(outputSecretJson)
 
 	absolutePath, err := filepath.Abs("../../docker/language/c/")
 	if err != nil {
@@ -36,7 +63,7 @@ func ContainerCreateAndStart(filename string, problemID string, language string)
 		&container.Config{
 			Image: imagefilename,
 			Cmd:   []string{},
-			Env:   []string{envvalue1, envvalue2, envvalue3},
+			Env:   []string{envvalue1, envvalue2, envvalue3, envvalue4, envvalue5, envvalue6},
 			Tty:   false,
 		}, &container.HostConfig{
 			Mounts: []mount.Mount{
