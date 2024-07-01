@@ -16,6 +16,7 @@ func main() {
 	router.Use(cors.Default())
 	
 	router.POST("/program/submit", submit.ReceiveSubmitProgram)
+	router.POST("/program/submit/result", api.RegisterResult)
 	router.POST("/register/login", api.Login)
 	router.GET("/get/problem/info", api.GetProblemInfo)
 	router.GET("/get/contest/info", api.GetContestInfo)
