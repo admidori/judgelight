@@ -4,12 +4,20 @@
 #SUBMITLANGUAGE="c"
 #PROBLEMID="1"
 #DATA=$'#include<stdio.h>\nint main(void){\n  int a,b;\n  scanf(\"%d %d\",&a,&b);\n  printf(\"%d\\n\",a+b);\n  return 0;\n}'
-#TESTCASEINPUT=( $'2 1' $'5 6' )
-#TESTCASEOUTPUT=( $'3' $'11' )
-#SECRETCASEINPUT=( $'2 2' $'0 10' $'22 2' )
-#SECRETCASEOUTPUT=( $'4' $'10' $'24')
+#TESTCASEJSON='[{"Input":"2 1\\n","Output":"3\\n"},{"Input":"5 6\\n","Output":"11\\n"}]'
+#SECRETCASEJSON='[{"Input":"2 2\\n","Output":"4\\n"},{"Input":"0 10\\n","Output":"10\\n"},{"Input":"22 2\\n","Output":"24\\n"}]'
 
 COMPILECODE="data.${SUBMITLANGUAGE}"
+
+while read i; do
+    TESTCASEINPUT+=( "$(jq -r '.Input' <<< "${i}")" )
+    TESTCASEOUTPUT+=( "$(jq -r '.Output' <<< "${i}")" )
+done < <(jq -c '.[]' <<< "${TESTCASEJSON}")
+
+while read i; do
+    SECRETCASEINPUT+=( "$(jq -r '.Input' <<< "${i}")" )
+    SECRETCASEOUTPUT+=( "$(jq -r '.Output' <<< "${i}")" )
+done< <(jq -c '.[]' <<< "${SECRETCASEJSON}")
 
 function create_files (){
     mkdir -p "./${SUBMITFILENAME}/testcase/input"
