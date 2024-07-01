@@ -58,7 +58,7 @@ func GetProblemInfo(c *gin.Context) {
 
 		for i := 0; i < total; i++ {
 			TestCaseInput[i] = problem[p].TestCase[i].Input
-			TestCaseOutput[i] = problem[p].SecretCase[i].Output
+			TestCaseOutput[i] = problem[p].TestCase[i].Output
 		}
 
 		c.JSON(http.StatusOK, gin.H{
@@ -69,6 +69,31 @@ func GetProblemInfo(c *gin.Context) {
 	if param == "InitialCode" {
 		c.JSON(http.StatusOK, gin.H{
 			"initialCode": problem[p].ProblemInitialCode,
+		})
+	}
+	if param == "Case" {
+		totalTest := len(problem[p].TestCase)
+		totalSecret := len(problem[p].SecretCase)
+
+		TestCaseInput := make([]string, totalTest)
+		TestCaseOutput := make([]string, totalTest)
+		SecretCaseInput := make([]string, totalSecret)
+		SecretCaseOutput := make([]string, totalSecret)
+
+		for i := 0; i < totalTest; i++ {
+			TestCaseInput[i] = problem[p].TestCase[i].Input
+			TestCaseOutput[i] = problem[p].TestCase[i].Output
+		}
+		for i := 0; i < totalSecret; i++ {
+			SecretCaseInput[i] = problem[p].SecretCase[i].Input
+			SecretCaseOutput[i] = problem[p].SecretCase[i].Output
+		}
+
+		c.JSON(http.StatusOK, gin.H{
+			"testCaseInputData":    TestCaseInput,
+			"testCaseOutputData":   TestCaseOutput,
+			"secretCaseInputData":  SecretCaseInput,
+			"secretCaseOutputData": SecretCaseOutput,
 		})
 	}
 }
