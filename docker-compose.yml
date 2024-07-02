@@ -44,14 +44,7 @@ services:
     command:
       - -c
       - |
-        [ -f ~/.exec-once ] || {
-          yarn install && yarn build && touch ~/.exec-once
-        }
-        yarn start
-
-#      - |
-#        yarn build
-#        yarn start
+        yarn dev
 
   nginx:
     build:
@@ -75,7 +68,7 @@ services:
     depends_on:
       - nginx
     ports:
-      - 3306:3306
+      - 4306:3306
     volumes:
       - ./docker/mysql/data:/var/lib/mysql
       - ./docker/mysql/init.d:/docker-entrypoint-initdb.d
@@ -83,6 +76,7 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: dev
       MYSQL_PASSWORD: dev
+      TZ: "Asia/Tokyo"
     networks:
       - mysql-network
       
