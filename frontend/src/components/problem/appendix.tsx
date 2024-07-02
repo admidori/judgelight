@@ -24,7 +24,8 @@ export default function Appendix(props){
                         fontSize: 16,
                         padding: "5px",
                     }}>
-                    Score: {props.problemAppendix.score}&#009;Time Limit: {props.problemAppendix.limitTime}&#009;Memory Limit: {props.problemAppendix.limitMemory}
+                    実行制限時間:{props.problemAppendix.limitTime}sec&#009;/&#009;メモリ制限:{props.problemAppendix.limitMemory}MB<br></br>
+                    配点: {props.problemAppendix.score}
                 </pre>
             </Container>
         </ThemeProvider>
