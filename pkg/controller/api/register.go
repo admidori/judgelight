@@ -1,6 +1,7 @@
 package api
 
 import (
+	"fmt"
 	"net/http"
 	"strings"
 
@@ -13,10 +14,18 @@ type ReceiveLoginFormat struct {
 	Password   string `json:"password"`
 }
 
+type ReceiveRegisterFormat struct {
+	Student_id string `json:"studentId"`
+	ProblemNum int    `json:"problemNum"`
+	Result     int    `json:"resultStatusCode"`
+}
+
 func Login(c *gin.Context) {
 	var json ReceiveLoginFormat
-	c.BindJSON(&json)
-
+	err := c.BindJSON(&json)
+	if err != nil {
+		panic(err)
+	}
 	userTable := database.ReadUser()
 	loginStatusCode := judgeuser(json.Student_id, json.Password, userTable)
 
@@ -42,4 +51,24 @@ func judgeuser(student_id string, password string, userTable []database.User_tab
 		}
 	}
 	return -1
+}
+
+func RegisterResult(c *gin.Context) {
+	var json ReceiveRegisterFormat
+	var table database.Result_table
+
+	err := c.BindJSON(&json)
+	if err != nil {
+		panic(err)
+	}
+
+	table.Student_id = json.Student_id
+	table.Problem_num = json.ProblemNum
+	table.Result = json.Result
+	fmt.Print(table.Problem_num)
+	database.RegisterResult(table)
+
+	c.JSON(http.StatusOK, gin.H{
+		"status": "success",
+	})
 }
