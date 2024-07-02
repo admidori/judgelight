@@ -6,7 +6,7 @@ export default function Description(props){
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
                 <Toolbar>
-                    <p style={{fontSize: 12}}>{props.problemDescription}</p>
+                    <p style={{fontSize: 15}}>{props.problemDescription}</p>
                 </Toolbar>
             </AppBar>
         </Box>
