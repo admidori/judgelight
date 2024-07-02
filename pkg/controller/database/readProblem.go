@@ -67,8 +67,12 @@ func ReadProblem() []Problem_table {
 		var testcaseSlice []TCase
 		var secretcaseSlice []SCase
 		var problem_limitation_descriptionSlice []LimitDescription
-		if err := json.Unmarshal(problem_limitation_description, &problem_limitation_descriptionSlice); err != nil {
-			panic(err)
+		if problem_limitation_description == nil {
+			problem_limitation_descriptionSlice = nil
+		}else{
+			if err := json.Unmarshal(problem_limitation_description, &problem_limitation_descriptionSlice); err != nil {
+				panic(err)
+			}
 		}
 		if testcase == nil {
 			testcaseSlice = nil

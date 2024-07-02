@@ -4,18 +4,22 @@ import { Container } from "@material-ui/core";
 export default function CaseLimitation(props){
     return (
             <Container maxWidth="xs">
-                <p style={{
-                    fontSize: 20,
-                    fontWeight: "bold",
-                    }}>制約</p>
-                <p>入力に関する制約は以下の通りである</p>
                     {
                         (function() {
-                            const list = [];
+                            if (props.problemLimitation.description.length === 0) {
+                                return <div></div>;
+                            }else{
+                                const list = [];
+                                list.push(<p style={{
+                                    fontSize: 20,
+                                    fontWeight: "bold",
+                                    }}>制約</p>)
+                                list.push(<p>入力に関する制約は以下の通りである</p>)
                             for (let i = 0; i < props.problemLimitation.description.length; i++) {
                                 list.push(<li>{props.problemLimitation.description[i]}</li>)
                             }
                             return <ul>{list}</ul>;
+                        }
                     }())}
                 <p style={{
                     fontSize: 20,
