@@ -12,19 +12,18 @@ import (
 
 var user_flag bool
 var problem_flag bool
-var submit_flag bool
-var contest_flag bool
+var result_flag bool
 
 // infoCmd represents the info command
 var infoCmd = &cobra.Command{
 	Use:   "info",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "A info command to show the information of the user, problem, and result table.",
+	Long: `This command will show the information of the user, problem, and result table.
+		You can select the table by using the flag.
+		For example, if you want to see the user table, you can use the flag --user or -u.
+		You can also see the problem table by using the flag --problem or -p.
+		And you can see the result table by using the flag --result or -r.
+		`,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		if user_flag {
 			fmt.Println("NUMBER" + "\t" + "USERNAME" + "\t" + "PASSWORD")
@@ -39,6 +38,7 @@ to quickly create a Cobra application.`,
 		}
 		if problem_flag {
 			fmt.Println("problem table")
+			fmt.Println("NUMBER" + "\t" + "PROBLEM_NUM" + "\t" + "PROBLEM_TITLE" + "\t" + "PROBLEM_SCORE" + "\t" + "PROBLEM_LIMIT_TIME" + "\t" + "PROBLEM_LIMIT_MEMORY" + "\t" + "PROBLEM_DESCRIPTION" + "\t" + "PROBLEM_LIMITATION_INPUT" + "\t" + "PROBLEM_LIMITATION_OUTPUT" + "\t" + "PROBLEM_INITIAL_CODE" + "\t" + "TESTCASE" + "\t" + "SECRETCASE")
 			problem := database.ReadProblem()
 
 			var cnt int = 1
@@ -48,12 +48,16 @@ to quickly create a Cobra application.`,
 			}
 			return nil
 		}
-		if submit_flag {
+		if result_flag {
 			fmt.Println("submit table")
-			return nil
-		}
-		if contest_flag {
-			fmt.Println("contest table")
+			fmt.Println("STUDENT_ID" + "\t" + "PROBLEM_NUM" + "\t" + "RESULT")
+			result := database.ReadResult()
+
+			var cnt int = 1
+			for _, res := range result {
+				fmt.Println(res.Student_id, "\t", res.Problem_num, "\t", res.Result)
+				cnt++
+			}
 			return nil
 		}
 		return fmt.Errorf("please select the flag")
@@ -65,6 +69,5 @@ func init() {
 
 	infoCmd.Flags().BoolVarP(&user_flag, "user", "u", false, "Show user table")
 	infoCmd.Flags().BoolVarP(&problem_flag, "problem", "p", false, "Show problem table")
-	infoCmd.Flags().BoolVarP(&submit_flag, "submit", "s", false, "Show submit table")
-	infoCmd.Flags().BoolVarP(&contest_flag, "contest", "c", false, "Show contest table")
+	infoCmd.Flags().BoolVarP(&result_flag, "result", "r", false, "Show result table")
 }
