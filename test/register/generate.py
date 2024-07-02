@@ -10,9 +10,10 @@ def generate_random_string(length):
 
 def generate_test_data(num_users):
     data = []
+    cnt = 1
     for _ in range(num_users):
-        username = generate_random_string(5)
-        password = generate_random_string(10)
+        username = str(cnt)
+        password = str(cnt)
         data.append([username, password])
     return data
 
