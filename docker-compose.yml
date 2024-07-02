@@ -2,7 +2,7 @@ version: '3'
 
 volumes:
   ignore:
-  
+
 services:
 #
 #  api:
@@ -45,7 +45,7 @@ services:
       - -c
       - |
         yarn dev
-
+        
   nginx:
     build:
       context: .
@@ -79,7 +79,7 @@ services:
       TZ: "Asia/Tokyo"
     networks:
       - mysql-network
-      
+
 networks:
   mysql-network:
     driver: bridge
