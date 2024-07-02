@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import { baseURL } from "../../pages";
+import { handleGetProblemTotalNumber } from "../problem/hooks";
 
 export const handleGetResult = () => {
     const [databaseResult, SetDatabaseResult] = React.useState({
         result: "",
     })
-    const [problemTotalNumber, SetProblemTotalNumber] = React.useState(0)
+    const problemTotalNumber = handleGetProblemTotalNumber()
 
     React.useEffect(() => {
-        axios.get(baseURL+"/database", {
+        axios.get(baseURL+"/database/result", {
                 params: {
                     "studentId": JSON.parse(localStorage.getItem("authInfo")).userId,
                 }
@@ -20,7 +21,6 @@ export const handleGetResult = () => {
                 result: responseJsonData.data.result,
             }
             SetDatabaseResult(tmpDatabaseResult)
-            SetProblemTotalNumber(responseJsonData.data.totalNum)
         })
         .catch(function(error){
             console.log(error)
@@ -28,4 +28,26 @@ export const handleGetResult = () => {
     },[]);
 
     return { databaseResult, problemTotalNumber }
+}
+
+export const handleGetScore = () => {
+    const [score, SetScore] = React.useState([])
+
+    useEffect(() => {
+        axios.get(baseURL+"/get/problem/info", {
+            params: {
+                "parameter": "ScoreAll",
+            }
+        })
+        .then(function(response){
+            const responseJsonData = JSON.parse(JSON.stringify(response))
+            const tmpScore = (responseJsonData.data.score)
+            SetScore(tmpScore)
+        })
+        .catch(function(error){
+            console.log(error)
+        })
+    },[])
+
+    return { score }
 }
