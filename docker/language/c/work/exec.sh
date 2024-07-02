@@ -1,12 +1,11 @@
 #!/bin/bash
 
-#SUBMITFILENAME="ZZtwR"
-#SUBMITLANGUAGE="c"
-#DATA=$'#include<stdio.h>\nint main(void){\n  int a,b;\n  scanf(\"%d %d\",&a,&b);\n  printf(\"%d\\n\",a+b);\n  while(1){printf("a");}return 0;\n}'
-#TESTCASEJSON='[{"Input":"2 1\\n","Output":"3\\n"},{"Input":"5 6\\n","Output":"11\\n"}]'
-#SECRETCASEJSON='[{"Input":"2 2\\n","Output":"4\\n"},{"Input":"0 10\\n","Output":"10\\n"},{"Input":"22 2\\n","Output":"24\\n"}]'
-#TIMEOUTSEC=10
-#MEMORYLIMIT=10
+SUBMITFILENAME="ZZtwR"
+SUBMITLANGUAGE="c"
+DATA=$'#include<stdio.h>\nint main(void){\n  int a,b;\n  scanf(\"%d %d\",&a,&b);\n  printf(\"%d\\n\",a+b);\n return 0;\n}'
+TESTCASEJSON='[{"Input":"2 1\\n","Output":"3\\n"},{"Input":"5 6\\n","Output":"11\\n"}]'
+SECRETCASEJSON='[{"Input":"2 2\\n","Output":"4\\n"},{"Input":"0 10\\n","Output":"10\\n"},{"Input":"22 2\\n","Output":"24\\n"}]'
+TIMEOUTSEC=10
 
 COMPILECODE="data.${SUBMITLANGUAGE}"
 
@@ -72,9 +71,9 @@ for cnt in "${TESTCASEINPUT[@]}"; do
     let index++
 done
 
-if [ ${RESULT_TEST} = 1 ]; then
+if [ "${RESULT_TEST}" = 1 ]; then
     echo "TestCase:WA"
-elif [ ${RESULT_TEST} = 2 ]; then
+elif [ "${RESULT_TEST}" = 2 ]; then
     echo "TestCase:TLE"
 else
     echo "TestCase:AC"
@@ -85,31 +84,31 @@ index=0
 for cnt in "${SECRETCASEINPUT[@]}"; do
     timeout ${TIMEOUTSEC} "./${SUBMITFILENAME}/execution.out" < "./${SUBMITFILENAME}/secretcase/input/${index}.txt" > "./${SUBMITFILENAME}/output.txt"
     if [ $? = 124 ]; then
-        RESULT_TEST=2
+        RESULT_SECRET=2
         break
     fi
     if ! diff "./${SUBMITFILENAME}/output.txt" "./${SUBMITFILENAME}/secretcase/output/${index}.txt"; then
-        RESULT_TEST=1
+        RESULT_SECRET=1
         break
     fi
     let index++
 done
 
-if [ ${RESULT_TEST} = 1 ]; then
+if [ "${RESULT_SECRET}" = 1 ]; then
     echo "SecretCase:WA"
-elif [ ${RESULT_TEST} = 2 ]; then
+elif [ "${RESULT_SECRET}" = 2 ]; then
     echo "SecretCase:TLE"
 else
     echo "SecretCase:AC"
-    RESULT_TEST=0
+    RESULT_SECRET=0
 fi
 
 delete_files
 
-if [ ${RESULT_TEST} = 2 ] || [ ${RESULT_SECRET} = 2 ]; then
+if [ "${RESULT_TEST}" = 2 ] || [ "${RESULT_SECRET}" = 2 ]; then
     echo "Last Result -> TLE"
     exit 3
-elif [ ${RESULT_TEST} = 0 ] && [ ${RESULT_SECRET} = 0 ]; then
+elif [ "${RESULT_TEST}" = 0 ] && [ "${RESULT_SECRET}" = 0 ]; then
     echo "Last Result -> AC"
     exit 0
 else
