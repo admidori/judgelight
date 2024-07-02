@@ -26,6 +26,5 @@ func GetResultInfo(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, gin.H{
 		"result": resultValue,
-		"totalNum": problemTotalNum,
 	})
 }

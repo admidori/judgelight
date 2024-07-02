@@ -71,6 +71,17 @@ func GetProblemInfo(c *gin.Context) {
 			"initialCode": problem[p].ProblemInitialCode,
 		})
 	}
+	if param == "ScoreAll" {
+		total := len(problem)
+		score := make([]int, total)
+
+		for i := 0; i < total; i++ {
+			score[i] = problem[i].ProblemScore
+		}
+		c.JSON(http.StatusOK, gin.H{
+			"score": score,
+		})
+	}
 	if param == "Case" {
 		totalTest := len(problem[p].TestCase)
 		totalSecret := len(problem[p].SecretCase)

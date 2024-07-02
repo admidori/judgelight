@@ -20,7 +20,7 @@ func main() {
 	router.POST("/register/login", api.Login)
 	router.GET("/get/problem/info", api.GetProblemInfo)
 	router.GET("/get/contest/info", api.GetContestInfo)
-	router.GET("/database", api.GetResultInfo)
+	router.GET("/database/result", api.GetResultInfo)
 
 	// Start listening.
 	router.Run(":8080")
