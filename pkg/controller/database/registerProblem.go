@@ -16,13 +16,13 @@ func RegisterProblem(problem settings.Problems) {
 	}
 	log.Print(result)
 
-	result, err = db.Exec(`DELETE FROM JUDGELIGHT.SETTING`)
+	result, err = db.Exec(`DELETE FROM JUDGELIGHT.CONTEST`)
 	if err != nil {
 		panic(err)
 	}
 	log.Print(result)
 
-	stmt, err := db.Prepare(`INSERT INTO JUDGELIGHT.SETTING (TITLE, START_TIME, END_TIME) VALUES (?, ?, ?)`)
+	stmt, err := db.Prepare(`INSERT INTO JUDGELIGHT.CONTEST (TITLE, START_TIME, END_TIME) VALUES (?, ?, ?)`)
 	if err != nil {
 		panic(err)
 	}
