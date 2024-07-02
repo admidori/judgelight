@@ -4,7 +4,11 @@ import { Container } from "@material-ui/core";
 export default function CaseLimitation(props){
     return (
             <Container maxWidth="xs">
-                <p style={{fontSize: 20}}>入力</p>
+                <p style={{
+                    fontSize: 20,
+                    fontWeight: "bold",
+                    }}>入力</p>
+                <p>入力は以下の形式で標準入力から与えられる</p>
                     <p style={{
                             whiteSpace: "pre-wrap",
                             wordWrap: "break-word",
@@ -15,7 +19,11 @@ export default function CaseLimitation(props){
                             border: "solid 1px #7f7f7f",
                             padding: "5px",
                         }}>{props.problemLimitation.input}</p>
-                <p style={{fontSize: 20}}>出力</p>
+                <p style={{
+                    fontSize: 20,
+                    fontWeight: "bold",
+                    }}>出力</p>
+                <p>結果は以下の形式で標準入力より出力せよ</p>
                     <p style={{
                             whiteSpace: "pre-wrap",
                             wordWrap: "break-word",

@@ -9,7 +9,10 @@ export default function Case(props){
                     const list = [];
                     for (let i = 0; i < Number(props.problemCaseTotalNumber); i++) {
                         list.push(<hr></hr>)
-                        list.push(<p style={{fontSize: 20}}>入力例{i+1}</p>)
+                        list.push(<p style={{
+                            fontSize: 20,
+                            fontWeight: "bold",
+                        }}>入力例{i+1}</p>)
                         list.push(<p style={{
                             whiteSpace: "pre-wrap",
                             wordWrap: "break-word",
@@ -20,7 +23,10 @@ export default function Case(props){
                             border: "solid 1px #7f7f7f",
                             padding: "5px",
                         }}>{props.problemCase.input[i]}</p>)
-                        list.push(<p style={{fontSize: 20}}>出力例{i+1}</p>)
+                        list.push(<p style={{
+                            fontSize: 20,
+                            fontWeight: "bold",
+                        }}>出力例{i+1}</p>)
                         list.push(<p style={{
                             whiteSpace: "pre-wrap",
                             wordWrap: "break-word",
