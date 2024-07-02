@@ -33,15 +33,40 @@ func RegisterProblem(problem settings.Problems) {
 	log.Print(result)
 
 	for i := 0; i < len(problem.Problem); i++ {
-		stmt, err = db.Prepare(`INSERT INTO JUDGELIGHT.PROBLEM (PROBLEM_ID, PROBLEM_TITLE, PROBLEM_SCORE, LIMIT_EXECUTE_TIME, LIMIT_EXECUTE_MEMORY, PROBLEM_DESCRIPTION, LIMIT_DESCRIPTION, INPUT_DESCRIPTION, OUTPUT_DESCRIPTION, INITIAL_CODE) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`)
+		stmt, err = db.Prepare(`INSERT INTO JUDGELIGHT.PROBLEM (PROBLEM_ID, PROBLEM_TITLE, PROBLEM_SCORE, LIMIT_EXECUTE_TIME, LIMIT_EXECUTE_MEMORY, PROBLEM_DESCRIPTION, INPUT_DESCRIPTION, OUTPUT_DESCRIPTION, INITIAL_CODE) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`)
 		if err != nil {
 			panic(err)
 		}
-		result, err = stmt.Exec(problem.Problem[i].ProblemNum, problem.Problem[i].ProblemTitle, problem.Problem[i].ProblemScore, problem.Problem[i].ProblemLimitTime, problem.Problem[i].ProblemLimitMemory, problem.Problem[i].ProblemDescription,  problem.Problem[i].ProblemLimitationDescription, problem.Problem[i].ProblemInput, problem.Problem[i].ProblemOutput, problem.Problem[i].ProblemInitialCode)
+		result, err = stmt.Exec(problem.Problem[i].ProblemNum, problem.Problem[i].ProblemTitle, problem.Problem[i].ProblemScore, problem.Problem[i].ProblemLimitTime, problem.Problem[i].ProblemLimitMemory, problem.Problem[i].ProblemDescription,  problem.Problem[i].ProblemInput, problem.Problem[i].ProblemOutput, problem.Problem[i].ProblemInitialCode)
 		if err != nil {
 			panic(err)
 		}
 		log.Print(result)
+
+		for j := 0; j < len(problem.Problem[i].ProblemLimitationDescription); j++ {
+			if j > 0 {
+				stmt, err = db.Prepare(`UPDATE JUDGELIGHT.PROBLEM SET LIMIT_DESCRIPTION = JSON_ARRAY_APPEND(LIMIT_DESCRIPTION, '$', JSON_OBJECT('description' , ?)) WHERE PROBLEM_ID = ?`)
+				if err != nil {
+					panic(err)
+				}
+				result, err = stmt.Exec(problem.Problem[i].ProblemLimitationDescription[j].Description, problem.Problem[i].ProblemNum)
+				if err != nil {
+					panic(err)
+				}
+				log.Print(result)
+			} else {
+				stmt, err = db.Prepare(`UPDATE JUDGELIGHT.PROBLEM SET LIMIT_DESCRIPTION = JSON_ARRAY(JSON_OBJECT('description' , ?)) WHERE PROBLEM_ID = ?`)
+				if err != nil {
+					panic(err)
+				}
+				result, err = stmt.Exec(problem.Problem[i].ProblemLimitationDescription[j].Description, problem.Problem[i].ProblemNum)
+				if err != nil {
+					panic(err)
+				}
+				log.Print(result)
+			}
+		}
+
 
 		for j := 0; j < len(problem.Problem[i].TestCase); j++ {
 			if j > 0 {

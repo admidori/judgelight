@@ -14,13 +14,17 @@ type Problem struct {
 	ProblemLimitTime             int    `yaml:"limit_execute_time"`
 	ProblemLimitMemory           int    `yaml:"limit_execute_memory"`
 	ProblemDescription           string `yaml:"description"`
-	ProblemLimitationDescription string `yaml:"limit_description"`
 	ProblemInput                 string `yaml:"input_description"`
 	ProblemOutput                string `yaml:"output_description"`
 	ProblemInitialCode           string `yaml:"initial_code"`
 
+	ProblemLimitationDescription []LimitDescription `yaml:"limit_description"`
 	TestCase   []TCase `yaml:"testcases"`
 	SecretCase []SCase `yaml:"secretcases"`
+}
+
+type LimitDescription struct {
+	Description string `yaml:"description"`
 }
 
 type TCase struct {

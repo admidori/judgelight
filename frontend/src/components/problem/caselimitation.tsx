@@ -9,16 +9,14 @@ export default function CaseLimitation(props){
                     fontWeight: "bold",
                     }}>制約</p>
                 <p>入力に関する制約は以下の通りである</p>
-                    <p style={{
-                            whiteSpace: "pre-wrap",
-                            wordWrap: "break-word",
-                            fontFamily: '"Fira code", "Fira Mono", monospace',
-                            fontSize: 16,
-                            background: "#f0f0f0",
-                            borderLeft: "solid 5px #7f7f7f",
-                            border: "solid 1px #7f7f7f",
-                            padding: "5px",
-                        }}>{props.problemLimitation.description}</p>
+                    {
+                        (function() {
+                            const list = [];
+                            for (let i = 0; i < props.problemLimitation.description.length; i++) {
+                                list.push(<li>{props.problemLimitation.description[i]}</li>)
+                            }
+                            return <ul>{list}</ul>;
+                    }())}
                 <p style={{
                     fontSize: 20,
                     fontWeight: "bold",

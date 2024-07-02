@@ -6,24 +6,28 @@ import (
 )
 
 type Problem_table struct {
-	ProblemNum                   string
-	ProblemTitle                 string
-	ProblemScore                 int
-	ProblemLimitTime             int
-	ProblemLimitMemory           int
-	ProblemDescription           string
-	ProblemLimitationDescription string
-	ProblemLimitationInput       string
-	ProblemLimitationOutput      string
-	ProblemInitialCode           string
+	ProblemNum              string
+	ProblemTitle            string
+	ProblemScore            int
+	ProblemLimitTime        int
+	ProblemLimitMemory      int
+	ProblemDescription      string
+	ProblemLimitationInput  string
+	ProblemLimitationOutput string
+	ProblemInitialCode      string
 
-	TestCase   []TCase
-	SecretCase []SCase
+	ProblemLimitationDescription []LimitDescription
+	TestCase                     []TCase
+	SecretCase                   []SCase
+}
+
+type LimitDescription struct {
+	Description string
 }
 
 type TCase struct {
-	Input  string
-	Output string
+	Input       string
+	Output      string
 	Description string
 }
 
@@ -48,19 +52,24 @@ func ReadProblem() []Problem_table {
 		var limitTime int
 		var limitMemory int
 		var problem_description string
-		var problem_limitation_description string
 		var input_description string
 		var output_description string
 		var initialCode string
+
+		var problem_limitation_description []byte
 		var testcase []byte
 		var secretcase []byte
 
-		err := rows.Scan(&id, &title, &score, &limitTime, &limitMemory, &problem_description, &problem_limitation_description, &input_description, &output_description, &initialCode, &testcase, &secretcase)
+		err := rows.Scan(&id, &title, &score, &limitTime, &limitMemory, &problem_description, &input_description, &output_description, &initialCode, &problem_limitation_description, &testcase, &secretcase)
 		if err != nil {
 			panic(err)
 		}
 		var testcaseSlice []TCase
 		var secretcaseSlice []SCase
+		var problem_limitation_descriptionSlice []LimitDescription
+		if err := json.Unmarshal(problem_limitation_description, &problem_limitation_descriptionSlice); err != nil {
+			panic(err)
+		}
 		if testcase == nil {
 			testcaseSlice = nil
 		} else {
@@ -71,7 +80,7 @@ func ReadProblem() []Problem_table {
 		if err := json.Unmarshal(secretcase, &secretcaseSlice); err != nil {
 			panic(err)
 		}
-		result = append(result, Problem_table{ProblemNum: id, ProblemTitle: title, ProblemScore: score, ProblemLimitTime: limitTime, ProblemLimitMemory: limitMemory, ProblemDescription: problem_description, ProblemLimitationDescription: problem_limitation_description, ProblemLimitationInput: input_description, ProblemLimitationOutput: output_description, ProblemInitialCode: initialCode, TestCase: testcaseSlice, SecretCase: secretcaseSlice})
+		result = append(result, Problem_table{ProblemNum: id, ProblemTitle: title, ProblemScore: score, ProblemLimitTime: limitTime, ProblemLimitMemory: limitMemory, ProblemDescription: problem_description, ProblemLimitationInput: input_description, ProblemLimitationOutput: output_description, ProblemInitialCode: initialCode, ProblemLimitationDescription: problem_limitation_descriptionSlice, TestCase: testcaseSlice, SecretCase: secretcaseSlice})
 	}
 	EndDatabase(db)
 	return result

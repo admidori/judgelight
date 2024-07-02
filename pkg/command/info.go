@@ -40,12 +40,12 @@ var infoCmd = &cobra.Command{
 		}
 		if problem_flag {
 			fmt.Println("problem table")
-			fmt.Println("NUMBER" + "\t" + "PROBLEM_NUM" + "\t" + "PROBLEM_TITLE" + "\t" + "PROBLEM_SCORE" + "\t" + "PROBLEM_LIMIT_TIME" + "\t" + "PROBLEM_LIMIT_MEMORY" + "\t" + "PROBLEM_DESCRIPTION" + "\t" + "PROBLEM_LIMITATION_INPUT" + "\t" + "PROBLEM_LIMITATION_OUTPUT" + "\t" + "PROBLEM_INITIAL_CODE" + "\t" + "TESTCASE" + "\t" + "SECRETCASE")
+			fmt.Println("NUMBER" + "\t" + "PROBLEM_NUM" + "\t" + "PROBLEM_TITLE" + "\t" + "PROBLEM_SCORE" + "\t" + "PROBLEM_LIMIT_TIME" + "\t" + "PROBLEM_LIMIT_MEMORY" + "\t" + "PROBLEM_DESCRIPTION" + "\t" + "PROBLEM_LIMITATION_INPUT" + "\t" + "PROBLEM_LIMITATION_OUTPUT" + "\t" + "PROBLEM_INITIAL_CODE" + "PROBLEM_LIMITATION_DESCRIPTION" + "\t" + "TESTCASE" + "\t" + "SECRETCASE")
 			problem := database.ReadProblem()
 
 			var cnt int = 1
 			for _, prob := range problem {
-				fmt.Println("[", cnt, "]\t", prob.ProblemNum, "\t", prob.ProblemTitle, "\t", prob.ProblemScore, "\t", prob.ProblemLimitTime, "\t", prob.ProblemLimitMemory, "\t", prob.ProblemDescription, "\t", prob.ProblemLimitationInput, "\t", prob.ProblemLimitationOutput, "\t", prob.ProblemInitialCode, "\t", prob.TestCase, "\t", prob.SecretCase)
+				fmt.Println("[", cnt, "]\t", prob.ProblemNum, "\t", prob.ProblemTitle, "\t", prob.ProblemScore, "\t", prob.ProblemLimitTime, "\t", prob.ProblemLimitMemory, "\t", prob.ProblemDescription, "\t", prob.ProblemLimitationInput, "\t", prob.ProblemLimitationOutput, "\t", prob.ProblemInitialCode, "\t", prob.ProblemLimitationDescription, "\t", prob.TestCase, "\t", prob.SecretCase)
 				cnt++
 			}
 			return nil

@@ -10,7 +10,10 @@ problem:
     limit_execute_time: 10
     limit_execute_memory: 256
     description: "Problem Description"
-    limit_description: "Limitation Description"
+    limit_description:
+      - description: "Limitation Description1"
+      - description: "Limitation Description2"
+      - description: "Limitation Description3"
     input_description: "Input Description"
     output_description: "Output Description"
 
@@ -58,7 +61,10 @@ problem:
     limit_execute_time: 10
     limit_execute_memory: 256
     description: "Problem Description"
-    limit_description: "Limitation Description"
+    limit_description:
+      - description: "Limitation Description1"
+      - description: "Limitation Description2"
+      - description: "Limitation Description3"
     input_description: "Input Description"
     output_description: "Output Description"
 

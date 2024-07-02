@@ -163,11 +163,12 @@ export const handleLimitation = (num) => {
             }
         }).then(function(response){
             const responseJsonData = JSON.parse(JSON.stringify(response))
-            SetProblemLimitation({
+            const tmpProblemLimitation = {
                 description: responseJsonData.data.description,
                 input: responseJsonData.data.input,
                 output: responseJsonData.data.output,
-            })
+            }
+            SetProblemLimitation(tmpProblemLimitation)
             console.log(responseJsonData.data)
             }).catch(function(error){
                 console.log(error)
