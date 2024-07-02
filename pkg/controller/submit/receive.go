@@ -11,6 +11,8 @@ type Receiveprogramformat struct {
 	DataID           string   `json:"dataID"`
 	AuthorID         string   `json:"authorID"`
 	Language         string   `json:"language"`
+	Timeout          int      `json:"timeout"`
+	Memory           int      `json:"memory"`
 	TestCaseInput    []string `json:"testCaseInput"`
 	TestCaseOutput   []string `json:"testCaseOutput"`
 	SecretCaseInput  []string `json:"secretCaseInput"`

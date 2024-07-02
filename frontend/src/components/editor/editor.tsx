@@ -22,7 +22,13 @@ export default function ProgramEditor() {
     const [ problemSecretCaseInput, SetProblemSecretCaseInput ] = React.useState()
     const [ problemSecretCaseOutput, SetProblemSecretCaseOutput ] = React.useState()
 
+    const [ problemLimitTime, SetProblemLimitTime ] = React.useState()
+    const [ problemLimitMemory, SetProblemLimitMemory ] = React.useState()
+    const [ problemScore, SetProblemScore ] = React.useState()
+
     React.useEffect(() => {
+        setResultStatus("")
+
         axios.get(baseURL+"/get/problem/info",{
             params: {
                 problemNumber: problemNumber,
@@ -53,6 +59,23 @@ export default function ProgramEditor() {
         }).catch(function(error){
             console.log(error)
         })
+        
+        axios.get(baseURL+"/get/problem/info",{
+            params: {
+                problemNumber: problemNumber,
+                parameter: "Appendix",
+            }
+        }).then(function(response){
+            const responseJsonData = JSON.parse(JSON.stringify(response))
+            const tmpProblemLimitTime = responseJsonData.data.limitTime
+            const tmpProblemLimitMemory = responseJsonData.data.limitMemory
+            const tmpProblemScore = responseJsonData.data.score
+            SetProblemLimitTime(tmpProblemLimitTime)
+            SetProblemLimitMemory(tmpProblemLimitMemory)
+            SetProblemScore(tmpProblemScore)
+        }).catch(function(error){
+            console.log(error)
+        })
     },[problemNumber])
 
     const  handleClick = () => {
@@ -61,6 +84,8 @@ export default function ProgramEditor() {
             "dataID": uuidv4(),
             "authorID": authInfo.userId,
             "language": "c",
+            "timeout": problemLimitTime,
+            "memory": problemLimitMemory,
             "testCaseInput": problemTestCaseInput,
             "testCaseOutput": problemTestCaseOutput,
             "secretCaseInput": problemSecretCaseInput,
@@ -78,6 +103,7 @@ export default function ProgramEditor() {
                     "studentId": authInfo.userId,
                     "problemNum": problemNumber,
                     "resultStatusCode": responseJsonData.data.ResultStatusCode,
+                    "resultScore": problemScore,
                 })
                 axios.post(baseURL+'/program/submit/result',sendJsonData)
                 .then(function(response){
