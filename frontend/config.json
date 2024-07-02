@@ -1,4 +1,6 @@
 {
     "domain":"http://localhost",
-    "apiPort": 8080
+    "apiPort": 8080,
+    "version": "1.0.0",
+    "codeName": "Alpha"
 }
