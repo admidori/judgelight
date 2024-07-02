@@ -14,7 +14,7 @@ gitコマンドやzip形式でのダウンロードなどを使用して、repos
 ## 1-2. 各種変数の変更
 各種変数を以下のように変更してください。  
 `/docker/nginx/conf.d`の`server name:`の`localhost`を使用するサーバのIPアドレスに変更。  
-`/frontend/pages/index.tsx`の変数`domain`を`localhost`から使用するサーバのIPアドレスに変更。　　
+`/frontend/config.json`の変数`domain`を`localhost`から使用するサーバのIPアドレスに変更。　　
 
 # 2. 起動方法
 ## 2-1. ソフトウェアの実行
@@ -24,7 +24,7 @@ dockerとバックエンド用のgoプログラムを以下のコマンドで走
 （それぞれ別プロセスのターミナル）で実行してください。  
 
 ## 2-2. 問題セットの設定
-```$ cd cmd/cli/ && go run main.go set f setting.yaml```  
+```$ cd cmd/cli/ && go run main.go set -f setting.yaml```  
 この操作により、`setting.yaml`に記述した設定事項がデータベースに記録されます．
 その後、/judgelight/settingsディレクトリ内のファイルを変更し、問題の設定を行います。  
 問題の設定についての詳細は「問題設定について」をご覧ください。  
