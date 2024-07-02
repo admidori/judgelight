@@ -5,6 +5,7 @@ import (
 	j "encoding/json"
 	"fmt"
 	"path/filepath"
+	"strconv"
 
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/container"
@@ -50,6 +51,7 @@ func ContainerCreateAndStart(json Receiveprogramformat) int {
 	envvalue3 := "DATA=" + json.Data
 	envvalue4 := "TESTCASEJSON=" + string(outputTestJson)
 	envvalue5 := "SECRETCASEJSON=" + string(outputSecretJson)
+	envvalue6 := "TIMEOUTSEC=" + strconv.Itoa(json.Timeout)
 
 	absolutePath, err := filepath.Abs("../../docker/language/c/")
 	if err != nil {
@@ -62,7 +64,7 @@ func ContainerCreateAndStart(json Receiveprogramformat) int {
 		&container.Config{
 			Image: imagefilename,
 			Cmd:   []string{},
-			Env:   []string{envvalue1, envvalue2, envvalue3, envvalue4, envvalue5},
+			Env:   []string{envvalue1, envvalue2, envvalue3, envvalue4, envvalue5, envvalue6},
 			Tty:   false,
 		}, &container.HostConfig{
 			Mounts: []mount.Mount{
