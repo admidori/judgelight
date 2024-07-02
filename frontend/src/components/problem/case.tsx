@@ -12,9 +12,9 @@ export default function Case(props){
                             for (let i = 0; i < Number(props.problemCaseTotalNumber); i++) {
                                 list.push(<hr></hr>)
                                 list.push(<p style={{fontSize: 12}}>入力例{i+1}</p>)
-                                list.push(<p style={{fontFamily: '"Fira code", "Fira Mono", monospace',fontSize: 12,}}>{props.problemCase.input[i]}</p>)
+                                list.push(<p style={{whiteSpace: "pre-wrap", wordWrap: "break-word", fontFamily: '"Fira code", "Fira Mono", monospace',fontSize: 12,}}>{props.problemCase.input[i]}</p>)
                                 list.push(<p style={{fontSize: 12}}>出力例{i+1}</p>)
-                                list.push(<p style={{fontFamily: '"Fira code", "Fira Mono", monospace',fontSize: 12,}}>{props.problemCase.output[i]}</p>)
+                                list.push(<p style={{whiteSpace: "pre-wrap", wordWrap: "break-word", fontFamily: '"Fira code", "Fira Mono", monospace',fontSize: 12,}}>{props.problemCase.output[i]}</p>)
                             }
                             return <p>{list}</p>;
                         }())
