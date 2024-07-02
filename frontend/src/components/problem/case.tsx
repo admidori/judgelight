@@ -37,6 +37,7 @@ export default function Case(props){
                             border: "solid 1px #7f7f7f",
                             padding: "5px",
                         }}>{props.problemCase.output[i]}</p>)
+                        list.push(<p>{props.problemCase.description[i]}</p>)
                     }
                     return <p>{list}</p>;
                 }())
