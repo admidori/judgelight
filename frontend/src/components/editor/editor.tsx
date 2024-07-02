@@ -17,6 +17,11 @@ export default function ProgramEditor() {
     const [resultStatus, setResultStatus] = React.useState("")
     const [authInfo, setAuthInfo] = React.useContext(AuthInfoContext)
     
+    const [ problemTestCaseInput, SetProblemTestCaseInput ] = React.useState()
+    const [ problemTestCaseOutput, SetProblemTestCaseOutput ] = React.useState()
+    const [ problemSecretCaseInput, SetProblemSecretCaseInput ] = React.useState()
+    const [ problemSecretCaseOutput, SetProblemSecretCaseOutput ] = React.useState()
+
     React.useEffect(() => {
         axios.get(baseURL+"/get/problem/info",{
             params: {
@@ -29,28 +34,64 @@ export default function ProgramEditor() {
         }).catch(function(error){
             console.log(error)
         })
+
+        axios.get(baseURL+"/get/problem/info",{
+            params: {
+                problemNumber: problemNumber,
+                parameter: "Case",
+            }
+        }).then(function(response){
+            const responseJsonData = JSON.parse(JSON.stringify(response))
+            const tmpProblemTestCaseInput = responseJsonData.data.testCaseInputData
+            const tmpProblemTestCaseOutput = responseJsonData.data.testCaseOutputData
+            const tmpProblemSecretCaseInput = responseJsonData.data.secretCaseInputData
+            const tmpProblemSecretCaseOutput = responseJsonData.data.secretCaseOutputData
+            SetProblemTestCaseInput(tmpProblemTestCaseInput)
+            SetProblemTestCaseOutput(tmpProblemTestCaseOutput)
+            SetProblemSecretCaseInput(tmpProblemSecretCaseInput)
+            SetProblemSecretCaseOutput(tmpProblemSecretCaseOutput)
+        }).catch(function(error){
+            console.log(error)
+        })
     },[problemNumber])
 
     const  handleClick = () => {
-        const sendJsonData = JSON.stringify(
-            {
-                "data": code,
-                "dataID": uuidv4(),
-                "problemID": problemNumber,
-                "authorID": authInfo.userId,
-                "language": "c"
-            }
-        );
+        const sendJsonData = JSON.stringify({
+            "data": code,
+            "dataID": uuidv4(),
+            "authorID": authInfo.userId,
+            "language": "c",
+            "testCaseInput": problemTestCaseInput,
+            "testCaseOutput": problemTestCaseOutput,
+            "secretCaseInput": problemSecretCaseInput,
+            "secretCaseOutput": problemSecretCaseOutput,
+        })
         
         setResultStatus("Judging")
         axios.post(baseURL+'/program/submit',sendJsonData)
-            .then(function(response){
-                const responseJsonData = JSON.parse(JSON.stringify(response));
-                setResultStatus(responseJsonData.data.ResultStatus)
-            })
-            .catch(function(error){
-                console.log(error)
-            })
+        .then(function(response){
+            const responseJsonData = JSON.parse(JSON.stringify(response));
+            setResultStatus(responseJsonData.data.ResultStatus)
+
+            if (responseJsonData.data.ResultStatusCode === 0){
+                const sendJsonData = JSON.stringify({
+                    "studentId": authInfo.userId,
+                    "problemNum": problemNumber,
+                    "resultStatusCode": responseJsonData.data.ResultStatusCode,
+                })
+                axios.post(baseURL+'/program/submit/result',sendJsonData)
+                .then(function(response){
+                    const responseJsonData = JSON.parse(JSON.stringify(response));
+                    console.log(responseJsonData)
+                }
+                ).catch(function(error){
+                    console.log(error)
+                })
+            }
+        })
+        .catch(function(error){
+            console.log(error)
+        })
     }
 
     return (
