@@ -148,6 +148,7 @@ export const handleGetProblemCaseTotalNumber = (num) => {
 
 export const handleLimitation = (num) => {
     const [problemLimitation, SetProblemLimitation] = React.useState({
+        description: "",
         input: "",
         output: "",
     })
@@ -161,9 +162,11 @@ export const handleLimitation = (num) => {
         }).then(function(response){
             const responseJsonData = JSON.parse(JSON.stringify(response))
             SetProblemLimitation({
+                description: responseJsonData.data.description,
                 input: responseJsonData.data.input,
                 output: responseJsonData.data.output,
             })
+            console.log(responseJsonData.data)
             }).catch(function(error){
                 console.log(error)
             })

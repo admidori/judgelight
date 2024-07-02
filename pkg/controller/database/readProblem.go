@@ -6,15 +6,16 @@ import (
 )
 
 type Problem_table struct {
-	ProblemNum              string
-	ProblemTitle            string
-	ProblemScore            int
-	ProblemLimitTime        int
-	ProblemLimitMemory      int
-	ProblemDescription      string
-	ProblemLimitationInput  string
-	ProblemLimitationOutput string
-	ProblemInitialCode      string
+	ProblemNum                   string
+	ProblemTitle                 string
+	ProblemScore                 int
+	ProblemLimitTime             int
+	ProblemLimitMemory           int
+	ProblemDescription           string
+	ProblemLimitationDescription string
+	ProblemLimitationInput       string
+	ProblemLimitationOutput      string
+	ProblemInitialCode           string
 
 	TestCase   []Case
 	SecretCase []Case
@@ -41,13 +42,14 @@ func ReadProblem() []Problem_table {
 		var limitTime int
 		var limitMemory int
 		var problem_description string
+		var problem_limitation_description string
 		var input_description string
 		var output_description string
 		var initialCode string
 		var testcase []byte
 		var secretcase []byte
 
-		err := rows.Scan(&id, &title, &score, &limitTime, &limitMemory, &problem_description, &input_description, &output_description, &initialCode, &testcase, &secretcase)
+		err := rows.Scan(&id, &title, &score, &limitTime, &limitMemory, &problem_description, &problem_limitation_description, &input_description, &output_description, &initialCode, &testcase, &secretcase)
 		if err != nil {
 			panic(err)
 		}
@@ -55,7 +57,7 @@ func ReadProblem() []Problem_table {
 		var secretcaseSlice []Case
 		if testcase == nil {
 			testcaseSlice = nil
-		}else{
+		} else {
 			if err := json.Unmarshal(testcase, &testcaseSlice); err != nil {
 				panic(err)
 			}
@@ -63,7 +65,7 @@ func ReadProblem() []Problem_table {
 		if err := json.Unmarshal(secretcase, &secretcaseSlice); err != nil {
 			panic(err)
 		}
-		result = append(result, Problem_table{ProblemNum: id, ProblemTitle: title, ProblemScore: score, ProblemLimitTime: limitTime, ProblemLimitMemory: limitMemory, ProblemDescription: problem_description, ProblemLimitationInput: input_description, ProblemLimitationOutput: output_description, ProblemInitialCode: initialCode, TestCase: testcaseSlice, SecretCase: secretcaseSlice})
+		result = append(result, Problem_table{ProblemNum: id, ProblemTitle: title, ProblemScore: score, ProblemLimitTime: limitTime, ProblemLimitMemory: limitMemory, ProblemDescription: problem_description, ProblemLimitationDescription: problem_limitation_description, ProblemLimitationInput: input_description, ProblemLimitationOutput: output_description, ProblemInitialCode: initialCode, TestCase: testcaseSlice, SecretCase: secretcaseSlice})
 	}
 	EndDatabase(db)
 	return result

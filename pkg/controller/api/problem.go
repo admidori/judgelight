@@ -42,6 +42,7 @@ func GetProblemInfo(c *gin.Context) {
 	}
 	if param == "Limitation" {
 		c.JSON(http.StatusOK, gin.H{
+			"description": problem[p].ProblemLimitationDescription,
 			"input":  problem[p].ProblemLimitationInput,
 			"output": problem[p].ProblemLimitationOutput,
 		})
