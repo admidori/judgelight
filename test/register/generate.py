@@ -15,6 +15,7 @@ def generate_test_data(num_users):
         username = str(cnt)
         password = str(cnt)
         data.append([username, password])
+        cnt += 1
     return data
 
 def write_csv_file(file_path, data):
