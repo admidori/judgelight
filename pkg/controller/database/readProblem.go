@@ -53,8 +53,12 @@ func ReadProblem() []Problem_table {
 		}
 		var testcaseSlice []Case
 		var secretcaseSlice []Case
-		if err := json.Unmarshal(testcase, &testcaseSlice); err != nil {
-			panic(err)
+		if testcase == nil {
+			testcaseSlice = nil
+		}else{
+			if err := json.Unmarshal(testcase, &testcaseSlice); err != nil {
+				panic(err)
+			}
 		}
 		if err := json.Unmarshal(secretcase, &secretcaseSlice); err != nil {
 			panic(err)
