@@ -108,7 +108,7 @@ delete_files
 
 if [ ${RESULT_TEST} = 2 ] || [ ${RESULT_SECRET} = 2 ]; then
     echo "Last Result -> TLE"
-    exit 2
+    exit 3
 elif [ ${RESULT_TEST} = 0 ] && [ ${RESULT_SECRET} = 0 ]; then
     echo "Last Result -> AC"
     exit 0
