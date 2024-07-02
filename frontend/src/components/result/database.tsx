@@ -14,10 +14,6 @@ export default function Database(){
                             fontSize: 20,
                             fontWeight: "bold",
                         }}>問題{i+1}</p>)
-                        list.push(<p style={{
-                            fontSize: 20,
-                            fontWeight: "bold",
-                        }}>提出状況</p>)
                         if (databaseResult.result[i] == "0"){
                             list.push(<p style={{
                                 fontSize: 16,

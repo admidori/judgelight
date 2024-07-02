@@ -20,10 +20,7 @@ export default function Score(){
             <p style={{
                 fontSize: 20,
                 fontWeight: "bold",
-            }}>合計得点</p>
-            <p style={{
-                fontSize: 20,
-            }}>{scoreSum}</p>
+            }}>合計得点:{scoreSum}</p>
         </Container>
     )
 }
