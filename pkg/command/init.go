@@ -32,21 +32,18 @@ var initCmd = &cobra.Command{
 		if init_problem {
 			database.DeleteProblem()
 			fmt.Println("Problem table initialized successfully.")
-		}
-		if init_result {
+		} else if init_result {
 			database.DeleteResult()
 			fmt.Println("Result table initialized successfully.")
-		}
-		if init_user {
+		} else if init_user {
 			database.DeleteUser()
 			fmt.Println("User table initialized successfully.")
-		}
-		if init_all {
-			database.DeleteProblem()
+		} else if init_all {
 			database.DeleteResult()
+			database.DeleteProblem()
 			database.DeleteUser()
 			fmt.Println("All tables initialized successfully.")
-		}else{
+		} else {
 			return fmt.Errorf("please select the table to initialize")
 		}
 		return nil
@@ -59,5 +56,5 @@ func init() {
 	initCmd.Flags().BoolVarP(&init_problem, "problem", "p", false, "Initialize problem table")
 	initCmd.Flags().BoolVarP(&init_result, "result", "r", false, "Initialize result table")
 	initCmd.Flags().BoolVarP(&init_user, "user", "u", false, "Initialize user table")
-	initCmd.Flags().BoolVarP(&init_user, "all", "a", false, "Initialize all table")
+	initCmd.Flags().BoolVarP(&init_all, "all", "a", false, "Initialize all table")
 }
