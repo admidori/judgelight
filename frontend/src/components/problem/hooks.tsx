@@ -52,6 +52,7 @@ export const handleCase = (num, total) => {
     const [problemCase, SetProblemCase] = React.useState({
         input: "",
         output: "",
+        description: "",
     })
     
     React.useEffect(() => {
@@ -65,6 +66,7 @@ export const handleCase = (num, total) => {
             const tmpProblemCase = {
                 input: responseJsonData.data.testCaseInputData,
                 output: responseJsonData.data.testCaseOutputData,
+                description: responseJsonData.data.testCaseDescription,
             }
             SetProblemCase(tmpProblemCase)
         }).catch(function(error){

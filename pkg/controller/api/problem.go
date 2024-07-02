@@ -43,8 +43,8 @@ func GetProblemInfo(c *gin.Context) {
 	if param == "Limitation" {
 		c.JSON(http.StatusOK, gin.H{
 			"description": problem[p].ProblemLimitationDescription,
-			"input":  problem[p].ProblemLimitationInput,
-			"output": problem[p].ProblemLimitationOutput,
+			"input":       problem[p].ProblemLimitationInput,
+			"output":      problem[p].ProblemLimitationOutput,
 		})
 	}
 	if param == "CaseTotalNumber" {
@@ -56,15 +56,18 @@ func GetProblemInfo(c *gin.Context) {
 		total := len(problem[p].TestCase)
 		TestCaseInput := make([]string, total)
 		TestCaseOutput := make([]string, total)
+		TestCaseDescription := make([]string, total)
 
 		for i := 0; i < total; i++ {
 			TestCaseInput[i] = problem[p].TestCase[i].Input
 			TestCaseOutput[i] = problem[p].TestCase[i].Output
+			TestCaseDescription[i] = problem[p].TestCase[i].Description
 		}
 
 		c.JSON(http.StatusOK, gin.H{
-			"testCaseInputData":  TestCaseInput,
-			"testCaseOutputData": TestCaseOutput,
+			"testCaseInputData":   TestCaseInput,
+			"testCaseOutputData":  TestCaseOutput,
+			"testCaseDescription": TestCaseDescription,
 		})
 	}
 	if param == "InitialCode" {

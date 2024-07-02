@@ -17,11 +17,17 @@ type Problem_table struct {
 	ProblemLimitationOutput      string
 	ProblemInitialCode           string
 
-	TestCase   []Case
-	SecretCase []Case
+	TestCase   []TCase
+	SecretCase []SCase
 }
 
-type Case struct {
+type TCase struct {
+	Input  string
+	Output string
+	Description string
+}
+
+type SCase struct {
 	Input  string
 	Output string
 }
@@ -53,8 +59,8 @@ func ReadProblem() []Problem_table {
 		if err != nil {
 			panic(err)
 		}
-		var testcaseSlice []Case
-		var secretcaseSlice []Case
+		var testcaseSlice []TCase
+		var secretcaseSlice []SCase
 		if testcase == nil {
 			testcaseSlice = nil
 		} else {

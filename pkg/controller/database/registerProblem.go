@@ -45,21 +45,21 @@ func RegisterProblem(problem settings.Problems) {
 
 		for j := 0; j < len(problem.Problem[i].TestCase); j++ {
 			if j > 0 {
-				stmt, err = db.Prepare(`UPDATE JUDGELIGHT.PROBLEM SET TEST_CASE = JSON_ARRAY_APPEND(TEST_CASE, '$', JSON_OBJECT('input' , ? , 'output' , ?)) WHERE PROBLEM_ID = ?`)
+				stmt, err = db.Prepare(`UPDATE JUDGELIGHT.PROBLEM SET TEST_CASE = JSON_ARRAY_APPEND(TEST_CASE, '$', JSON_OBJECT('input' , ? , 'output' , ? ,'description' , ?)) WHERE PROBLEM_ID = ?`)
 				if err != nil {
 					panic(err)
 				}
-				result, err = stmt.Exec(problem.Problem[i].TestCase[j].Input, problem.Problem[i].TestCase[j].Output, problem.Problem[i].ProblemNum)
+				result, err = stmt.Exec(problem.Problem[i].TestCase[j].Input, problem.Problem[i].TestCase[j].Output, problem.Problem[i].TestCase[j].Description, problem.Problem[i].ProblemNum)
 				if err != nil {
 					panic(err)
 				}
 				log.Print(result)
 			} else {
-				stmt, err = db.Prepare(`UPDATE JUDGELIGHT.PROBLEM SET TEST_CASE = JSON_ARRAY(JSON_OBJECT('input' , ? , 'output' , ?)) WHERE PROBLEM_ID = ?`)
+				stmt, err = db.Prepare(`UPDATE JUDGELIGHT.PROBLEM SET TEST_CASE = JSON_ARRAY(JSON_OBJECT('input' , ? , 'output' , ?, 'description', ?)) WHERE PROBLEM_ID = ?`)
 				if err != nil {
 					panic(err)
 				}
-				result, err = stmt.Exec(problem.Problem[i].TestCase[j].Input, problem.Problem[i].TestCase[j].Output, problem.Problem[i].ProblemNum)
+				result, err = stmt.Exec(problem.Problem[i].TestCase[j].Input, problem.Problem[i].TestCase[j].Output, problem.Problem[i].TestCase[j].Description, problem.Problem[i].ProblemNum)
 				if err != nil {
 					panic(err)
 				}

@@ -19,11 +19,17 @@ type Problem struct {
 	ProblemOutput                string `yaml:"output_description"`
 	ProblemInitialCode           string `yaml:"initial_code"`
 
-	TestCase   []Case `yaml:"testcases"`
-	SecretCase []Case `yaml:"secretcases"`
+	TestCase   []TCase `yaml:"testcases"`
+	SecretCase []SCase `yaml:"secretcases"`
 }
 
-type Case struct {
+type TCase struct {
+	Input  string `yaml:"input"`
+	Output string `yaml:"output"`
+	Description string `yaml:"description"`
+}
+
+type SCase struct {
 	Input  string `yaml:"input"`
 	Output string `yaml:"output"`
 }
