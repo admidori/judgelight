@@ -1,0 +1,101 @@
+contest_infomation:
+  title: "Contest Title"
+  start_time: "2023-01-01 00:00:00"
+  end_time: "2023-01-01 00:00:00"
+
+problem:
+  - number: 1
+    title: "Problem Title"
+    score: 100
+    limit_execute_time: 10
+    limit_execute_memory: 256
+    description: "Problem Description"
+    input_description: "Input Description"
+    output_description: "Output Description"
+
+    initial_code: |-
+      #include<stdio.h>
+      int main(void){
+        int a,b;
+        scanf("%d %d",&a,&b);
+        printf("%d\n",a+b);
+        return 0;
+      }
+
+    testcases:
+      - input: |- 
+          1 2
+        output: |-
+          3
+
+      - input: |- 
+          5 6
+        output: |-
+          11
+
+    secretcases:
+      - input: |- 
+          2 2
+        output: |-
+          4
+
+      - input: |- 
+          0 10
+        output: |-
+          10
+
+      - input: |- 
+          22 2
+        output: |-
+          24
+
+  - number: 2
+    title: "Problem Title"
+    score: 100
+    limit_execute_time: 10
+    limit_execute_memory: 256
+    description: "Problem Description"
+    input_description: "Input Description"
+    output_description: "Output Description"
+
+    initial_code: |-
+      #include <iostream>
+      using namespace std;
+      int main() {
+        int a, b;
+        cin >> a >> b;
+        cout << a + b << endl;
+        return 0;
+      }
+      
+    testcases:
+      - input: |- 
+          1
+          2
+        output: |-
+          3
+
+      - input: |- 
+            1
+            2
+        output: |-
+          3
+
+    secretcases:
+      - input: |- 
+          1
+          2
+        output: |-
+          3
+
+      - input: |- 
+          1
+          2
+        output: |-
+          3
+
+      - input: |- 
+          1
+          2
+        output: |-
+          3
