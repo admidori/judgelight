@@ -2,6 +2,8 @@ import csv
 import random
 import string
 
+GENERATE_NUM_USERS = 50
+
 def generate_random_string(length):
     letters = string.ascii_letters + string.digits
     return ''.join(random.choice(letters) for _ in range(length))
@@ -19,9 +21,8 @@ def write_csv_file(file_path, data):
         writer = csv.writer(file)
         writer.writerows(data)
 
-# Generate test data for 1000 users
-test_data = generate_test_data(1000)
+test_data = generate_test_data(50)
 
 # Write the data to a CSV file
-file_path = '/home/admidori/judgelight/test/register/test.csv'
+file_path = './test.csv'
 write_csv_file(file_path, test_data)
