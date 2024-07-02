@@ -28,6 +28,7 @@ export default function Login(){
 
     const handleClickLogin = () => {
         setAuthInfo({ userId: id, userPassword: password })
+        alert("Login Successfull")
     }
 
     return (

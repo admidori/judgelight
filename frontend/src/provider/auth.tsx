@@ -27,7 +27,6 @@ export default function AuthContextProvider(props){
                 console.log(responseJsonData.data)
                 if (responseJsonData.data.status == "success"){
                     setAuthInfo(authInfo)
-                    alert("Login Successfull")
                     localStorage.setItem("authInfo", JSON.stringify(authInfo))
                     setLoginStatus(true)
                 }
