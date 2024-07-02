@@ -21,6 +21,8 @@ var initCmd = &cobra.Command{
 	Long: `This command is used to initialize the database table.
 	If you want to initialize the problem table, use the -p flag.
 	If you want to initialize the result table, use the -r flag.
+	If you want to initialize the user table, use the -u flag.
+	If you want to initialize all table, use the -a flag.
 	You can use both flags at the same time.
 	For example, if you want to initialize the problem table and the result table, use the following command:
 		judgelight init -p -r
@@ -50,4 +52,5 @@ func init() {
 	initCmd.Flags().BoolVarP(&init_problem, "problem", "p", false, "Initialize problem table")
 	initCmd.Flags().BoolVarP(&init_result, "result", "r", false, "Initialize result table")
 	initCmd.Flags().BoolVarP(&init_user, "user", "u", false, "Initialize user table")
+	initCmd.Flags().BoolVarP(&init_user, "all", "a", false, "Initialize all table")
 }
