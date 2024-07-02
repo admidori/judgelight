@@ -13,6 +13,7 @@ import (
 var init_problem bool
 var init_result bool
 var init_user bool
+var init_all bool
 
 // initCmd represents the init command
 var initCmd = &cobra.Command{
@@ -39,6 +40,12 @@ var initCmd = &cobra.Command{
 		if init_user {
 			database.DeleteUser()
 			fmt.Println("User table initialized successfully.")
+		}
+		if init_all {
+			database.DeleteProblem()
+			database.DeleteResult()
+			database.DeleteUser()
+			fmt.Println("All tables initialized successfully.")
 		}else{
 			return fmt.Errorf("please select the table to initialize")
 		}
