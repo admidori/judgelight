@@ -71,7 +71,7 @@ services:
     depends_on:
       - nginx
     ports:
-      - 3306:3306
+      - 4306:3306
     volumes:
       - ./docker/mysql/data:/var/lib/mysql
       - ./docker/mysql/init.d:/docker-entrypoint-initdb.d
