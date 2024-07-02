@@ -1,5 +1,5 @@
 import React from "react";
-import { createTheme, ThemeProvider, AppBar, Box, Toolbar, Typography } from "@material-ui/core";
+import { createTheme, ThemeProvider, AppBar, Box, Toolbar, Typography, Container } from "@material-ui/core";
 import { green } from "@material-ui/core/colors";
 
 export default function Appendix(props){
@@ -14,25 +14,19 @@ export default function Appendix(props){
 
     return (
         <ThemeProvider theme={theme}>
-            <AppBar position="static" color="secondary">
-                <Toolbar disableGutters>
-                    <Box sx={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'space-between',
+            <Container maxWidth="xs">
+                <pre style={{
+                        borderRadius: 5,
+                        whiteSpace: "pre-wrap",
+                        wordWrap: "break-word",
+                        border: "dotted 1px #7f7f7f",
+                        fontFamily: '"Fira code", "Fira Mono", monospace',
+                        fontSize: 16,
+                        padding: "5px",
                     }}>
-                        <Typography variant="h6" component="div">
-                            Score: {props.problemAppendix.score}
-                        </Typography>
-                        <Typography variant="h6" component="div">
-                            Time Limit: {props.problemAppendix.limitTime}
-                        </Typography>
-                        <Typography variant="h6" component="div">
-                            Memory Limit: {props.problemAppendix.limitMemory}
-                        </Typography>
-                    </Box>
-                </Toolbar>
-            </AppBar>
+                    Score: {props.problemAppendix.score}&#009;Time Limit: {props.problemAppendix.limitTime}&#009;Memory Limit: {props.problemAppendix.limitMemory}
+                </pre>
+            </Container>
         </ThemeProvider>
     )
 }

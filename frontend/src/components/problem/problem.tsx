@@ -4,7 +4,7 @@ import Description from "./description";
 import Case from "./case";
 import Title from "./title";
 import Appendix from "./appendix";
-import Limitation from "./limitation";
+import CaseLimitation from "./caselimitation";
 import { handleGetProblemTotalNumber, handleGetProblemCaseTotalNumber, handleTitle, handleDescription, handleAppendix, handleLimitation, handleCase } from "./hooks";
 import { ProblemNumberContext } from "../../provider/problemNumber";
 
@@ -28,7 +28,7 @@ export default function Problem(){
             <Title problemTitle = { problemTitle }/>
             <Appendix problemAppendix = { problemAppendix }/>
             <Description problemDescription = { problemDescription }/>
-            <Limitation problemLimitation = { problemLimitation }/>
+            <CaseLimitation problemLimitation = { problemLimitation }/>
             <Case problemCase = { problemCase } problemCaseTotalNumber = { problemCaseTotalNumber }/>
         </div>
     );

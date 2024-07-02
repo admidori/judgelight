@@ -1,4 +1,4 @@
-import { createTheme, ThemeProvider, AppBar, Toolbar, Typography, Box, Container } from "@material-ui/core";
+import { createTheme, Container } from "@material-ui/core";
 import React from "react";
 import { green } from "@material-ui/core/colors";
 
@@ -13,10 +13,8 @@ export default function Title(props){
     });
 
     return (
-        <ThemeProvider theme={theme}>
-            <Container maxWidth="xs">
-                <h1>{props.problemTitle.problemNumber}. {props.problemTitle.title}</h1>
-            </Container>
-        </ThemeProvider>
+        <Container maxWidth="xs">
+            <h1>{props.problemTitle.problemNumber}. {props.problemTitle.title}</h1>
+        </Container>
     );
 }

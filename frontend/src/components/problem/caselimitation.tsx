@@ -1,16 +1,11 @@
 import React from "react";
-import { AppBar, Box, Container, Toolbar } from "@material-ui/core";
+import { Container } from "@material-ui/core";
 
-export default function Case(props){
+export default function CaseLimitation(props){
     return (
-        <Container maxWidth="xs">
-            {
-                (function () {
-                    const list = [];
-                    for (let i = 0; i < Number(props.problemCaseTotalNumber); i++) {
-                        list.push(<hr></hr>)
-                        list.push(<p style={{fontSize: 20}}>入力例{i+1}</p>)
-                        list.push(<p style={{
+            <Container maxWidth="xs">
+                <p style={{fontSize: 20}}>入力</p>
+                    <p style={{
                             whiteSpace: "pre-wrap",
                             wordWrap: "break-word",
                             fontFamily: '"Fira code", "Fira Mono", monospace',
@@ -19,9 +14,9 @@ export default function Case(props){
                             borderLeft: "solid 5px #7f7f7f",
                             border: "solid 1px #7f7f7f",
                             padding: "5px",
-                        }}>{props.problemCase.input[i]}</p>)
-                        list.push(<p style={{fontSize: 20}}>出力例{i+1}</p>)
-                        list.push(<p style={{
+                        }}>{props.problemLimitation.input}</p>
+                <p style={{fontSize: 20}}>出力</p>
+                    <p style={{
                             whiteSpace: "pre-wrap",
                             wordWrap: "break-word",
                             fontFamily: '"Fira code", "Fira Mono", monospace',
@@ -30,11 +25,7 @@ export default function Case(props){
                             borderLeft: "solid 5px #7f7f7f",
                             border: "solid 1px #7f7f7f",
                             padding: "5px",
-                        }}>{props.problemCase.output[i]}</p>)
-                    }
-                    return <p>{list}</p>;
-                }())
-            }
-        </Container>
-    );
+                        }}>{props.problemLimitation.output}</p>
+            </Container>
+    )
 }

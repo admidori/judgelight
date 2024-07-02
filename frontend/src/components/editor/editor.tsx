@@ -9,7 +9,7 @@ import { baseURL } from "../../pages";
 import { ProblemNumberContext } from "../../provider/problemNumber";
 import { v4 as uuidv4 } from 'uuid';
 import { AuthInfoContext } from "../../provider/auth";
-import { Box } from "@material-ui/core";
+import { Box, Container } from "@material-ui/core";
 
 export default function ProgramEditor() {
     const [problemNumber, setProblemNumber] = React.useContext(ProblemNumberContext)
@@ -96,21 +96,24 @@ export default function ProgramEditor() {
 
     return (
         <div>
-            <h3>Edit Code</h3>
-            <Box border={1}>
+            <Container maxWidth="md">
+                <h3>Edit Here</h3>
                 <Editor
                     value={code}
                     onValueChange={code => setCode(code)}
                     highlight={code => highlight(code, languages.c)}
                     padding={10}
                     style={{
+                        border: "#000000",
+                        borderStyle: "solid",
+                        borderWidth: "1px",
                         fontFamily: '"Fira code", "Fira Mono", monospace',
-                        fontSize: 14,
+                        fontSize: 16,
                     }}
                 />
-            </Box>
-            <button onClick={handleClick}>Submit</button>
-            <p>{resultStatus}</p>
+                <button onClick={handleClick}>Submit</button>
+                <p>{resultStatus}</p>
+            </Container>
         </div>
     );
 }
