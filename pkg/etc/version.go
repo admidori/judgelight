@@ -1,5 +1,5 @@
 package etc
 
-var VERSION_JUDGELIGHT = "1.0"
-var DEVELOPMENT_CODE = "Development"
-var RELEASE_DATE = "2023/6"
+var VERSION_JUDGELIGHT = "1.0.0"
+var DEVELOPMENT_CODE = "Beta"
+var RELEASE_DATE = "2024/07/03"
