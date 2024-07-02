@@ -10,6 +10,7 @@ problem:
     limit_execute_time: 10
     limit_execute_memory: 256
     description: "Problem Description"
+    limit_description: "Limitation Description"
     input_description: "Input Description"
     output_description: "Output Description"
 
@@ -27,11 +28,13 @@ problem:
           1 2
         output: |-
           3
+        description: "Example 1"
 
       - input: |- 
           5 6
         output: |-
           11
+        description: "Example 2"
 
     secretcases:
       - input: |- 
@@ -55,6 +58,7 @@ problem:
     limit_execute_time: 10
     limit_execute_memory: 256
     description: "Problem Description"
+    limit_description: "Limitation Description"
     input_description: "Input Description"
     output_description: "Output Description"
 
@@ -74,12 +78,14 @@ problem:
           2
         output: |-
           3
+        description: "Example 1"
 
       - input: |- 
             1
             2
         output: |-
           3
+        description: "Example 2"
 
     secretcases:
       - input: |- 
