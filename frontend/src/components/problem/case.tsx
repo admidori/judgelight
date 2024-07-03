@@ -3,7 +3,7 @@ import { AppBar, Box, Container, Toolbar } from "@material-ui/core";
 
 export default function Case(props){
     return (
-        <Container maxWidth="xs">
+        <Container maxWidth="md">
             {
                 (function () {
                     const list = [];

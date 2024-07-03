@@ -5,6 +5,10 @@ export default function Description(props){
     return (
         <Container maxWidth="md">
             <p style={{
+                fontSize: 20,
+                fontWeight: "bold",
+                }}>問題</p>
+            <p style={{
                 whiteSpace: "pre-wrap",
                 wordWrap: "break-word",
                 border: "#000000",

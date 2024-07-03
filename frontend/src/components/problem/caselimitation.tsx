@@ -3,7 +3,7 @@ import { Container } from "@material-ui/core";
 
 export default function CaseLimitation(props){
     return (
-            <Container maxWidth="xs">
+            <Container maxWidth="md">
                     {
                         (function() {
                             if (props.problemLimitation.description.length === 0) {
@@ -18,7 +18,7 @@ export default function CaseLimitation(props){
                             for (let i = 0; i < props.problemLimitation.description.length; i++) {
                                 list.push(<li>{props.problemLimitation.description[i]}</li>)
                             }
-                            return <ul>{list}</ul>;
+                            return <>{list}</>;
                         }
                     }())}
                 <p style={{
