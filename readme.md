@@ -24,7 +24,7 @@ dockerとバックエンド用のgoプログラムを以下のコマンドで走
 （それぞれ別プロセスのターミナル）で実行してください。  
 
 ## 2-2. 問題セットの設定
-```$ cd cmd/cli/ && go run main.go set -f setting.yaml```  
+```$ go run cmd/cli/main.go set -f setting.yaml```  
 この操作により、`setting.yaml`に記述した設定事項がデータベースに記録されます．
 その後、/judgelight/settingsディレクトリ内のファイルを変更し、問題の設定を行います。  
 問題の設定についての詳細は「問題設定について」をご覧ください。  
@@ -44,6 +44,10 @@ problem:    //問題情報を設定できます
     limit_execute_time: 10  //実行制限時間を設定できます
     limit_execute_memory: 256   //実行メモリの制限を設定できます
     description: "Problem Description"  //問題文を設定できます
+    limit_description:            // 値の制限に関する文面を設定できます
+      - description: "Limitation Description1"
+      - description: "Limitation Description2"
+      - description: "Limitation Description3"
     input_description: "Input Description"  //入力に関する説明を設定できます
     output_description: "Output Description"    //出力に関する説明を設定できます
 
@@ -92,7 +96,7 @@ problem:    //問題情報を設定できます
 
 # 結果の確認方法
 結果は、全てサーバ内に保存されます．結果を出力するときは以下のコマンドを入力してください．
-```$ cd cmd/cli && go run main.go total -f <出力したいEXCELファイルのパス>```
+```$ go run cmd/cli/main.go total -f <出力したいCSVファイルのパス>```
 
 # License
 MIT (c) 2023-2024 [@admidori](https://github.com/admidori)
