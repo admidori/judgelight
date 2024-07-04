@@ -12,7 +12,6 @@ export default function ContestTitle() {
         axios.get(baseURL+"/get/contest/info")
         .then(function(response){
             const responseJsonData = JSON.parse(JSON.stringify(response))
-            console.log(responseJsonData.data)
             setContestTitle(responseJsonData.data.title)
             setContestStartTime(responseJsonData.data.startTime)
             setContestEndTime(responseJsonData.data.endTime)

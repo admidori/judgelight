@@ -6,13 +6,11 @@ export default function Score(){
     const { databaseResult, problemTotalNumber } = handleGetResult()
     const { score } = handleGetScore()
     const [scoreSum, SetScoreSum] = React.useState(0)
-    console.log(score)
     var sum = 0
     React.useEffect(() => {
         for (let i = 0; i < score.length; i++) {
             if (databaseResult.result[i] == "0"){
                 sum += score[i]
-                console.log(scoreSum)
             }
         }
         SetScoreSum(sum)

@@ -24,7 +24,6 @@ export default function AuthContextProvider(props){
             axios.post(baseURL+'/register/login',sendJsonData)
             .then(function(response){
                 const responseJsonData = JSON.parse(JSON.stringify(response))
-                console.log(responseJsonData.data)
                 if (responseJsonData.data.status == "success"){
                     setAuthInfo(authInfo)
                     localStorage.setItem("authInfo", JSON.stringify(authInfo))

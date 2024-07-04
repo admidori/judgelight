@@ -169,7 +169,6 @@ export const handleLimitation = (num) => {
                 output: responseJsonData.data.output,
             }
             SetProblemLimitation(tmpProblemLimitation)
-            console.log(responseJsonData.data)
             }).catch(function(error){
                 console.log(error)
             })

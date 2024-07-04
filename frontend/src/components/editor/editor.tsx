@@ -108,7 +108,6 @@ export default function ProgramEditor() {
                 axios.post(baseURL+'/program/submit/result',sendJsonData)
                 .then(function(response){
                     const responseJsonData = JSON.parse(JSON.stringify(response));
-                    console.log(responseJsonData)
                 }
                 ).catch(function(error){
                     console.log(error)
