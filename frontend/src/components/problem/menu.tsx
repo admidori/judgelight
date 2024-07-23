@@ -1,6 +1,6 @@
 import React from "react";
 import { AppBar, Box, Toolbar, Button , createTheme, ThemeProvider, ButtonGroup} from "@material-ui/core";
-import { green } from "@material-ui/core/colors";
+import { lightBlue, blue, indigo } from "@material-ui/core/colors";
 
 export default function Menu(props){
     const handleClick = (num) => {
@@ -9,10 +9,8 @@ export default function Menu(props){
 
     const theme = createTheme({
         palette: {
-            primary: green,
-            secondary: {
-                main: '#689f38',
-            },
+            primary: indigo,
+            secondary: blue,
         },
     });
 
