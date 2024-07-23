@@ -7,7 +7,7 @@ type AuthInfo = {
     userPassword: string;
 }
 
-export const LogginContext = React.createContext<boolean>(false)
+export const LoginContext = React.createContext<boolean>(false)
 export const AuthInfoContext = React.createContext<[AuthInfo, React.Dispatch<React.SetStateAction<AuthInfo>>]>([{ userId: "", userPassword: "" }, () => {}])
 
 export default function AuthContextProvider(props){
@@ -25,6 +25,7 @@ export default function AuthContextProvider(props){
             .then(function(response){
                 const responseJsonData = JSON.parse(JSON.stringify(response))
                 if (responseJsonData.data.status == "success"){
+                    alert("Login Successfull")
                     setAuthInfo(authInfo)
                     localStorage.setItem("authInfo", JSON.stringify(authInfo))
                     setLoginStatus(true)
@@ -41,11 +42,11 @@ export default function AuthContextProvider(props){
     }, [authInfo])
 
     return(
-        <LogginContext.Provider value={loginStatus}>
+        <LoginContext.Provider value={loginStatus}>
             <AuthInfoContext.Provider value={[authInfo, setAuthInfo]}>
                 {props.children}
             </AuthInfoContext.Provider>
-        </LogginContext.Provider>
+        </LoginContext.Provider>
         
     )
 }

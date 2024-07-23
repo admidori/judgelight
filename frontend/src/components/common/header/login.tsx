@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import { LogginContext, AuthInfoContext } from "../../../provider/auth";
+import { LoginContext, AuthInfoContext } from "../../../provider/auth";
 
 export default function Login(){
-    const loginStatus = React.useContext(LogginContext)
+    const loginStatus = React.useContext(LoginContext)
     const [ authInfo, setAuthInfo ] = React.useContext(AuthInfoContext)
 
     const [id, setId] = React.useState<string>(authInfo.userId)
@@ -28,7 +28,6 @@ export default function Login(){
 
     const handleClickLogin = () => {
         setAuthInfo({ userId: id, userPassword: password })
-        alert("Login Successfull")
     }
 
     return (
