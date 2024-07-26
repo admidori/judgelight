@@ -28,3 +28,11 @@ func GetResultInfo(c *gin.Context) {
 		"result": resultValue,
 	})
 }
+
+func GetResultInfoAll(c *gin.Context) {
+	result := database.ReadResult()
+
+	c.JSON(http.StatusOK, gin.H{
+		"result": result,
+	})
+}

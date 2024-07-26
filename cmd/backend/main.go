@@ -21,6 +21,7 @@ func main() {
 	router.GET("/get/problem/info", api.GetProblemInfo)
 	router.GET("/get/contest/info", api.GetContestInfo)
 	router.GET("/database/result", api.GetResultInfo)
+	router.GET("/database/result/all", api.GetResultInfoAll)
 
 	// Start listening.
 	router.Run(":8080")
