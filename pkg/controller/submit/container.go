@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"path/filepath"
 	"strconv"
+	"strings"
 
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/container"
@@ -44,13 +45,16 @@ func ContainerCreateAndStart(json Receiveprogramformat) int {
 	if err != nil {
 		panic(err)
 	}
-
+	
+	convOutputTestJson := strings.Replace(string(outputTestJson),`\n`,`\\n`,-1)
+	convOutputSecretJson := strings.Replace(string(outputSecretJson),`\n`,`\\n`,-1)
+	
 	imagefilename := "judge-server:" + json.Language
 	envvalue1 := "SUBMITFILENAME=" + json.AuthorID
 	envvalue2 := "SUBMITLANGUAGE=" + json.Language
 	envvalue3 := "DATA=" + json.Data
-	envvalue4 := "TESTCASEJSON=" + string(outputTestJson)
-	envvalue5 := "SECRETCASEJSON=" + string(outputSecretJson)
+	envvalue4 := "TESTCASEJSON=" + convOutputTestJson
+	envvalue5 := "SECRETCASEJSON=" + convOutputSecretJson
 	envvalue6 := "TIMEOUTSEC=" + strconv.Itoa(json.Timeout)
 
 	absolutePath, err := filepath.Abs("../../docker/language/c/")
