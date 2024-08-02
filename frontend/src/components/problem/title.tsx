@@ -13,7 +13,7 @@ export default function Title(props){
     });
 
     return (
-        <Container maxWidth="xs">
+        <Container maxWidth="md">
             <h1>{props.problemTitle.problemNumber}. {props.problemTitle.title}</h1>
         </Container>
     );
