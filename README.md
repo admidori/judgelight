@@ -1,4 +1,4 @@
-[Japanese]()
+[Japanese](https://github.com/admidori/judgelight/blob/master/docs/README-ja.md)
 # Judgelight
 ### Judgelight is the judgement server for competitive-programming.
 ![logo](/docs/img/logo.png)
