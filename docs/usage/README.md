@@ -116,6 +116,3 @@ problem:    //問題情報を設定できます
 # 結果の確認方法
 結果は、全てサーバ内に保存されます．結果を出力するときは以下のコマンドを入力してください．  
 ```$ go run cmd/cli/main.go total -f <出力したいCSVファイルのパス>```
-
-# License
-MIT (c) 2023-2024 [@admidori](https://github.com/admidori)
