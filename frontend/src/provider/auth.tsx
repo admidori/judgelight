@@ -35,7 +35,6 @@ export default function AuthContextProvider(props){
                 }
             })
             .catch(function(error){
-                console.log(error)
             })
         }
     }, [authInfo])

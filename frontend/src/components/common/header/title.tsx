@@ -17,7 +17,6 @@ export default function ContestTitle() {
             setContestEndTime(responseJsonData.data.endTime)
         })
         .catch(function(error){
-            console.log(error)
         })
     }, [])
 
