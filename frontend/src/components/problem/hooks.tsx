@@ -15,7 +15,6 @@ export const handleGetProblemTotalNumber = () => {
             SetProblemTotalNumber(responseJsonData.data.parameter)
         })
         .catch(function(error){
-            console.log(error)
         })
     },[])
     
@@ -41,7 +40,6 @@ export const handleTitle = (num) => {
                 problemNumber: responseJsonData.data.problemNumber,
             })
         }).catch(function(error){
-            console.log(error)
         })
     },[num])
 
@@ -70,7 +68,6 @@ export const handleCase = (num, total) => {
             }
             SetProblemCase(tmpProblemCase)
         }).catch(function(error){
-                console.log(error)
             })
     },[num,total])
     return { problemCase }
@@ -97,7 +94,6 @@ export const handleAppendix = (num) => {
                 limitMemory: responseJsonData.data.limitMemory,
             })
         }).catch(function(error){
-            console.log(error)
         })
     },[num])
 
@@ -119,7 +115,6 @@ export const handleDescription = (num) => {
             SetProblemDescription(responseJsonData.data.description)
         })
         .catch(function(error){
-            console.log(error)
     })
     },[num])
 
@@ -141,7 +136,6 @@ export const handleGetProblemCaseTotalNumber = (num) => {
             SetProblemCaseTotalNumber(responseJsonData.data.totalNumber)
         })
         .catch(function(error){
-            console.log(error)
     })
     },[num])
 
@@ -170,7 +164,6 @@ export const handleLimitation = (num) => {
             }
             SetProblemLimitation(tmpProblemLimitation)
             }).catch(function(error){
-                console.log(error)
             })
     },[num])
     return { problemLimitation }

@@ -38,7 +38,6 @@ export default function ProgramEditor() {
             const responseJsonData = JSON.parse(JSON.stringify(response))
             setCode(responseJsonData.data.initialCode)
         }).catch(function(error){
-            console.log(error)
         })
 
         axios.get(baseURL+"/get/problem/info",{
@@ -57,7 +56,6 @@ export default function ProgramEditor() {
             SetProblemSecretCaseInput(tmpProblemSecretCaseInput)
             SetProblemSecretCaseOutput(tmpProblemSecretCaseOutput)
         }).catch(function(error){
-            console.log(error)
         })
         
         axios.get(baseURL+"/get/problem/info",{
@@ -74,7 +72,6 @@ export default function ProgramEditor() {
             SetProblemLimitMemory(tmpProblemLimitMemory)
             SetProblemScore(tmpProblemScore)
         }).catch(function(error){
-            console.log(error)
         })
     },[problemNumber])
 
@@ -110,14 +107,18 @@ export default function ProgramEditor() {
                     const responseJsonData = JSON.parse(JSON.stringify(response));
                 }
                 ).catch(function(error){
-                    console.log(error)
                 })
             }
         })
         .catch(function(error){
-            console.log(error)
         })
     }
+
+    React.useEffect(() => {
+        if (resultStatus!="Judging" && resultStatus!="") {
+            alert(resultStatus);
+        }
+    }, [resultStatus]);
 
     return (
         <div>

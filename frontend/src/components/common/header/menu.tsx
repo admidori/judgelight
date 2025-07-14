@@ -1,8 +1,11 @@
 import { AppBar, Container, Toolbar, Box , Button, ButtonGroup } from "@material-ui/core";
 import React from "react";
 import Link from "next/link";
+import { LoginContext } from "../../../provider/auth";
 
 export default function Menu() {
+    const isLoggedIn = React.useContext(LoginContext);
+
     return (
         <AppBar position="static">
             <Container maxWidth="xl">
@@ -17,12 +20,18 @@ export default function Menu() {
                                 <Button
                                     style={{ margin: '10px', color: 'white', display: 'block' , borderColor: 'white'}}
                                 >
-                                    PROBLEMSET
+                                    PROBLEMS
                                 </Button>
                             </Link>
                             <Link href="/result">
                                 <Button
-                                    style={{ margin: '10px', color: 'white', display: 'block' , borderColor: 'white'}}
+                                    disabled={!isLoggedIn}
+                                    style={{
+                                        margin: '10px',
+                                        color: isLoggedIn ? 'white' : 'gray',
+                                        display: 'block',
+                                        borderColor: 'white'
+                                    }}
                                 >
                                     RESULT
                                 </Button>

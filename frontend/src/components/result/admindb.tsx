@@ -5,7 +5,6 @@ import { baseURL } from "../../pages";
 
 export default function AdminDatabase(){
     const { databaseResult, problemTotalNumber } = handleGetAllResult()
-    console.log(databaseResult)
     return(
         <p>開発者用ツールのConsole画面から答えの一覧を見ることができます．</p>
     );
@@ -24,7 +23,6 @@ const handleGetAllResult = () => {
             SetDatabaseResult(tmpDatabaseResult)
         })
         .catch(function(error){
-            console.log(error)
         })
     },[])
 

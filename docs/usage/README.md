@@ -25,13 +25,15 @@ gitコマンドやzip形式でのダウンロードなどを使用して、repos
 # 2. 起動方法
 ## 2-1. ソフトウェアの実行
 dockerとバックエンド用のgoプログラムを以下のコマンドで実行します．  
+**1はcmd/backend直下のディレクトリでgo runしてください**
 
 1. ```$ cd cmd/backend && go run main.go```
 2. ```$ docker compose up```
 
-（それぞれ別プロセスのターミナル）で実行してください。  
+それぞれ別プロセスのターミナルで実行してください。  
 
 ## 2-2. 問題セットの設定
+`docker compose up`を行った状態で，以下のコマンドを別プロセスのターミナルで実行して下さい．
 ```$ go run cmd/cli/main.go set -f setting.yaml```  
 この操作により、`setting.yaml`に記述した設定事項がデータベースに記録されます．
 その後、judgelight/settingsディレクトリ内のファイルを変更し、問題の設定を行います。  

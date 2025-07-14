@@ -21,13 +21,14 @@ export default function Login(){
 
     const handleClickLogout = () => {
         setAuthInfo({ userId: "", userPassword: "" })
-        alert("Logout Successfull")
+        alert("Logout Successful")
         localStorage.removeItem("authInfo")
         window.location.reload()
     }
 
     const handleClickLogin = () => {
         setAuthInfo({ userId: id, userPassword: password })
+        alert("Login Successful")
     }
 
     return (

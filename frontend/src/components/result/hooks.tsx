@@ -23,7 +23,6 @@ export const handleGetResult = () => {
             SetDatabaseResult(tmpDatabaseResult)
         })
         .catch(function(error){
-            console.log(error)
         })
     },[]);
 
@@ -45,7 +44,6 @@ export const handleGetScore = () => {
             SetScore(tmpScore)
         })
         .catch(function(error){
-            console.log(error)
         })
     },[])
 
