@@ -119,6 +119,12 @@ export default function ProgramEditor() {
         })
     }
 
+    React.useEffect(() => {
+        if (resultStatus!="Judging" && resultStatus!="") {
+            alert(resultStatus);
+        }
+    }, [resultStatus]);
+
     return (
         <div>
             <Container maxWidth="md">
