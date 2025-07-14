@@ -28,17 +28,21 @@ export default function ContestTitle() {
                     <Box sx={{
                         display: 'flex',
                         alignItems: 'center',
-                        justifyContent: 'center',
+                        justifyContent: 'space-between',
+                        width: '100%',
                     }}>
-                        <h2>{contestTitle}</h2>
+                        <h2 style={{ margin: 0 }}>{contestTitle}</h2>
                         <pre style={{
-                        borderRadius: 5,
-                        whiteSpace: "pre-wrap",
-                        wordWrap: "break-word",
-                        fontFamily: '"Fira code", "Fira Mono", monospace',
-                        fontSize: 14,
-                        padding: "5px",
-                    }}>開始時刻:{contestStartTime} &#009; 終了時刻:{contestEndTime}</pre>
+                            borderRadius: 5,
+                            whiteSpace: "pre-wrap",
+                            wordWrap: "break-word",
+                            fontFamily: '"Fira code", "Fira Mono", monospace',
+                            fontSize: 14,
+                            textAlign: "right",
+                            margin: 0,
+                        }}>
+                            開始時刻:{contestStartTime} &#009; 終了時刻:{contestEndTime}
+                        </pre>
                     </Box>
                 </Toolbar>
             </Container>
