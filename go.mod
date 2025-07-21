@@ -1,12 +1,12 @@
 module github.com/admidori/judgelight
 
-go 1.20
+go 1.21.0
 
 require (
 	github.com/docker/docker v24.0.9+incompatible
 	github.com/gin-contrib/cors v1.6.0
 	github.com/gin-gonic/gin v1.9.1
-	github.com/go-sql-driver/mysql v1.8.1
+	github.com/go-sql-driver/mysql v1.9.3
 	github.com/spf13/cobra v1.8.0
 	gopkg.in/yaml.v3 v3.0.1
 )
