@@ -1,7 +1,11 @@
 import axios from "axios";
 import React from "react";
 import { baseURL } from "../../../pages";
-import { AppBar, Container, Toolbar, Box } from "@material-ui/core";
+import { Layout, Typography, Space, Tag } from "antd";
+import { ClockCircleOutlined } from '@ant-design/icons';
+
+const { Header } = Layout;
+const { Title } = Typography;
 
 export default function ContestTitle() {
     const [contestTitle, setContestTitle] = React.useState<string>("")
@@ -21,30 +25,25 @@ export default function ContestTitle() {
     }, [])
 
     return (
-        <AppBar position="static">
-            <Container maxWidth="xl">
-                <Toolbar disableGutters>
-                    <Box sx={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'space-between',
-                        width: '100%',
-                    }}>
-                        <h2 style={{ margin: 0 }}>{contestTitle}</h2>
-                        <pre style={{
-                            borderRadius: 5,
-                            whiteSpace: "pre-wrap",
-                            wordWrap: "break-word",
-                            fontFamily: '"Fira code", "Fira Mono", monospace',
-                            fontSize: 14,
-                            textAlign: "right",
-                            margin: 0,
-                        }}>
-                            開始時刻:{contestStartTime} &#009; 終了時刻:{contestEndTime}
-                        </pre>
-                    </Box>
-                </Toolbar>
-            </Container>
-        </AppBar>
+        <Header style={{
+            background: '#1890ff',
+            padding: '0 24px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+        }}>
+            <Title level={3} style={{ color: '#fff', margin: 0 }}>
+                {contestTitle}
+            </Title>
+            
+            <Space size="large">
+                <Tag icon={<ClockCircleOutlined />} color="blue">
+                    開始: {contestStartTime}
+                </Tag>
+                <Tag icon={<ClockCircleOutlined />} color="red">
+                    終了: {contestEndTime}
+                </Tag>
+            </Space>
+        </Header>
     );
 }
