@@ -1,61 +1,30 @@
 import React from "react";
-import { AppBar, Box, Toolbar, Button , createTheme, ThemeProvider, ButtonGroup} from "@material-ui/core";
-import { lightBlue, blue, indigo } from "@material-ui/core/colors";
-import { NodeNextRequest } from "next/dist/server/base-http/node";
+import { Tabs } from 'antd';
+import type { TabsProps } from 'antd';
 
-export default function Menu(props){
-    const handleClick = (num) => {
-        props.handleNowProblemChange(num)
-    }
+export default function Menu(props) {
+    const handleChange = (key: string) => {
+        props.handleNowProblemChange(Number(key));
+    };
 
-    const theme = createTheme({
-        palette: {
-            primary: indigo,
-            secondary: blue,
-        },
-    });
+    const items: TabsProps['items'] = Array.from(
+        { length: Number(props.problemTotal) },
+        (_, i) => ({
+            key: String(i + 1),
+            label: `問題 ${i + 1}`,
+        })
+    );
 
-    return(
-        <ThemeProvider theme={theme}>
-                <AppBar position="static" color="secondary">
-                    <Toolbar disableGutters>
-                        <Box sx={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'space-between',
-                            overflow: 'auto',
-                            width: '100%',
-                        }}>
-                            <ButtonGroup>
-                                {
-                                (function () {
-                                    const list = [];
-                                    for (let i = 1; i <= Number(props.problemTotal); i++) {
-                                        if(i%10 === 0){
-                                            list.push(<br/>);
-                                        }
-                                        list.push(
-                                            <Button
-                                                variant="outlined"
-                                                style={{
-                                                    margin: '2px',
-                                                    color: 'white',
-                                                    borderColor: 'white',
-                                                    display: 'block', 
-                                                }}
-                                                onClick={() => handleClick(i)}
-                                            >
-                                                {i}
-                                            </Button>
-                                        );
-                                    }
-                                    return <>{list}</>;
-                                }())
-                                }
-                            </ButtonGroup>
-                        </Box>
-                    </Toolbar>
-                </AppBar>
-        </ThemeProvider>
+    return (
+        <Tabs
+            defaultActiveKey="1"
+            items={items}
+            onChange={handleChange}
+            type="card"
+            style={{ 
+                padding: '0 16px',
+                backgroundColor: '#fff' 
+            }}
+        />
     );
 }
