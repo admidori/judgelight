@@ -6,17 +6,15 @@ import Database from "../components/result/database";
 import AuthContextProvider from "../provider/auth";
 import Score from "../components/result/score";
 
-class Result extends React.Component{
-    render(){
-        return(
+export default function Result() {
+    return(
+        <div>
             <AuthContextProvider>
-                <Header />
-                <Score />
+            <Header />
+            <Score />
                 <Database />
                 <Footer />
             </AuthContextProvider>
-        )
-    };
+        </div>
+    )
 }
-
-export default Result

@@ -5,14 +5,10 @@ import AdminDatabase from '../components/result/admindb';
 
 export var baseURL = config.domain + ":" + config.apiPort
 
-class Index extends React.Component {
-    render() {
-        return (
-            <div>
-                <AdminDatabase></AdminDatabase>
-            </div>
-        );
-    }
+export default function Admin() {
+    return (
+        <div>
+            <AdminDatabase></AdminDatabase>
+        </div>
+    );
 }
-
-export default Index;
