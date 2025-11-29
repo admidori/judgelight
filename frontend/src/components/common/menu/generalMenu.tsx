@@ -4,7 +4,6 @@ import { LoginContext } from "../../../provider/auth";
 import type { MenuProps } from "antd";
 import { Menu, Button } from "antd";
 import { DesktopOutlined, MenuFoldOutlined, MenuUnfoldOutlined, PieChartOutlined, UserOutlined } from '@ant-design/icons';
-import LoginModal from "../login/login";
 
 interface GeneralMenuProps {
     collapsed: boolean;
