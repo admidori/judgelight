@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Layout } from 'antd';
 import Header from "../components/common/header/header";
-import Footer from '../components/common/footer/footer';
 import GeneralMenu from '../components/common/menu/generalMenu';
 import ProgramEditor from '../components/editor/editor';
 import Problem from '../components/problem/problem';
@@ -45,7 +44,6 @@ export default function ProblemPage() {
                             </Content>
                         </Layout>
                     </Layout>
-                    <Footer />
                 </Layout>
             </AuthContextProvider>
         </ProblemNumberProvider>
