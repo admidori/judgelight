@@ -3,7 +3,8 @@ import Link from "next/link";
 import { LoginContext } from "../../../provider/auth";
 import type { MenuProps } from "antd";
 import { Menu, Button } from "antd";
-import { DesktopOutlined, MenuFoldOutlined, MenuUnfoldOutlined, PieChartOutlined } from '@ant-design/icons';
+import { DesktopOutlined, MenuFoldOutlined, MenuUnfoldOutlined, PieChartOutlined, UserOutlined } from '@ant-design/icons';
+import LoginModal from "../login/login";
 
 interface GeneralMenuProps {
     collapsed: boolean;
@@ -11,11 +12,18 @@ interface GeneralMenuProps {
 }
 
 export default function GeneralMenu({ collapsed, onCollapse }: GeneralMenuProps) {
+    const [loginModalOpen, setLoginModalOpen] = React.useState(false);
     const isLoggedIn = React.useContext(LoginContext);
 
     type MenuItem = Required<MenuProps>['items'][number];
 
     const menuItems: MenuItem[] = [
+        {
+            key: 'login',
+            label: isLoggedIn ? 'LOGOUT' : 'LOGIN',
+            icon: <UserOutlined />,
+            onClick: isLoggedIn ? () => null : () => setLoginModalOpen(true),
+        },
         {
             key: 'problems',
             label: (
@@ -51,6 +59,10 @@ export default function GeneralMenu({ collapsed, onCollapse }: GeneralMenuProps)
                 mode="inline"
                 items={menuItems}
                 inlineCollapsed={collapsed}
+            />
+            <LoginModal 
+                open={loginModalOpen} 
+                onClose={() => setLoginModalOpen(false)} 
             />
         </>
     )
