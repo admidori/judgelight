@@ -1,13 +1,16 @@
 import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
 import { baseURL } from "../../../pages";
 import { Layout, Typography, Space, Tag } from "antd";
 import { ClockCircleOutlined } from '@ant-design/icons';
+import LoginModal from "../login/login";
+import LoginIcon from "./loginIcon";
 
 const { Header } = Layout;
 const { Title } = Typography;
 
 export default function ContestTitle() {
+    const [loginModalOpen, setLoginModalOpen] = useState(false);
     const [contestTitle, setContestTitle] = React.useState<string>("")
     const [contestStartTime, setContestStartTime] = React.useState<string>("")
     const [contestEndTime, setContestEndTime] = React.useState<string>("")
@@ -43,6 +46,7 @@ export default function ContestTitle() {
                 <Tag icon={<ClockCircleOutlined />} color="red">
                     終了: {contestEndTime}
                 </Tag>
+                <LoginIcon />
             </Space>
         </Header>
     );

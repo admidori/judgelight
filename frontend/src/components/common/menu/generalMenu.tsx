@@ -12,7 +12,6 @@ interface GeneralMenuProps {
 }
 
 export default function GeneralMenu({ collapsed, onCollapse }: GeneralMenuProps) {
-    const [loginModalOpen, setLoginModalOpen] = React.useState(false);
     const isLoggedIn = React.useContext(LoginContext);
 
     type MenuItem = Required<MenuProps>['items'][number];
@@ -39,15 +38,6 @@ export default function GeneralMenu({ collapsed, onCollapse }: GeneralMenuProps)
         },
     ];
 
-    const loginMenuItem: MenuItem[] = [
-        {
-            key: 'login',
-            label: isLoggedIn ? 'LOGOUT' : 'LOGIN',
-            icon: <UserOutlined />,
-            onClick: () => setLoginModalOpen(true),
-        },
-    ];
-
     return (
         <>
             <Button
@@ -57,24 +47,11 @@ export default function GeneralMenu({ collapsed, onCollapse }: GeneralMenuProps)
             >
                 {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
             </Button>
-            <div style={{ display: 'flex', flexDirection: 'column', height: 'calc(100vh - 120px)' }}>
-                <Menu
-                    defaultSelectedKeys={['1']}
-                    mode="inline"
-                    items={menuItems}
-                    inlineCollapsed={collapsed}
-                    style={{ flex: 1, borderRight: 0 }}
-                />
-                <Menu
-                    mode="inline"
-                    items={loginMenuItem}
-                    inlineCollapsed={collapsed}
-                    style={{ borderRight: 0, borderTop: '1px solid #f0f0f0' }}
-                />
-            </div>
-            <LoginModal 
-                open={loginModalOpen} 
-                onClose={() => setLoginModalOpen(false)} 
+            <Menu
+                defaultSelectedKeys={['1']}
+                mode="inline"
+                items={menuItems}
+                inlineCollapsed={collapsed}
             />
         </>
     )
