@@ -4,22 +4,25 @@ volumes:
   ignore:
   
 services:
-#
-#  api:
-#    build:
-#      context: .
-#      dockerfile: ./docker/api/Dockerfile
-#    container_name: judgelight-api
-#    volumes:
-#      - ./cmd:/go/src/app/cmd/
-#      - ./pkg:/go/src/app/pkg/
-#      - ./docker/language:/go/src/app/docker/language/
-#    hostname: backend
-#    restart: always
-#    tty: true
-#    ports:
-#      - 8080:8080
-#
+  api:
+    build:
+      context: .
+      dockerfile: ./docker/api/Dockerfile
+    container_name: judgelight-api
+    volumes:
+      - ./cmd:/go/src/app/cmd/
+      - ./pkg:/go/src/app/pkg/
+      - ./docker/language:/go/src/app/docker/language/
+      - ./setting.yaml:/go/src/app/setting.yaml
+    hostname: backend
+    restart: always
+    tty: true
+    ports:
+      - 8080:8080
+    depends_on:
+      - mysql
+    networks:
+      - app-network
 
   next:
     build:
@@ -48,6 +51,8 @@ services:
           yarn install && yarn build && touch ~/.exec-once
         }
         yarn dev
+    networks:
+      - app-network
 
   nginx:
     build:
@@ -58,8 +63,13 @@ services:
     tty: true
     depends_on:
       - next
+      - api
     ports:
       - 80:80
+    volumes:
+      - ./docker/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - app-network
 
   mysql:
     build:
@@ -68,8 +78,6 @@ services:
     container_name: judgelight-mysql
     restart: always
     tty: true
-    depends_on:
-      - nginx
     ports:
       - 4306:3306
     volumes:
@@ -80,8 +88,8 @@ services:
       MYSQL_USER: dev
       MYSQL_PASSWORD: dev
     networks:
-      - mysql-network
+      - app-network
       
 networks:
-  mysql-network:
+  app-network:
     driver: bridge
