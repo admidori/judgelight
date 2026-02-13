@@ -9,7 +9,7 @@ import (
 func InitDatabase() *sql.DB {
 	username := "root"
 	password := "root"
-	hostname := "localhost:4306"
+	hostname := "mysql:3306"
 
 	auth := username + ":" + password + "@tcp(" + hostname + ")/JUDGELIGHT"
 	db, err := sql.Open("mysql", auth)

@@ -2,7 +2,7 @@ import React from 'react';
 import config from "../../config.json";
 import Link from 'next/link';
 
-export var baseURL = config.domain + ":" + config.apiPort
+export var baseURL = "/api"
 
 export default function Index() {
     return (
