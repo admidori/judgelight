@@ -81,8 +81,12 @@ func ReadProblem() []Problem_table {
 				panic(err)
 			}
 		}
-		if err := json.Unmarshal(secretcase, &secretcaseSlice); err != nil {
-			panic(err)
+		if secretcase == nil {
+			secretcaseSlice = nil
+		} else {
+			if err := json.Unmarshal(secretcase, &secretcaseSlice); err != nil {
+				panic(err)
+			}
 		}
 		result = append(result, Problem_table{ProblemNum: id, ProblemTitle: title, ProblemScore: score, ProblemLimitTime: limitTime, ProblemLimitMemory: limitMemory, ProblemDescription: problem_description, ProblemLimitationInput: input_description, ProblemLimitationOutput: output_description, ProblemInitialCode: initialCode, ProblemLimitationDescription: problem_limitation_descriptionSlice, TestCase: testcaseSlice, SecretCase: secretcaseSlice})
 	}

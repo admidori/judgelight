@@ -17,6 +17,13 @@ func GetProblemInfo(c *gin.Context) {
 
 	param := c.Query("parameter")
 
+	if param != "NumberOfProblem" && param != "ScoreAll" {
+		if p < 0 || p >= len(problem) {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "invalid problemNumber"})
+			return
+		}
+	}
+
 	if param == "NumberOfProblem" {
 		c.JSON(http.StatusOK, gin.H{
 			"parameter": len(problem),
