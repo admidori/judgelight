@@ -13,6 +13,7 @@ services:
       - ./cmd:/go/src/app/cmd/
       - ./pkg:/go/src/app/pkg/
       - ./docker/language:/go/src/app/docker/language/
+      - ./setting.yaml:/go/src/app/setting.yaml
     hostname: backend
     restart: always
     tty: true
